@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function LoginPage() {
   return (
-    <div className="bg-white rounded-2xl shadow-2xl p-8">
+    <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
         <p className="text-gray-600">Sign in to your Survd account</p>
@@ -16,7 +16,7 @@ export default function LoginPage() {
           <input
             type="email"
             id="email"
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-900"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition text-gray-900 bg-gray-50"
             placeholder="you@example.com"
           />
         </div>
@@ -28,24 +28,24 @@ export default function LoginPage() {
           <input
             type="password"
             id="password"
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-900"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition text-gray-900 bg-gray-50"
             placeholder="••••••••"
           />
         </div>
 
         <div className="flex items-center justify-between text-sm">
           <label className="flex items-center text-gray-700">
-            <input type="checkbox" className="mr-2" />
+            <input type="checkbox" className="mr-2 accent-primary" />
             Remember me
           </label>
-          <Link href="/forgot-password" className="text-blue-600 hover:text-blue-700">
+          <Link href="/forgot-password" className="text-primary hover:text-primary/80 font-medium">
             Forgot password?
           </Link>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition"
+          className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition shadow-sm"
         >
           Sign In
         </button>
@@ -53,7 +53,7 @@ export default function LoginPage() {
 
       <p className="text-center text-sm text-gray-600 mt-6">
         Don&apos;t have an account?{' '}
-        <Link href="/signup" className="text-blue-600 hover:text-blue-700 font-medium">
+        <Link href="/signup" className="text-primary hover:text-primary/80 font-medium">
           Sign up
         </Link>
       </p>

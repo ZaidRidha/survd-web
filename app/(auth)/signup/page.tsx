@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function SignupPage() {
   return (
-    <div className="bg-white rounded-2xl shadow-2xl p-8">
+    <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
         <p className="text-gray-600">Join Survd today</p>
@@ -16,7 +16,7 @@ export default function SignupPage() {
           <input
             type="text"
             id="name"
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-900"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition text-gray-900 bg-gray-50"
             placeholder="John Doe"
           />
         </div>
@@ -28,7 +28,7 @@ export default function SignupPage() {
           <input
             type="email"
             id="email"
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-900"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition text-gray-900 bg-gray-50"
             placeholder="you@example.com"
           />
         </div>
@@ -40,7 +40,7 @@ export default function SignupPage() {
           <input
             type="password"
             id="password"
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-900"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition text-gray-900 bg-gray-50"
             placeholder="••••••••"
           />
         </div>
@@ -52,14 +52,14 @@ export default function SignupPage() {
           <div className="grid grid-cols-2 gap-3">
             <button
               type="button"
-              className="p-4 rounded-lg border-2 border-gray-300 hover:border-blue-600 transition text-gray-700 hover:bg-blue-50"
+              className="p-4 rounded-lg border-2 border-gray-300 hover:border-primary transition text-gray-700 hover:bg-primary-light"
             >
               <div className="text-2xl mb-2">👤</div>
               <div className="font-semibold text-sm">Customer</div>
             </button>
             <button
               type="button"
-              className="p-4 rounded-lg border-2 border-gray-300 hover:border-blue-600 transition text-gray-700 hover:bg-blue-50"
+              className="p-4 rounded-lg border-2 border-gray-300 hover:border-primary transition text-gray-700 hover:bg-primary-light"
             >
               <div className="text-2xl mb-2">💼</div>
               <div className="font-semibold text-sm">Vendor</div>
@@ -69,7 +69,7 @@ export default function SignupPage() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition"
+          className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition shadow-sm"
         >
           Create Account
         </button>
@@ -81,7 +81,7 @@ export default function SignupPage() {
 
       <p className="text-center text-sm text-gray-600 mt-6">
         Already have an account?{' '}
-        <Link href="/login" className="text-blue-600 hover:text-blue-700 font-medium">
+        <Link href="/login" className="text-primary hover:text-primary/80 font-medium">
           Sign in
         </Link>
       </p>

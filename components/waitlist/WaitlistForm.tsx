@@ -56,10 +56,10 @@ export default function WaitlistForm() {
 
   if (isSuccess) {
     return (
-      <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-10">
+      <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-200">
         <div className="text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
@@ -71,7 +71,7 @@ export default function WaitlistForm() {
           </p>
           <button
             onClick={() => setIsSuccess(false)}
-            className="text-blue-600 hover:text-blue-700 font-medium"
+            className="text-primary hover:text-primary/80 font-medium"
           >
             Add another person
           </button>
@@ -81,7 +81,7 @@ export default function WaitlistForm() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-10">
+    <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-200">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
           Join the Waitlist
@@ -102,7 +102,7 @@ export default function WaitlistForm() {
             id="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-900"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition text-gray-900 bg-gray-50"
             placeholder="John Doe"
             disabled={isSubmitting}
           />
@@ -118,7 +118,7 @@ export default function WaitlistForm() {
             id="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-900"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition text-gray-900 bg-gray-50"
             placeholder="john@example.com"
             disabled={isSubmitting}
           />
@@ -136,8 +136,8 @@ export default function WaitlistForm() {
               disabled={isSubmitting}
               className={`p-4 rounded-lg border-2 transition ${
                 formData.userType === 'customer'
-                  ? 'border-blue-600 bg-blue-50 text-blue-700'
-                  : 'border-gray-300 hover:border-gray-400 text-gray-700'
+                  ? 'border-primary bg-primary-light text-gray-900'
+                  : 'border-gray-300 hover:border-gray-400 text-gray-700 bg-white'
               }`}
             >
               <div className="text-2xl mb-2">👤</div>
@@ -150,8 +150,8 @@ export default function WaitlistForm() {
               disabled={isSubmitting}
               className={`p-4 rounded-lg border-2 transition ${
                 formData.userType === 'vendor'
-                  ? 'border-blue-600 bg-blue-50 text-blue-700'
-                  : 'border-gray-300 hover:border-gray-400 text-gray-700'
+                  ? 'border-primary bg-primary-light text-gray-900'
+                  : 'border-gray-300 hover:border-gray-400 text-gray-700 bg-white'
               }`}
             >
               <div className="text-2xl mb-2">💼</div>
@@ -163,7 +163,7 @@ export default function WaitlistForm() {
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm">
+          <div className="bg-danger/10 border border-danger/20 rounded-lg p-3 text-danger text-sm">
             {error}
           </div>
         )}
@@ -172,7 +172,7 @@ export default function WaitlistForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
         >
           {isSubmitting ? 'Joining...' : 'Join Waitlist'}
         </button>
