@@ -13,6 +13,8 @@ export default function AppScreenshotCarousel({
   interval = 4000
 }: AppScreenshotCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -40,10 +42,35 @@ export default function AppScreenshotCarousel({
     );
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      // Swiped left
+      goToNext();
+    }
+
+    if (touchStart - touchEnd < -50) {
+      // Swiped right
+      goToPrevious();
+    }
+  };
+
   return (
     <div className="relative">
       {/* Screenshot Display */}
-      <div className="relative rounded-xl overflow-hidden shadow-2xl">
+      <div
+        className="relative rounded-xl overflow-hidden shadow-2xl"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="relative aspect-[9/19]">
           {screenshots.map((screenshot, index) => (
             <div
@@ -84,7 +111,7 @@ export default function AppScreenshotCarousel({
       </button>
 
       {/* Mobile Navigation Arrows - Below image */}
-      <div className="flex md:hidden justify-center gap-8 mt-4">
+      <div className="flex md:hidden justify-center gap-12 mt-4">
         <button
           onClick={goToPrevious}
           className="bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition"
