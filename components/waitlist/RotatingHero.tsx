@@ -89,9 +89,7 @@ export default function RotatingHero() {
 
   return (
     <div className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-      <div className="inline-block bg-primary/10 px-4 py-2 rounded-full text-sm font-medium mb-6 text-primary border border-primary/20">
-        {slide.badge}
-      </div>
+
       <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">
         {slide.title}
       </h1>
