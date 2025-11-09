@@ -1,5 +1,6 @@
 import WaitlistForm from '@/components/waitlist/WaitlistForm';
 import RotatingHero from '@/components/waitlist/RotatingHero';
+import ScrollingServices from '@/components/waitlist/ScrollingServices';
 import Image from 'next/image';
 
 export default function WaitlistPage() {
@@ -238,7 +239,7 @@ export default function WaitlistPage() {
       </section>
 
       {/* Services Preview */}
-      <section className="bg-gray-50 py-16 border-t border-gray-300">
+      <section className="bg-gray-50 py-16 border-t border-gray-300 overflow-hidden">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">
             Services Available at Launch
@@ -246,52 +247,7 @@ export default function WaitlistPage() {
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
             From beauty and wellness to home services and vehicle care - all available at your convenience
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
-            {[
-              { name: 'Barbers', icon: '✂️' },
-              { name: 'Hairdressers', icon: '💇' },
-              { name: 'Tattoos', icon: '🖊️' },
-              { name: 'Massage', icon: '💆' },
-              { name: 'Nails', icon: '💅' },
-              { name: 'Hairstyle', icon: '💇‍♀️' },
-              { name: 'Jet Wash', icon: '🚿' },
-              { name: 'Window Cleaners', icon: '🪟' },
-              { name: 'Estheticians', icon: '✨' },
-              { name: 'Personal Shopper', icon: '🛍️' },
-              { name: 'Gardeners', icon: '🌱' },
-              { name: 'Piercing', icon: '💎' },
-              { name: 'Concierge', icon: '🔑' },
-              { name: 'Painter', icon: '🎨' },
-              { name: 'Makeup Artist', icon: '💄' },
-              { name: 'Handyman', icon: '🔧' },
-              { name: 'Private Chef', icon: '👨‍🍳' },
-              { name: 'Car Wash', icon: '🚗' },
-              { name: 'Sneaker Cleaning', icon: '👟' },
-              { name: 'Car Breakdown', icon: '🔧' },
-              { name: 'Domestic Services', icon: '🏠' },
-              { name: 'Shoe Cleaning', icon: '👞' },
-              { name: 'Meal Prep', icon: '🍱' },
-              { name: 'Mobile Laundry', icon: '👕' },
-              { name: 'Mobile Detail', icon: '✨' },
-              { name: 'Health & Wellness', icon: '💪' },
-              { name: 'Face Cleanse', icon: '🧖' },
-              { name: 'Logistics', icon: '📦' },
-              { name: 'Groceries', icon: '🛒' },
-              { name: 'Garden Services', icon: '🌿' },
-              { name: 'Painting', icon: '🖌️' },
-              { name: 'Vehicle Services', icon: '🚙' },
-              { name: 'Photography', icon: '📸' },
-              { name: 'Car Detailing', icon: '🧽' },
-            ].map((service) => (
-              <div
-                key={service.name}
-                className="bg-white rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200"
-              >
-                <div className="text-4xl mb-2">{service.icon}</div>
-                <div className="text-gray-800 text-sm font-medium">{service.name}</div>
-              </div>
-            ))}
-          </div>
+          <ScrollingServices />
         </div>
       </section>
 
