@@ -67,14 +67,14 @@ const heroSlides = [
         <span className="text-primary">Earn More</span>
       </>
     ),
-    description: 'Break free from shop commissions. Set your own rates, manage your schedule, and keep more of what you earn.',
+    description: 'Cheaper than Booksy or Fresha. No subscription fees, just small commissions when you earn.',
     benefits: [
-      'Higher earnings, no shop fees',
-      'Access to growing customer base',
-      'Full control of your business',
-      'Set your own pricing and hours',
-      'Build your personal brand',
-      'Secure payments and support',
+      'Very small commission rates',
+      'No monthly subscription fees',
+      'Easy-to-use management interface',
+      'Sign up and start instantly',
+      'Full customization & discoverability',
+      'Built-in review system',
     ],
     showStats: false,
   },
