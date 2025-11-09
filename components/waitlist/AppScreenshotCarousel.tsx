@@ -13,6 +13,8 @@ export default function AppScreenshotCarousel({
   interval = 4000
 }: AppScreenshotCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -23,6 +25,34 @@ export default function AppScreenshotCarousel({
 
     return () => clearInterval(timer);
   }, [currentIndex, screenshots.length, interval]); // Reset interval when slide changes
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      goToNext();
+    }
+
+    if (isRightSwipe) {
+      goToPrevious();
+    }
+
+    // Reset values
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
@@ -43,7 +73,12 @@ export default function AppScreenshotCarousel({
   return (
     <div className="relative">
       {/* Screenshot Display */}
-      <div className="relative rounded-xl overflow-hidden shadow-2xl">
+      <div
+        className="relative rounded-xl overflow-hidden shadow-2xl"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="relative aspect-[9/19]">
           {screenshots.map((screenshot, index) => (
             <div

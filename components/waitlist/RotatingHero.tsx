@@ -83,6 +83,8 @@ const heroSlides = [
 export default function RotatingHero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -96,10 +98,53 @@ export default function RotatingHero() {
     return () => clearInterval(interval);
   }, [currentSlide]); // Reset interval when slide changes
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      // Swipe left - go to next slide
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+        setIsTransitioning(false);
+      }, 300);
+    }
+
+    if (isRightSwipe) {
+      // Swipe right - go to previous slide
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+        setIsTransitioning(false);
+      }, 300);
+    }
+
+    // Reset values
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
   const slide = heroSlides[currentSlide];
 
   return (
-    <div className="text-center md:text-left">
+    <div
+      className="text-center md:text-left"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className={`transition-opacity duration-300 min-h-[500px] md:min-h-[450px] ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
         <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">
           {slide.title}
