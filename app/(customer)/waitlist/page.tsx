@@ -20,57 +20,58 @@ export default function WaitlistPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-br from-gray-50 to-white">
+      <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-br from-primary/5 via-white to-gray-50">
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Content */}
-            <div className="text-gray-800">
+            <div>
               <div className="inline-block bg-primary/10 px-4 py-2 rounded-full text-sm font-medium mb-6 text-primary border border-primary/20">
                 Coming Soon
               </div>
               <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">
-                The Future of Local Service Booking
+                Services That Come
+                <br />
+                <span className="text-primary">To You</span>
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 mb-8">
-                Join thousands of customers and vendors getting ready for launch
+                Connect with independent professionals for haircuts, massages, car detailing, and more - all on your schedule, at your location.
               </p>
 
-              {/* Features */}
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary/10 rounded-full p-2 mt-1">
-                    <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg text-gray-900">For Customers</h3>
-                    <p className="text-gray-600">Book appointments with local barbers, hairstylists, and more in seconds</p>
-                  </div>
+              {/* Key Stats */}
+              <div className="grid grid-cols-3 gap-6 mb-8">
+                <div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">24/7</div>
+                  <div className="text-sm text-gray-600">Available</div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary/10 rounded-full p-2 mt-1">
-                    <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg text-gray-900">For Vendors</h3>
-                    <p className="text-gray-600">Grow your business with powerful booking management and client tools</p>
-                  </div>
+                <div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">30+</div>
+                  <div className="text-sm text-gray-600">Services</div>
+                </div>
+                <div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">500+</div>
+                  <div className="text-sm text-gray-600">Professionals</div>
                 </div>
               </div>
 
-              {/* Social Proof */}
-              <div className="flex items-center gap-6">
-                <div>
-                  <div className="text-3xl font-bold text-gray-900">500+</div>
-                  <div className="text-gray-600 text-sm">On Waitlist</div>
+              {/* Benefits Preview */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <p className="text-gray-700">Book instantly, no phone calls</p>
                 </div>
-                <div className="h-12 w-px bg-gray-300"></div>
-                <div>
-                  <div className="text-3xl font-bold text-gray-900">50+</div>
-                  <div className="text-gray-600 text-sm">Cities</div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <p className="text-gray-700">Mobile & in-home services</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <p className="text-gray-700">Verified professionals</p>
                 </div>
               </div>
             </div>
@@ -83,26 +84,255 @@ export default function WaitlistPage() {
         </div>
       </section>
 
+      {/* How It Works */}
+      <section className="py-20 bg-white border-t border-gray-200">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">
+            How It Works
+          </h2>
+          <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+            Get professional services in three simple steps
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-primary/20">
+                <span className="text-2xl font-bold text-primary">1</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Choose Your Service</h3>
+              <p className="text-gray-600">
+                Browse from over 30 professional services - from beauty and wellness to home maintenance and vehicle care.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-primary/20">
+                <span className="text-2xl font-bold text-primary">2</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Book Instantly</h3>
+              <p className="text-gray-600">
+                Select your preferred time and location. Whether at home, office, or on the go - we come to you.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-primary/20">
+                <span className="text-2xl font-bold text-primary">3</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Enjoy Your Service</h3>
+              <p className="text-gray-600">
+                Relax while skilled professionals deliver quality service at your convenience. Rate and review when done.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* For Clients */}
+      <section className="py-20 bg-gray-50 border-t border-gray-200">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                  For Clients
+                </h2>
+                <p className="text-xl text-gray-600 mb-8">
+                  Say goodbye to booking hassles and waiting rooms. Get professional services on your schedule.
+                </p>
+
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary/10 rounded-lg p-3 mt-1">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">Book in Seconds</h3>
+                      <p className="text-gray-600">No more phone calls or waiting on hold. Browse, book, and confirm instantly through the app.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary/10 rounded-lg p-3 mt-1">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">Mobile & In-Home Services</h3>
+                      <p className="text-gray-600">Get services at your home, office, or any location that works for you. We bring the experience to you.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary/10 rounded-lg p-3 mt-1">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">Verified Professionals</h3>
+                      <p className="text-gray-600">All service providers are vetted and rated by the community. Book with confidence.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary/10 rounded-lg p-3 mt-1">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">Available 24/7</h3>
+                      <p className="text-gray-600">Early morning or late night - book services that fit your schedule, not the other way around.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 lg:p-12 border border-primary/20">
+                <div className="aspect-square bg-white/50 rounded-xl flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-6xl mb-4">📱</div>
+                    <p className="text-gray-600">App Screenshot Preview</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* For Vendors */}
+      <section className="py-20 bg-white border-t border-gray-200">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="order-2 lg:order-1">
+                <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 lg:p-12 border border-primary/20">
+                  <div className="aspect-square bg-white/50 rounded-xl flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-6xl mb-4">💼</div>
+                      <p className="text-gray-600">Vendor Dashboard Preview</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="order-1 lg:order-2">
+                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                  For Service Providers
+                </h2>
+                <p className="text-xl text-gray-600 mb-8">
+                  Break free from traditional shops. Build your independent business and earn more.
+                </p>
+
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary/10 rounded-lg p-3 mt-1">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">Earn More</h3>
+                      <p className="text-gray-600">Keep more of what you earn. No shop commission eating into your profits - go independent and grow your income.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary/10 rounded-lg p-3 mt-1">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">Growing Customer Base</h3>
+                      <p className="text-gray-600">Get discovered by thousands of potential clients actively looking for your services.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary/10 rounded-lg p-3 mt-1">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">Manage Your Schedule</h3>
+                      <p className="text-gray-600">Set your own hours, accept bookings on your terms, and manage everything from one dashboard.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary/10 rounded-lg p-3 mt-1">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">Build Your Brand</h3>
+                      <p className="text-gray-600">Create your profile, showcase your work, and build a reputation that brings repeat customers.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services Preview */}
       <section className="bg-gray-50 py-16 border-t border-gray-300">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">
             Services Available at Launch
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 max-w-6xl mx-auto">
+          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            From beauty and wellness to home services and vehicle care - all available at your convenience
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
             {[
-              { name: 'Barber', icon: '✂️', color: 'category-barber' },
-              { name: 'Hairstylist', icon: '💇', color: 'category-hairstylist' },
-              { name: 'Nails', icon: '💅', color: 'category-nails' },
-              { name: 'Makeup', icon: '💄', color: 'category-makeup' },
-              { name: 'Massage', icon: '💆', color: 'category-massage' },
-              { name: 'Laundry', icon: '👕', color: 'category-laundry' },
-              { name: 'Tattoo', icon: '🖊️', color: 'category-tattoo' },
-              { name: 'Piercing', icon: '💎', color: 'category-piercing' },
+              { name: 'Barbers', icon: '✂️' },
+              { name: 'Hairdressers', icon: '💇' },
+              { name: 'Tattoos', icon: '🖊️' },
+              { name: 'Massage', icon: '💆' },
+              { name: 'Nails', icon: '💅' },
+              { name: 'Hairstyle', icon: '💇‍♀️' },
+              { name: 'Jet Wash', icon: '🚿' },
+              { name: 'Window Cleaners', icon: '🪟' },
+              { name: 'Estheticians', icon: '✨' },
+              { name: 'Personal Shopper', icon: '🛍️' },
+              { name: 'Gardeners', icon: '🌱' },
+              { name: 'Piercing', icon: '💎' },
+              { name: 'Concierge', icon: '🔑' },
+              { name: 'Painter', icon: '🎨' },
+              { name: 'Makeup Artist', icon: '💄' },
+              { name: 'Handyman', icon: '🔧' },
+              { name: 'Private Chef', icon: '👨‍🍳' },
+              { name: 'Car Wash', icon: '🚗' },
+              { name: 'Sneaker Cleaning', icon: '👟' },
+              { name: 'Car Breakdown', icon: '🔧' },
+              { name: 'Domestic Services', icon: '🏠' },
+              { name: 'Shoe Cleaning', icon: '👞' },
+              { name: 'Meal Prep', icon: '🍱' },
+              { name: 'Mobile Laundry', icon: '👕' },
+              { name: 'Mobile Detail', icon: '✨' },
+              { name: 'Health & Wellness', icon: '💪' },
+              { name: 'Face Cleanse', icon: '🧖' },
+              { name: 'Logistics', icon: '📦' },
+              { name: 'Groceries', icon: '🛒' },
+              { name: 'Garden Services', icon: '🌿' },
+              { name: 'Painting', icon: '🖌️' },
+              { name: 'Vehicle Services', icon: '🚙' },
+              { name: 'Photography', icon: '📸' },
+              { name: 'Car Detailing', icon: '🧽' },
             ].map((service) => (
               <div
                 key={service.name}
-                className={`bg-white rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200`}
+                className="bg-white rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200"
               >
                 <div className="text-4xl mb-2">{service.icon}</div>
                 <div className="text-gray-800 text-sm font-medium">{service.name}</div>
@@ -111,6 +341,26 @@ export default function WaitlistPage() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8 border-t border-gray-800">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Image
+                src="/images/survd-logo.png"
+                alt="Survd"
+                width={100}
+                height={33}
+                className="h-8 w-auto brightness-0 invert"
+              />
+            </div>
+            <div className="text-sm text-gray-400">
+              © 2025 Survd. All rights reserved.
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
