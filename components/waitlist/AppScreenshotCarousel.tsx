@@ -13,8 +13,8 @@ export default function AppScreenshotCarousel({
   interval = 4000
 }: AppScreenshotCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
+  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -27,31 +27,56 @@ export default function AppScreenshotCarousel({
   }, [currentIndex, screenshots.length, interval]); // Reset interval when slide changes
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
+    setTouchEnd(null);
+    setTouchStart({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    });
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    setTouchEnd({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    });
+
+    // Prevent scrolling if this is a horizontal swipe
+    if (touchStart) {
+      const xDiff = Math.abs(e.targetTouches[0].clientX - touchStart.x);
+      const yDiff = Math.abs(e.targetTouches[0].clientY - touchStart.y);
+
+      // If horizontal movement is greater than vertical, prevent scroll
+      if (xDiff > yDiff) {
+        e.preventDefault();
+      }
+    }
   };
 
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
 
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
+    const xDistance = touchStart.x - touchEnd.x;
+    const yDistance = touchStart.y - touchEnd.y;
+    const xDistanceAbs = Math.abs(xDistance);
+    const yDistanceAbs = Math.abs(yDistance);
 
-    if (isLeftSwipe) {
-      goToNext();
-    }
+    // Only trigger swipe if horizontal movement is greater than vertical
+    if (xDistanceAbs > yDistanceAbs && xDistanceAbs > 50) {
+      const isLeftSwipe = xDistance > 50;
+      const isRightSwipe = xDistance < -50;
 
-    if (isRightSwipe) {
-      goToPrevious();
+      if (isLeftSwipe) {
+        goToNext();
+      }
+
+      if (isRightSwipe) {
+        goToPrevious();
+      }
     }
 
     // Reset values
-    setTouchStart(0);
-    setTouchEnd(0);
+    setTouchStart(null);
+    setTouchEnd(null);
   };
 
   const goToSlide = (index: number) => {
@@ -75,6 +100,7 @@ export default function AppScreenshotCarousel({
       {/* Screenshot Display */}
       <div
         className="relative rounded-xl overflow-hidden shadow-2xl"
+        style={{ touchAction: 'pan-y' }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
