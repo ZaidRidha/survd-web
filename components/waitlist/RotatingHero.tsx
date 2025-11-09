@@ -18,6 +18,29 @@ const heroSlides = [
       'Mobile & in-home services',
       'Verified professionals',
     ],
+    showStats: true,
+  },
+  {
+    badge: 'Over 30 Services',
+    title: (
+      <>
+        All The Services
+        <br />
+        <span className="text-primary">You Need</span>
+      </>
+    ),
+    description: 'From beauty and wellness to home maintenance and vehicle care - everything available on demand.',
+    services: [
+      { emoji: '💇', name: 'Barbers & Hairstylists' },
+      { emoji: '💅', name: 'Nail Techs' },
+      { emoji: '💆', name: 'Massage Therapy' },
+      { emoji: '🚗', name: 'Car Detailing' },
+      { emoji: '🏠', name: 'Cleaning Services' },
+      { emoji: '👕', name: 'Mobile Laundry' },
+      { emoji: '🔧', name: 'Handyman' },
+      { emoji: '👨‍🍳', name: 'Private Chef' },
+    ],
+    showStats: false,
   },
   {
     badge: 'For Clients',
@@ -30,10 +53,11 @@ const heroSlides = [
     ),
     description: 'No more waiting rooms or rushing to appointments. Professional services come to you - at home, at work, or wherever you need them.',
     benefits: [
-      'Available 24/7 to fit your schedule',
       'Skip the commute and waiting',
       'Pay securely through the app',
+      'Rate and review your experience',
     ],
+    showStats: false,
   },
   {
     badge: 'For Vendors',
@@ -50,22 +74,7 @@ const heroSlides = [
       'Access to growing customer base',
       'Full control of your business',
     ],
-  },
-  {
-    badge: 'Over 30 Services',
-    title: (
-      <>
-        Everything You Need,
-        <br />
-        <span className="text-primary">One Platform</span>
-      </>
-    ),
-    description: 'From beauty and wellness to home maintenance and vehicle care - find all the services you need in one convenient app.',
-    benefits: [
-      'Barbers, hairstylists, massage therapists',
-      'Car detailing, cleaning, handyman',
-      'Personal chefs, photographers & more',
-    ],
+    showStats: false,
   },
 ];
 
@@ -97,33 +106,53 @@ export default function RotatingHero() {
         {slide.description}
       </p>
 
-      {/* Key Stats */}
-      <div className="grid grid-cols-3 gap-6 mb-8">
-        <div>
-          <div className="text-3xl md:text-4xl font-bold text-primary mb-1">24/7</div>
-          <div className="text-sm text-gray-600">Available</div>
+      {/* Key Stats - Only show on first slide */}
+      {slide.showStats && (
+        <div className="grid grid-cols-3 gap-6 mb-8">
+          <div>
+            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">24/7</div>
+            <div className="text-sm text-gray-600">Available</div>
+          </div>
+          <div>
+            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">30+</div>
+            <div className="text-sm text-gray-600">Services</div>
+          </div>
+          <div>
+            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">500+</div>
+            <div className="text-sm text-gray-600">Professionals</div>
+          </div>
         </div>
-        <div>
-          <div className="text-3xl md:text-4xl font-bold text-primary mb-1">30+</div>
-          <div className="text-sm text-gray-600">Services</div>
+      )}
+
+      {/* Services Grid - Show on services slide */}
+      {slide.services && (
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          {slide.services.map((service, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-3 bg-gradient-to-r from-primary/5 to-transparent rounded-lg p-3 hover:from-primary/10 transition-all duration-300 hover:scale-105"
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              <span className="text-3xl">{service.emoji}</span>
+              <span className="text-gray-800 font-medium text-sm">{service.name}</span>
+            </div>
+          ))}
         </div>
-        <div>
-          <div className="text-3xl md:text-4xl font-bold text-primary mb-1">500+</div>
-          <div className="text-sm text-gray-600">Professionals</div>
-        </div>
-      </div>
+      )}
 
       {/* Benefits Preview */}
-      <div className="space-y-3">
-        {slide.benefits.map((benefit, index) => (
-          <div key={index} className="flex items-center gap-3">
-            <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-            </svg>
-            <p className="text-gray-700">{benefit}</p>
-          </div>
-        ))}
-      </div>
+      {slide.benefits && (
+        <div className="space-y-3">
+          {slide.benefits.map((benefit, index) => (
+            <div key={index} className="flex items-center gap-3">
+              <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <p className="text-gray-700">{benefit}</p>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Slide Indicators */}
       <div className="flex items-center gap-3 mt-8">
