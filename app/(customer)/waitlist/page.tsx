@@ -1,4 +1,5 @@
 import WaitlistForm from '@/components/waitlist/WaitlistForm';
+import RotatingHero from '@/components/waitlist/RotatingHero';
 import Image from 'next/image';
 
 export default function WaitlistPage() {
@@ -23,57 +24,9 @@ export default function WaitlistPage() {
       <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-br from-primary/5 via-white to-gray-50">
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Content */}
+            {/* Left Side - Rotating Content */}
             <div>
-              <div className="inline-block bg-primary/10 px-4 py-2 rounded-full text-sm font-medium mb-6 text-primary border border-primary/20">
-                Coming Soon
-              </div>
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">
-                Services That Come
-                <br />
-                <span className="text-primary">To You</span>
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-8">
-                Connect with independent professionals for haircuts, massages, car detailing, and more - all on your schedule, at your location.
-              </p>
-
-              {/* Key Stats */}
-              <div className="grid grid-cols-3 gap-6 mb-8">
-                <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">24/7</div>
-                  <div className="text-sm text-gray-600">Available</div>
-                </div>
-                <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">30+</div>
-                  <div className="text-sm text-gray-600">Services</div>
-                </div>
-                <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">500+</div>
-                  <div className="text-sm text-gray-600">Professionals</div>
-                </div>
-              </div>
-
-              {/* Benefits Preview */}
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <p className="text-gray-700">Book instantly, no phone calls</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <p className="text-gray-700">Mobile & in-home services</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <p className="text-gray-700">Verified professionals</p>
-                </div>
-              </div>
+              <RotatingHero />
             </div>
 
             {/* Right Side - Waitlist Form */}
