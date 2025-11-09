@@ -122,6 +122,16 @@ export default function ScrollingServices() {
         .animate-scroll-right:hover {
           animation-play-state: paused;
         }
+
+        @media (max-width: 768px) {
+          .animate-scroll-left {
+            animation: scroll-left 25s linear infinite;
+          }
+
+          .animate-scroll-right {
+            animation: scroll-right 25s linear infinite;
+          }
+        }
       `}</style>
     </div>
   );
