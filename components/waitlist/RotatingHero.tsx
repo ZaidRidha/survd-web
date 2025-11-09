@@ -100,7 +100,7 @@ export default function RotatingHero() {
 
   return (
     <div>
-      <div className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+      <div className={`transition-opacity duration-300 min-h-[500px] md:min-h-[450px] ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
         <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">
           {slide.title}
         </h1>
