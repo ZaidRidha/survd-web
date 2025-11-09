@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 type UserType = 'customer' | 'vendor' | '';
 
@@ -140,7 +141,14 @@ export default function WaitlistForm() {
                   : 'border-gray-300 hover:border-gray-400 text-gray-700 bg-white'
               }`}
             >
-              <div className="text-2xl mb-2">👤</div>
+              <div className="mb-2 flex justify-center">
+                <Image
+                  src="/images/logos/CustomerWaitListLogo.png"
+                  alt="Customer"
+                  width={40}
+                  height={40}
+                />
+              </div>
               <div className="font-semibold text-sm">Customer</div>
               <div className="text-xs opacity-75">Book services</div>
             </button>
@@ -154,7 +162,14 @@ export default function WaitlistForm() {
                   : 'border-gray-300 hover:border-gray-400 text-gray-700 bg-white'
               }`}
             >
-              <div className="text-2xl mb-2">💼</div>
+              <div className="mb-2 flex justify-center">
+                <Image
+                  src="/images/logos/VendorWaitListLogo.png"
+                  alt="Vendor"
+                  width={40}
+                  height={40}
+                />
+              </div>
               <div className="font-semibold text-sm">Vendor</div>
               <div className="text-xs opacity-75">Offer services</div>
             </button>
