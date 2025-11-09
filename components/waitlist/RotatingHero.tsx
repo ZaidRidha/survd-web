@@ -37,8 +37,6 @@ const heroSlides = [
       { emoji: '🚗', name: 'Car Detailing' },
       { emoji: '🏠', name: 'Cleaning Services' },
       { emoji: '👕', name: 'Mobile Laundry' },
-      { emoji: '🔧', name: 'Handyman' },
-      { emoji: '👨‍🍳', name: 'Private Chef' },
     ],
     showStats: false,
   },
@@ -56,6 +54,9 @@ const heroSlides = [
       'Skip the commute and waiting',
       'Pay securely through the app',
       'Rate and review your experience',
+      'Real-time tracking and updates',
+      'Flexible scheduling 24/7',
+      'Trusted, verified professionals',
     ],
     showStats: false,
   },
@@ -73,6 +74,9 @@ const heroSlides = [
       'Higher earnings, no shop fees',
       'Access to growing customer base',
       'Full control of your business',
+      'Set your own pricing and hours',
+      'Build your personal brand',
+      'Secure payments and support',
     ],
     showStats: false,
   },
@@ -97,64 +101,65 @@ export default function RotatingHero() {
   const slide = heroSlides[currentSlide];
 
   return (
-    <div className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+    <div>
+      <div className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">
+          {slide.title}
+        </h1>
+        <p className="text-xl md:text-2xl text-gray-600 mb-8">
+          {slide.description}
+        </p>
 
-      <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">
-        {slide.title}
-      </h1>
-      <p className="text-xl md:text-2xl text-gray-600 mb-8">
-        {slide.description}
-      </p>
-
-      {/* Key Stats - Only show on first slide */}
-      {slide.showStats && (
-        <div className="grid grid-cols-3 gap-6 mb-8">
-          <div>
-            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">24/7</div>
-            <div className="text-sm text-gray-600">Available</div>
-          </div>
-          <div>
-            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">30+</div>
-            <div className="text-sm text-gray-600">Services</div>
-          </div>
-          <div>
-            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">500+</div>
-            <div className="text-sm text-gray-600">Professionals</div>
-          </div>
-        </div>
-      )}
-
-      {/* Services Grid - Show on services slide */}
-      {slide.services && (
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          {slide.services.map((service, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-3 bg-gradient-to-r from-primary/5 to-transparent rounded-lg p-3 hover:from-primary/10 transition-all duration-300 hover:scale-105"
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
-              <span className="text-3xl">{service.emoji}</span>
-              <span className="text-gray-800 font-medium text-sm">{service.name}</span>
+        {/* Key Stats - Only show on first slide */}
+        {slide.showStats && (
+          <div className="grid grid-cols-3 gap-6 mb-8">
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-1">24/7</div>
+              <div className="text-sm text-gray-600">Available</div>
             </div>
-          ))}
-        </div>
-      )}
-
-      {/* Benefits Preview */}
-      {slide.benefits && (
-        <div className="space-y-3">
-          {slide.benefits.map((benefit, index) => (
-            <div key={index} className="flex items-center gap-3">
-              <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              <p className="text-gray-700">{benefit}</p>
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-1">30+</div>
+              <div className="text-sm text-gray-600">Services</div>
             </div>
-          ))}
-        </div>
-      )}
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-1">500+</div>
+              <div className="text-sm text-gray-600">Professionals</div>
+            </div>
+          </div>
+        )}
 
-      {/* Slide Indicators */}
+        {/* Services Grid - Show on services slide */}
+        {slide.services && (
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            {slide.services.map((service, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-3 bg-gradient-to-r from-primary/5 to-transparent rounded-lg p-3 hover:from-primary/10 transition-all duration-300 hover:scale-105"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <span className="text-3xl">{service.emoji}</span>
+                <span className="text-gray-800 font-medium text-sm">{service.name}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Benefits Preview */}
+        {slide.benefits && (
+          <div className="space-y-3">
+            {slide.benefits.map((benefit, index) => (
+              <div key={index} className="flex items-center gap-3">
+                <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <p className="text-gray-700">{benefit}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Slide Indicators - Static, outside transition */}
       <div className="flex items-center gap-3 mt-8">
         {/* Left Arrow */}
         <button
