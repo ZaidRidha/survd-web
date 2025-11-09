@@ -169,11 +169,16 @@ export default function WaitlistPage() {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1">
                 <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 lg:p-12 border border-primary/20">
-                  <div className="aspect-square bg-white/50 rounded-xl flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-6xl mb-4">💼</div>
-                      <p className="text-gray-600">Vendor Dashboard Preview</p>
-                    </div>
+                  <div className="max-w-[320px] mx-auto">
+                    <AppScreenshotCarousel
+                      screenshots={[
+                        '/images/screenshots/vendor/VendorSideAppScreenshot1.jpeg',
+                        '/images/screenshots/vendor/VendorSideAppScreenshot2.jpeg',
+                        '/images/screenshots/vendor/VendorSideAppScreenshot3.jpeg',
+                        '/images/screenshots/vendor/VendorSideAppScreenshot4.jpeg',
+                        '/images/screenshots/vendor/VendorSideAppScreenshot5.jpeg'
+                      ]}
+                    />
                   </div>
                 </div>
               </div>
