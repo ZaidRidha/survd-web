@@ -125,11 +125,11 @@ export default function ScrollingServices() {
 
         @media (max-width: 768px) {
           .animate-scroll-left {
-            animation: scroll-left 25s linear infinite;
+            animation: scroll-left 15s linear infinite;
           }
 
           .animate-scroll-right {
-            animation: scroll-right 25s linear infinite;
+            animation: scroll-right 15s linear infinite;
           }
         }
       `}</style>
