@@ -80,10 +80,10 @@ export default function RotatingHero() {
         setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
         setIsTransitioning(false);
       }, 300);
-    }, 5000); // Change slide every 5 seconds
+    }, 8000); // Change slide every 8 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [currentSlide]); // Reset interval when slide changes
 
   const slide = heroSlides[currentSlide];
 
