@@ -13,10 +13,6 @@ export default function AppScreenshotCarousel({
   interval = 4000
 }: AppScreenshotCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -44,66 +40,26 @@ export default function AppScreenshotCarousel({
     );
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-    setTouchEnd(e.targetTouches[0].clientX);
-    setIsDragging(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const currentTouch = e.targetTouches[0].clientX;
-    setTouchEnd(currentTouch);
-    if (isDragging) {
-      setDragOffset(currentTouch - touchStart);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-    const swipeDistance = touchStart - touchEnd;
-
-    if (swipeDistance > 50) {
-      // Swiped left
-      goToNext();
-    } else if (swipeDistance < -50) {
-      // Swiped right
-      goToPrevious();
-    }
-
-    setDragOffset(0);
-  };
-
   return (
     <div className="relative">
       {/* Screenshot Display */}
-      <div
-        className="relative rounded-xl overflow-hidden shadow-2xl touch-pan-y"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
+      <div className="relative rounded-xl overflow-hidden shadow-2xl">
         <div className="relative aspect-[9/19]">
-          <div
-            className={`flex ${isDragging ? '' : 'transition-transform duration-300 ease-out'}`}
-            style={{
-              transform: `translateX(calc(-${currentIndex * 100}% + ${dragOffset}px))`,
-            }}
-          >
-            {screenshots.map((screenshot, index) => (
-              <div
-                key={screenshot}
-                className="min-w-full relative aspect-[9/19]"
-              >
-                <Image
-                  src={screenshot}
-                  alt={`App Screenshot ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  draggable={false}
-                />
-              </div>
-            ))}
-          </div>
+          {screenshots.map((screenshot, index) => (
+            <div
+              key={screenshot}
+              className={`absolute inset-0 transition-opacity duration-500 ${
+                index === currentIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <Image
+                src={screenshot}
+                alt={`App Screenshot ${index + 1}`}
+                fill
+                className="object-cover"
+              />
+            </div>
+          ))}
         </div>
       </div>
 
