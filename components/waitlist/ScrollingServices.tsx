@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 const services = {
   row1: [
     { name: 'Barbers', icon: '✂️' },
@@ -44,6 +46,10 @@ const services = {
 };
 
 export default function ScrollingServices() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const allServices = [...services.row1, ...services.row2, ...services.row3];
+
   return (
     <div>
       {/* Row 1 - Scrolling Left */}
@@ -90,6 +96,46 @@ export default function ScrollingServices() {
           ))}
         </div>
       </div>
+
+      {/* View All Button */}
+      <div className="text-center mt-8">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
+        >
+          View All Services
+        </button>
+      </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setIsModalOpen(false)}>
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
+              <h3 className="text-2xl font-bold text-gray-900">All Services</h3>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700 text-3xl leading-none"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="p-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {allServices.map((service, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-50 rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200"
+                  >
+                    <div className="text-4xl mb-2">{service.icon}</div>
+                    <div className="text-gray-800 text-sm font-medium">{service.name}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <style jsx>{`
         @keyframes scroll-left {
