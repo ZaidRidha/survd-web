@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Survd - Join the Waitlist",
   description: "Join the waitlist for Survd - the future of local service booking. Connect with barbers, hairstylists, nail technicians, and more.",
+  icons: {
+    icon: "/images/logos/SurvdFavIcon.png",
+  },
 };
 
 export default function RootLayout({
