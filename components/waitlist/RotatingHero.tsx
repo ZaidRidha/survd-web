@@ -7,12 +7,12 @@ const heroSlides = [
     badge: 'Coming Soon',
     title: (
       <>
-        Services That Come
+        Introducing
         <br />
-        <span className="text-primary">To You</span>
+        <span className="text-gray-900">Survd</span>
       </>
     ),
-    description: 'Connect with independent professionals for haircuts, massages, car detailing, and more - all on your schedule, at your location.',
+    description: 'Connect with independent professionals for haircuts, laundry, nail techs, and more - all on your schedule, at your location.',
     benefits: [
       'Book instantly, no phone calls',
       'Mobile & in-home services',
@@ -80,7 +80,7 @@ export default function RotatingHero() {
         setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
         setIsTransitioning(false);
       }, 300);
-    }, 8000); // Change slide every 8 seconds
+    }, 10000); // Change slide every 8 seconds
 
     return () => clearInterval(interval);
   }, [currentSlide]); // Reset interval when slide changes
