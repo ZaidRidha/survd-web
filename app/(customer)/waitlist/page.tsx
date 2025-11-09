@@ -1,6 +1,7 @@
 import WaitlistForm from '@/components/waitlist/WaitlistForm';
 import RotatingHero from '@/components/waitlist/RotatingHero';
 import ScrollingServices from '@/components/waitlist/ScrollingServices';
+import AppScreenshotCarousel from '@/components/waitlist/AppScreenshotCarousel';
 import Image from 'next/image';
 
 export default function WaitlistPage() {
@@ -147,11 +148,13 @@ export default function WaitlistPage() {
               </div>
 
               <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 lg:p-12 border border-primary/20">
-                <div className="aspect-square bg-white/50 rounded-xl flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">📱</div>
-                    <p className="text-gray-600">App Screenshot Preview</p>
-                  </div>
+                <div className="max-w-[250px] mx-auto">
+                  <AppScreenshotCarousel
+                    screenshots={[
+                      '/images/screenshots/customer/CustomerSideAppScreenshot1.jpeg',
+                      '/images/screenshots/customer/CustomerSideAppScreenshot2.jpeg'
+                    ]}
+                  />
                 </div>
               </div>
             </div>
