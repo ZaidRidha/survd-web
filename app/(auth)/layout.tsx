@@ -10,7 +10,7 @@ export default function AuthLayout({
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Image
-            src="/images/survd-logo.png"
+            src="/images/logos/survd-logo.png"
             alt="Survd"
             width={150}
             height={50}

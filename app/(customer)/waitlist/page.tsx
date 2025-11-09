@@ -12,7 +12,7 @@ export default function WaitlistPage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Image
-              src="/images/survd-logo.png"
+              src="/images/logos/survd-logo.png"
               alt="Survd"
               width={120}
               height={40}
@@ -260,7 +260,7 @@ export default function WaitlistPage() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
               <Image
-                src="/images/survd-logo.png"
+                src="/images/logos/survd-logo.png"
                 alt="Survd"
                 width={100}
                 height={33}
