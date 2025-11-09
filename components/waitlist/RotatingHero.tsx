@@ -44,19 +44,17 @@ const heroSlides = [
     badge: 'For Clients',
     title: (
       <>
-        Save Time,
+        Book Anytime,
         <br />
-        <span className="text-primary">Live Better</span>
+        <span className="text-primary">Anywhere You Need</span>
       </>
     ),
-    description: 'No more waiting rooms or rushing to appointments. Professional services come to you - at home, at work, or wherever you need them.',
+    description: 'Professional services come to you - at home, at work, or wherever you need them.',
     benefits: [
-      'Skip the commute and waiting',
-      'Pay securely through the app',
-      'Rate and review your experience',
-      'Real-time tracking and updates',
-      'Flexible scheduling 24/7',
-      'Trusted, verified professionals',
+      'Book after hours and weekends',
+      'See who\'s available near you',
+      'Mobile & in-home services',
+      'Buy now, pay later with Klarna',
     ],
     showStats: false,
   },
