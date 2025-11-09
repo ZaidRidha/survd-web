@@ -89,10 +89,10 @@ export default function WaitlistPage() {
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
-                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center lg:text-left">
                   For Clients
                 </h2>
-                <p className="text-xl text-gray-600 mb-8">
+                <p className="text-xl text-gray-600 mb-8 text-center lg:text-left">
                   Say goodbye to booking hassles and waiting rooms. Get professional services on your schedule.
                 </p>
 
@@ -184,10 +184,10 @@ export default function WaitlistPage() {
               </div>
 
               <div className="order-1 lg:order-2">
-                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center lg:text-left">
                   For Service Providers
                 </h2>
-                <p className="text-xl text-gray-600 mb-8">
+                <p className="text-xl text-gray-600 mb-8 text-center lg:text-left">
                   Break free from traditional shops. Build your independent business and earn more.
                 </p>
 

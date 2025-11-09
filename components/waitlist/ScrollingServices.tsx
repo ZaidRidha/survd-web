@@ -29,6 +29,7 @@ const services = {
     { name: 'Domestic Services', icon: '🏠' },
     { name: 'Shoe Cleaning', icon: '👞' },
     { name: 'Meal Prep', icon: '🍱' },
+    { name: 'Padel Bookings', icon: '🎾' },
   ],
   row3: [
     { name: 'Mobile Laundry', icon: '👕' },
