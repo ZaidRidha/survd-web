@@ -66,7 +66,7 @@ export default function AppScreenshotCarousel({
       {/* Navigation Arrows - Outside the image */}
       <button
         onClick={goToPrevious}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-20 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition"
         aria-label="Previous screenshot"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,7 +75,7 @@ export default function AppScreenshotCarousel({
       </button>
       <button
         onClick={goToNext}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-20 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition"
         aria-label="Next screenshot"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

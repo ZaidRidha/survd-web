@@ -148,7 +148,7 @@ export default function WaitlistPage() {
               </div>
 
               <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 lg:p-12 border border-primary/20">
-                <div className="max-w-[250px] mx-auto">
+                <div className="max-w-[320px] mx-auto">
                   <AppScreenshotCarousel
                     screenshots={[
                       '/images/screenshots/customer/CustomerSideAppScreenshot1.jpeg',
