@@ -22,7 +22,7 @@ export default function AppScreenshotCarousel({
     }, interval);
 
     return () => clearInterval(timer);
-  }, [screenshots.length, interval]);
+  }, [currentIndex, screenshots.length, interval]); // Reset interval when slide changes
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
