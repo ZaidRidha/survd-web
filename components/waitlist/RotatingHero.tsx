@@ -4,12 +4,11 @@ import { useState, useEffect } from 'react';
 
 const heroSlides = [
   {
-    badge: 'Coming Soon',
     title: (
       <>
         Introducing
         <br />
-        <span className="text-gray-900">Survd</span>
+        <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Survd</span>
       </>
     ),
     description: 'Connect with independent professionals for haircuts, laundry, nail techs, and more - all on your schedule, at your location.',
@@ -21,12 +20,11 @@ const heroSlides = [
     showStats: true,
   },
   {
-    badge: 'Over 30 Services',
     title: (
       <>
         All The Services
         <br />
-        <span className="text-primary">You Need</span>
+        <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">You Need</span>
       </>
     ),
     description: 'From beauty and wellness to home maintenance and vehicle care - everything available on demand.',
@@ -41,12 +39,11 @@ const heroSlides = [
     showStats: false,
   },
   {
-    badge: 'For Clients',
     title: (
       <>
         Book Anytime,
         <br />
-        <span className="text-primary">Anywhere You Need</span>
+        <span className="bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">Anywhere You Need</span>
       </>
     ),
     description: 'Professional services come to you - at home, at work, or wherever you need them.',
@@ -55,16 +52,17 @@ const heroSlides = [
       'See who\'s available near you',
       'Mobile & in-home services',
       'Buy now, pay later with Klarna',
+      'Real-time availability tracking',
+      'Instant booking confirmation',
     ],
     showStats: false,
   },
   {
-    badge: 'For Vendors',
     title: (
       <>
         Go Independent,
         <br />
-        <span className="text-primary">Earn More</span>
+        <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Earn More</span>
       </>
     ),
     description: 'Cheaper than Booksy or Fresha. No subscription fees, just small commissions when you earn.',
@@ -171,65 +169,72 @@ export default function RotatingHero() {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className={`transition-opacity duration-300 min-h-[500px] md:min-h-[450px] ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">
-          {slide.title}
+      <div className={`transition-all duration-500 ${isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+        {/* Title */}
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900 h-[120px] md:h-[140px] flex items-center justify-center md:justify-start">
+          <span className="text-center md:text-left">{slide.title}</span>
         </h1>
-        <p className="text-xl md:text-2xl text-gray-600 mb-8">
+
+        {/* Description */}
+        <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed text-center md:text-left">
           {slide.description}
         </p>
 
-        {/* Key Stats - Only show on first slide */}
-        {slide.showStats && (
-          <div className="grid grid-cols-3 gap-6 mb-8">
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-1">24/7</div>
-              <div className="text-sm text-gray-600">Available</div>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-1">30+</div>
-              <div className="text-sm text-gray-600">Services</div>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-1">500+</div>
-              <div className="text-sm text-gray-600">Professionals</div>
-            </div>
-          </div>
-        )}
-
-        {/* Services Grid - Show on services slide */}
-        {slide.services && (
-          <div className="grid grid-cols-2 gap-4 mb-8">
-            {slide.services.map((service, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 bg-gradient-to-r from-primary/5 to-transparent rounded-lg p-3 hover:from-primary/10 transition-all duration-300 hover:scale-105"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <span className="text-3xl">{service.emoji}</span>
-                <span className="text-gray-800 font-medium text-sm">{service.name}</span>
+        {/* Content Area - Fixed height for consistency */}
+        <div className="min-h-[280px] md:min-h-[260px]">
+          {/* Key Stats - Only show on first slide */}
+          {slide.showStats && (
+            <div className="grid grid-cols-3 gap-4 md:gap-6 mb-8">
+              <div className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-transparent rounded-2xl p-4 md:p-6 border border-green-200 hover:border-green-400 transition-all duration-300 hover:shadow-lg hover:scale-105">
+                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-1">24/7</div>
+                <div className="text-sm text-gray-600 font-medium">Available</div>
               </div>
-            ))}
-          </div>
-        )}
-
-        {/* Benefits Preview */}
-        {slide.benefits && (
-          <div className="space-y-3 flex flex-col items-center md:items-start">
-            {slide.benefits.map((benefit, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <p className="text-gray-700">{benefit}</p>
+              <div className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-transparent rounded-2xl p-4 md:p-6 border border-green-200 hover:border-green-400 transition-all duration-300 hover:shadow-lg hover:scale-105">
+                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-1">30+</div>
+                <div className="text-sm text-gray-600 font-medium">Services</div>
               </div>
-            ))}
-          </div>
-        )}
+              <div className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-transparent rounded-2xl p-4 md:p-6 border border-green-200 hover:border-green-400 transition-all duration-300 hover:shadow-lg hover:scale-105">
+                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-1">500+</div>
+                <div className="text-sm text-gray-600 font-medium">Professionals</div>
+              </div>
+            </div>
+          )}
+
+          {/* Services Grid - Show on services slide */}
+          {slide.services && (
+            <div className="grid grid-cols-2 gap-3 md:gap-4 mb-8">
+              {slide.services.map((service, index) => (
+                <div
+                  key={index}
+                  className="group relative flex items-center gap-3 bg-gradient-to-br from-white to-gray-50 rounded-xl p-4 border border-gray-200 hover:border-green-400 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-2xl">{service.emoji}</span>
+                  </div>
+                  <span className="text-gray-800 font-semibold text-sm">{service.name}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Benefits Preview */}
+          {slide.benefits && (
+            <div className="space-y-3 flex flex-col items-center md:items-start">
+              {slide.benefits.map((benefit, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <p className="text-gray-700">{benefit}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Slide Indicators - Static, outside transition */}
-      <div className="flex items-center justify-center md:justify-start gap-3 mt-8">
+      <div className="flex items-center justify-center md:justify-start gap-3 mt-0 md:mt-8">
         {/* Left Arrow */}
         <button
           onClick={() => {
@@ -239,16 +244,16 @@ export default function RotatingHero() {
               setIsTransitioning(false);
             }, 300);
           }}
-          className="p-1.5 rounded-full hover:bg-gray-100 transition-colors"
+          className="p-2 rounded-full bg-white border border-gray-200 hover:border-green-600 hover:bg-green-50 transition-all duration-300 shadow-sm hover:shadow-md"
           aria-label="Previous slide"
         >
-          <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-gray-600 hover:text-green-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
 
         {/* Dots */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 px-2">
           {heroSlides.map((_, index) => (
             <button
               key={index}
@@ -259,8 +264,10 @@ export default function RotatingHero() {
                   setIsTransitioning(false);
                 }, 300);
               }}
-              className={`h-1.5 rounded-full transition-all ${
-                index === currentSlide ? 'w-8 bg-primary' : 'w-1.5 bg-gray-300 hover:bg-gray-400'
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === currentSlide
+                  ? 'w-8 bg-gradient-to-r from-green-600 to-emerald-600 shadow-md'
+                  : 'w-2 bg-gray-300 hover:bg-green-400 hover:w-4'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -276,10 +283,10 @@ export default function RotatingHero() {
               setIsTransitioning(false);
             }, 300);
           }}
-          className="p-1.5 rounded-full hover:bg-gray-100 transition-colors"
+          className="p-2 rounded-full bg-white border border-gray-200 hover:border-green-600 hover:bg-green-50 transition-all duration-300 shadow-sm hover:shadow-md"
           aria-label="Next slide"
         >
-          <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-gray-600 hover:text-green-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
           </svg>
         </button>
