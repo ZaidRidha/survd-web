@@ -1,9 +1,9 @@
-import WaitlistForm from '@/components/waitlist/WaitlistForm';
-import RotatingHero from '@/components/waitlist/RotatingHero';
-import ScrollingServices from '@/components/waitlist/ScrollingServices';
-import AppScreenshotCarousel from '@/components/waitlist/AppScreenshotCarousel';
-import HowItWorks from '@/components/waitlist/HowItWorks';
-import Image from 'next/image';
+import WaitlistForm from "@/components/waitlist/WaitlistForm";
+import RotatingHero from "@/components/waitlist/RotatingHero";
+import ScrollingServices from "@/components/waitlist/ScrollingServices";
+import AppScreenshotCarousel from "@/components/waitlist/AppScreenshotCarousel";
+import HowItWorks from "@/components/waitlist/HowItWorks";
+import Image from "next/image";
 
 export default function WaitlistPage() {
   return (
@@ -50,55 +50,116 @@ export default function WaitlistPage() {
                   For Clients
                 </h2>
                 <p className="text-xl text-gray-600 mb-8 text-center lg:text-left animate-fade-in-up animation-delay-100">
-                  Say goodbye to booking hassles and waiting rooms. Get professional services on your schedule.
+                  Say goodbye to booking hassles and waiting rooms. Get
+                  professional services on your schedule.
                 </p>
 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4 animate-fade-in-up animation-delay-200">
                     <div className="bg-primary/10 rounded-lg p-3 mt-1">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg
+                        className="w-6 h-6 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">Book in Seconds</h3>
-                      <p className="text-gray-600">No more phone calls or waiting on hold. Browse, book, and confirm instantly through the app.</p>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">
+                        Book in Seconds
+                      </h3>
+                      <p className="text-gray-600">
+                        No more phone calls or waiting on hold. Browse, book,
+                        and confirm instantly through the app.
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4 animate-fade-in-up animation-delay-300">
                     <div className="bg-primary/10 rounded-lg p-3 mt-1">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                      <svg
+                        className="w-6 h-6 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">Mobile & In-Home Services</h3>
-                      <p className="text-gray-600">Get services at your home, office, or any location that works for you. We bring the experience to you.</p>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">
+                        Mobile & In-Home Services
+                      </h3>
+                      <p className="text-gray-600">
+                        Get services at your home, office, or any location that
+                        works for you. We bring the experience to you.
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4 animate-fade-in-up animation-delay-400">
                     <div className="bg-primary/10 rounded-lg p-3 mt-1">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg
+                        className="w-6 h-6 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">Verified Professionals</h3>
-                      <p className="text-gray-600">All service providers are vetted and rated by the community. Book with confidence.</p>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">
+                        Verified Professionals
+                      </h3>
+                      <p className="text-gray-600">
+                        All service providers are vetted and rated by the
+                        community. Book with confidence.
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4 animate-fade-in-up animation-delay-500">
                     <div className="bg-primary/10 rounded-lg p-3 mt-1">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      <svg
+                        className="w-6 h-6 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">Available 24/7</h3>
-                      <p className="text-gray-600">Early morning or late night - book services that fit your schedule, not the other way around.</p>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">
+                        Available 24/7
+                      </h3>
+                      <p className="text-gray-600">
+                        Early morning or late night - book services that fit
+                        your schedule, not the other way around.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -108,8 +169,11 @@ export default function WaitlistPage() {
                 <div className="max-w-[320px] mx-auto">
                   <AppScreenshotCarousel
                     screenshots={[
-                      '/images/screenshots/customer/CustomerSideAppScreenshot1.jpeg',
-                      '/images/screenshots/customer/CustomerSideAppScreenshot2.jpeg'
+                      "/images/screenshots/customer/CustomerSideAppScreenshot1.jpeg",
+                      "/images/screenshots/customer/CustomerSideAppScreenshot2.jpeg",
+                      "/images/screenshots/customer/CustomerSideAppScreenshot3.jpeg",
+                      "/images/screenshots/customer/CustomerSideAppScreenshot4.jpeg",
+                      "/images/screenshots/customer/CustomerSideAppScreenshot5.jpeg",
                     ]}
                   />
                 </div>
@@ -129,11 +193,11 @@ export default function WaitlistPage() {
                   <div className="max-w-[320px] mx-auto">
                     <AppScreenshotCarousel
                       screenshots={[
-                        '/images/screenshots/vendor/VendorSideAppScreenshot1.jpeg',
-                        '/images/screenshots/vendor/VendorSideAppScreenshot2.jpeg',
-                        '/images/screenshots/vendor/VendorSideAppScreenshot3.jpeg',
-                        '/images/screenshots/vendor/VendorSideAppScreenshot4.jpeg',
-                        '/images/screenshots/vendor/VendorSideAppScreenshot5.jpeg'
+                        "/images/screenshots/vendor/VendorSideAppScreenshot1.jpeg",
+                        "/images/screenshots/vendor/VendorSideAppScreenshot2.jpeg",
+                        "/images/screenshots/vendor/VendorSideAppScreenshot3.jpeg",
+                        "/images/screenshots/vendor/VendorSideAppScreenshot4.jpeg",
+                        "/images/screenshots/vendor/VendorSideAppScreenshot5.jpeg",
                       ]}
                     />
                   </div>
@@ -145,55 +209,116 @@ export default function WaitlistPage() {
                   For Service Providers
                 </h2>
                 <p className="text-xl text-gray-600 mb-8 text-center lg:text-left animate-fade-in-up animation-delay-100">
-                  Break free from traditional shops. Build your independent business and earn more.
+                  Break free from traditional shops. Build your independent
+                  business and earn more.
                 </p>
 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4 animate-fade-in-up animation-delay-200">
                     <div className="bg-primary/10 rounded-lg p-3 mt-1">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                      <svg
+                        className="w-6 h-6 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">Earn More</h3>
-                      <p className="text-gray-600">Keep more of what you earn. No shop commission eating into your profits - go independent and grow your income.</p>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">
+                        Earn More
+                      </h3>
+                      <p className="text-gray-600">
+                        Keep more of what you earn. No shop commission eating
+                        into your profits - go independent and grow your income.
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4 animate-fade-in-up animation-delay-300">
                     <div className="bg-primary/10 rounded-lg p-3 mt-1">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      <svg
+                        className="w-6 h-6 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">Growing Customer Base</h3>
-                      <p className="text-gray-600">Get discovered by thousands of potential clients actively looking for your services.</p>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">
+                        Growing Customer Base
+                      </h3>
+                      <p className="text-gray-600">
+                        Get discovered by thousands of potential clients
+                        actively looking for your services.
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4 animate-fade-in-up animation-delay-400">
                     <div className="bg-primary/10 rounded-lg p-3 mt-1">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <svg
+                        className="w-6 h-6 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">Manage Your Schedule</h3>
-                      <p className="text-gray-600">Set your own hours, accept bookings on your terms, and manage everything from one dashboard.</p>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">
+                        Manage Your Schedule
+                      </h3>
+                      <p className="text-gray-600">
+                        Set your own hours, accept bookings on your terms, and
+                        manage everything from one dashboard.
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4 animate-fade-in-up animation-delay-500">
                     <div className="bg-primary/10 rounded-lg p-3 mt-1">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      <svg
+                        className="w-6 h-6 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">Build Your Brand</h3>
-                      <p className="text-gray-600">Create your profile, showcase your work, and build a reputation that brings repeat customers.</p>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">
+                        Build Your Brand
+                      </h3>
+                      <p className="text-gray-600">
+                        Create your profile, showcase your work, and build a
+                        reputation that brings repeat customers.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -213,7 +338,8 @@ export default function WaitlistPage() {
             Services Available at Launch
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto animate-fade-in-up animation-delay-100">
-            From beauty and wellness to home services and vehicle care - all available at your convenience
+            From beauty and wellness to home services and vehicle care - all
+            available at your convenience
           </p>
           <div className="animate-fade-in animation-delay-300">
             <ScrollingServices />
