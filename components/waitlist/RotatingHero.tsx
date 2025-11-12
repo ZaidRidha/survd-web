@@ -171,7 +171,7 @@ export default function RotatingHero() {
     >
       <div className={`transition-all duration-500 ${isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
         {/* Title */}
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900 h-[120px] md:h-[140px] flex items-center justify-center md:justify-start">
+        <h1 className="text-5xl md:text-6xl font-bold mb-8 md:mb-10 leading-tight text-gray-900 h-[120px] md:h-[140px] flex items-center justify-center md:justify-start">
           <span className="text-center md:text-left">{slide.title}</span>
         </h1>
 
@@ -219,7 +219,7 @@ export default function RotatingHero() {
 
           {/* Benefits Preview */}
           {slide.benefits && (
-            <div className="space-y-3 flex flex-col items-center md:items-start">
+            <div className="space-y-3 flex flex-col items-center md:items-start mb-8">
               {slide.benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">

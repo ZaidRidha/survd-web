@@ -23,7 +23,7 @@ export default function WaitlistPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 pt-32 pb-20 md:py-20 lg:pt-20 bg-gradient-to-br from-primary/5 via-white to-gray-50 waitlist-hero-section">
+      <section className="min-h-screen flex items-center justify-center px-6 md:px-8 lg:px-4 pt-32 pb-20 md:py-20 lg:pt-20 bg-gradient-to-br from-primary/5 via-white to-gray-50 waitlist-hero-section">
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Rotating Content */}
