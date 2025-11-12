@@ -2,6 +2,7 @@ import WaitlistForm from '@/components/waitlist/WaitlistForm';
 import RotatingHero from '@/components/waitlist/RotatingHero';
 import ScrollingServices from '@/components/waitlist/ScrollingServices';
 import AppScreenshotCarousel from '@/components/waitlist/AppScreenshotCarousel';
+import HowItWorks from '@/components/waitlist/HowItWorks';
 import Image from 'next/image';
 
 export default function WaitlistPage() {
@@ -203,48 +204,7 @@ export default function WaitlistPage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 bg-white border-t border-gray-200">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-4 animate-fade-in-up">
-            How It Works
-          </h2>
-          <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto animate-fade-in-up animation-delay-100">
-            Get professional services in three simple steps
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
-            <div className="text-center animate-fade-in-up animation-delay-200">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-primary/20">
-                <span className="text-2xl font-bold text-primary">1</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Choose Your Service</h3>
-              <p className="text-gray-600">
-                Browse from over 30 professional services - from beauty and wellness to home maintenance and vehicle care.
-              </p>
-            </div>
-
-            <div className="text-center animate-fade-in-up animation-delay-400">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-primary/20">
-                <span className="text-2xl font-bold text-primary">2</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Book Instantly</h3>
-              <p className="text-gray-600">
-                Select your preferred time and location. Whether at home, office, or on the go - we come to you.
-              </p>
-            </div>
-
-            <div className="text-center animate-fade-in-up animation-delay-600">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-primary/20">
-                <span className="text-2xl font-bold text-primary">3</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Enjoy Your Service</h3>
-              <p className="text-gray-600">
-                Relax while skilled professionals deliver quality service at your convenience. Rate and review when done.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HowItWorks />
 
       {/* Services Preview */}
       <section className="bg-gray-50 py-16 border-t border-gray-300 overflow-hidden">
