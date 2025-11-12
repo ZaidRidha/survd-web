@@ -87,9 +87,14 @@ export default function WaitlistForm() {
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
           Join the Waitlist
         </h2>
-        <p className="text-gray-600">
+        <p className="text-gray-600 mb-3">
           Be the first to know when we launch!
         </p>
+        <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/30 rounded-lg p-3">
+          <p className="text-sm text-gray-700">
+            <strong className="text-primary">Early access perks:</strong> Exclusive discounts, priority features, and special launch bonuses for both customers and vendors!
+          </p>
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
@@ -175,61 +180,6 @@ export default function WaitlistForm() {
             </button>
           </div>
         </div>
-
-        {/* Early Adopter Benefits */}
-        {formData.userType === 'customer' && (
-          <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border-2 border-primary rounded-lg p-3 shadow-md animate-in slide-in-from-top duration-300">
-            <div className="flex items-center gap-1.5 mb-2">
-              <span className="text-lg">🎉</span>
-              <h4 className="font-bold text-gray-900 text-xs">Exclusive Early Customer Perks!</h4>
-            </div>
-            <ul className="space-y-1.5 text-xs text-gray-800">
-              <li className="flex items-start gap-2 group">
-                <span className="text-sm flex-shrink-0 group-hover:scale-110 transition-transform">💸</span>
-                <span><strong className="text-primary">HUGE Discounts!</strong> Up to 50% off</span>
-              </li>
-              <li className="flex items-start gap-2 group">
-                <span className="text-sm flex-shrink-0 group-hover:scale-110 transition-transform">⚡</span>
-                <span><strong className="text-primary">VIP Access!</strong> First to new features</span>
-              </li>
-              <li className="flex items-start gap-2 group">
-                <span className="text-sm flex-shrink-0 group-hover:scale-110 transition-transform">🎁</span>
-                <span><strong className="text-primary">Launch Bonuses!</strong> LIMITED TIME coupons</span>
-              </li>
-              <li className="flex items-start gap-2 group">
-                <span className="text-sm flex-shrink-0 group-hover:scale-110 transition-transform">👑</span>
-                <span><strong className="text-primary">Priority Support!</strong> Jump the line</span>
-              </li>
-            </ul>
-          </div>
-        )}
-
-        {formData.userType === 'vendor' && (
-          <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border-2 border-primary rounded-lg p-3 shadow-md animate-in slide-in-from-top duration-300">
-            <div className="flex items-center gap-1.5 mb-2">
-              <span className="text-lg">🚀</span>
-              <h4 className="font-bold text-gray-900 text-xs">Exclusive Early Vendor Perks!</h4>
-            </div>
-            <ul className="space-y-1.5 text-xs text-gray-800">
-              <li className="flex items-start gap-2 group">
-                <span className="text-sm flex-shrink-0 group-hover:scale-110 transition-transform">💰</span>
-                <span><strong className="text-primary">CHEAPER Commissions!</strong> Lock in reduced rates</span>
-              </li>
-              <li className="flex items-start gap-2 group">
-                <span className="text-sm flex-shrink-0 group-hover:scale-110 transition-transform">📈</span>
-                <span><strong className="text-primary">MASSIVE Visibility!</strong> Enhanced discoverability</span>
-              </li>
-              <li className="flex items-start gap-2 group">
-                <span className="text-sm flex-shrink-0 group-hover:scale-110 transition-transform">🏆</span>
-                <span><strong className="text-primary">TOP Rankings!</strong> Priority search placement</span>
-              </li>
-              <li className="flex items-start gap-2 group">
-                <span className="text-sm flex-shrink-0 group-hover:scale-110 transition-transform">⚡</span>
-                <span><strong className="text-primary">First Dibs!</strong> Early access to new features</span>
-              </li>
-            </ul>
-          </div>
-        )}
 
         {/* Error Message */}
         {error && (
