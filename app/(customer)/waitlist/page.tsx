@@ -198,6 +198,7 @@ export default function WaitlistPage() {
                         "/images/screenshots/vendor/VendorSideAppScreenshot3.jpeg",
                         "/images/screenshots/vendor/VendorSideAppScreenshot4.jpeg",
                         "/images/screenshots/vendor/VendorSideAppScreenshot5.jpeg",
+                        "/images/screenshots/vendor/VendorSideAppScreenshot6.jpeg",
                       ]}
                     />
                   </div>
