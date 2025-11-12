@@ -24,7 +24,7 @@ import {
   Leaf,
   Camera
 } from 'lucide-react';
-import { GiEarrings } from 'react-icons/gi';
+import { GiEarrings, GiComb, GiNails } from 'react-icons/gi';
 
 const pastelColors = [
   'text-pink-400',
@@ -44,10 +44,10 @@ const pastelColors = [
 const services = {
   row1: [
     { name: 'Barbers', icon: Scissors, color: 'text-blue-400' },
-    { name: 'Hairdressers', icon: Sparkles, color: 'text-pink-400' },
+    { name: 'Hairdressers', icon: GiComb, color: 'text-pink-400' },
     { name: 'Sports Booking', icon: Trophy, color: 'text-orange-400' },
     { name: 'Massage', icon: Heart, color: 'text-rose-400' },
-    { name: 'Nails', icon: Sparkles, color: 'text-purple-400' },
+    { name: 'Nails', icon: GiNails, color: 'text-purple-400' },
     { name: 'Hairstyle', icon: Scissors, color: 'text-cyan-400' },
     { name: 'Jet Wash', icon: Droplets, color: 'text-blue-400' },
     { name: 'Window Cleaners', icon: Home, color: 'text-teal-400' },
