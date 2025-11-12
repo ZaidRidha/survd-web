@@ -6,7 +6,7 @@ const services = {
   row1: [
     { name: 'Barbers', icon: '✂️' },
     { name: 'Hairdressers', icon: '💇' },
-    { name: 'Tattoos', icon: '🖊️' },
+    { name: 'Sports Booking', icon: '⚽' },
     { name: 'Massage', icon: '💆' },
     { name: 'Nails', icon: '💅' },
     { name: 'Hairstyle', icon: '💇‍♀️' },
@@ -102,7 +102,7 @@ export default function ScrollingServices() {
       <div className="text-center mt-8">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
+          className="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-lg transition shadow-sm"
         >
           View All Services
         </button>
