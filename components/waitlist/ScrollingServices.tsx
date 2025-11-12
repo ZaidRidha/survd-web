@@ -1,48 +1,87 @@
 'use client';
 
 import { useState } from 'react';
+import {
+  Scissors,
+  Sparkles,
+  Trophy,
+  Heart,
+  Droplets,
+  Home,
+  ShoppingBag,
+  Flower2,
+  Key,
+  Paintbrush,
+  Palette,
+  Wrench,
+  ChefHat,
+  Car,
+  Footprints,
+  UtensilsCrossed,
+  Shirt,
+  Package,
+  ShoppingCart,
+  Leaf,
+  Camera
+} from 'lucide-react';
+import { GiEarrings } from 'react-icons/gi';
+
+const pastelColors = [
+  'text-pink-400',
+  'text-purple-400',
+  'text-blue-400',
+  'text-cyan-400',
+  'text-teal-400',
+  'text-green-400',
+  'text-lime-400',
+  'text-yellow-400',
+  'text-orange-400',
+  'text-rose-400',
+  'text-indigo-400',
+  'text-violet-400',
+];
 
 const services = {
   row1: [
-    { name: 'Barbers', icon: '✂️' },
-    { name: 'Hairdressers', icon: '💇' },
-    { name: 'Sports Booking', icon: '⚽' },
-    { name: 'Massage', icon: '💆' },
-    { name: 'Nails', icon: '💅' },
-    { name: 'Hairstyle', icon: '💇‍♀️' },
-    { name: 'Jet Wash', icon: '🚿' },
-    { name: 'Window Cleaners', icon: '🪟' },
-    { name: 'Estheticians', icon: '✨' },
-    { name: 'Personal Shopper', icon: '🛍️' },
-    { name: 'Gardeners', icon: '🌱' },
-    { name: 'Piercing', icon: '💎' },
+    { name: 'Barbers', icon: Scissors, color: 'text-blue-400' },
+    { name: 'Hairdressers', icon: Sparkles, color: 'text-pink-400' },
+    { name: 'Sports Booking', icon: Trophy, color: 'text-orange-400' },
+    { name: 'Massage', icon: Heart, color: 'text-rose-400' },
+    { name: 'Nails', icon: Sparkles, color: 'text-purple-400' },
+    { name: 'Hairstyle', icon: Scissors, color: 'text-cyan-400' },
+    { name: 'Jet Wash', icon: Droplets, color: 'text-blue-400' },
+    { name: 'Window Cleaners', icon: Home, color: 'text-teal-400' },
+    { name: 'Estheticians', icon: Sparkles, color: 'text-violet-400' },
+    { name: 'Personal Shopper', icon: ShoppingBag, color: 'text-pink-400' },
+    { name: 'Gardeners', icon: Flower2, color: 'text-green-400' },
+    { name: 'Piercing', icon: GiEarrings, color: 'text-indigo-400' },
   ],
   row2: [
-    { name: 'Concierge', icon: '🔑' },
-    { name: 'Painter', icon: '🎨' },
-    { name: 'Makeup Artist', icon: '💄' },
-    { name: 'Handyman', icon: '🔧' },
-    { name: 'Private Chef', icon: '👨‍🍳' },
-    { name: 'Car Wash', icon: '🚗' },
-    { name: 'Sneaker Cleaning', icon: '👟' },
-    { name: 'Car Breakdown', icon: '🔧' },
-    { name: 'Domestic Services', icon: '🏠' },
-    { name: 'Shoe Cleaning', icon: '👞' },
-    { name: 'Meal Prep', icon: '🍱' },
-    { name: 'Padel Bookings', icon: '🎾' },
+    { name: 'Concierge', icon: Key, color: 'text-yellow-400' },
+    { name: 'Painter', icon: Paintbrush, color: 'text-purple-400' },
+    { name: 'Makeup Artist', icon: Palette, color: 'text-pink-400' },
+    { name: 'Handyman', icon: Wrench, color: 'text-orange-400' },
+    { name: 'Private Chef', icon: ChefHat, color: 'text-rose-400' },
+    { name: 'Car Wash', icon: Car, color: 'text-cyan-400' },
+    { name: 'Sneaker Cleaning', icon: Footprints, color: 'text-lime-400' },
+    { name: 'Car Breakdown', icon: Wrench, color: 'text-orange-400' },
+    { name: 'Domestic Services', icon: Home, color: 'text-teal-400' },
+    { name: 'Shoe Cleaning', icon: Footprints, color: 'text-blue-400' },
+    { name: 'Meal Prep', icon: UtensilsCrossed, color: 'text-green-400' },
+    { name: 'Padel Bookings', icon: Trophy, color: 'text-violet-400' },
   ],
   row3: [
-    { name: 'Mobile Laundry', icon: '👕' },
-    { name: 'Mobile Detail', icon: '✨' },
-    { name: 'Health & Wellness', icon: '💪' },
-    { name: 'Face Cleanse', icon: '🧖' },
-    { name: 'Logistics', icon: '📦' },
-    { name: 'Groceries', icon: '🛒' },
-    { name: 'Garden Services', icon: '🌿' },
-    { name: 'Painting', icon: '🖌️' },
-    { name: 'Vehicle Services', icon: '🚙' },
-    { name: 'Photography', icon: '📸' },
-    { name: 'Car Detailing', icon: '🧽' },
+    { name: 'Mobile Laundry', icon: Shirt, color: 'text-cyan-400' },
+    { name: 'Mobile Detail', icon: Sparkles, color: 'text-yellow-400' },
+    { name: 'Health & Wellness', icon: Heart, color: 'text-rose-400' },
+    { name: 'Face Cleanse', icon: Sparkles, color: 'text-pink-400' },
+    { name: 'Logistics', icon: Package, color: 'text-orange-400' },
+    { name: 'Groceries', icon: ShoppingCart, color: 'text-green-400' },
+    { name: 'Garden Services', icon: Leaf, color: 'text-teal-400' },
+    { name: 'Painting', icon: Paintbrush, color: 'text-purple-400' },
+    { name: 'Vehicle Services', icon: Car, color: 'text-blue-400' },
+    { name: 'Photography', icon: Camera, color: 'text-indigo-400' },
+    { name: 'Car Detailing', icon: Sparkles, color: 'text-violet-400' },
   ],
 };
 
@@ -56,45 +95,60 @@ export default function ScrollingServices() {
       {/* Row 1 - Scrolling Left */}
       <div className="relative mb-4">
         <div className="flex gap-4 animate-scroll-left">
-          {services.row1.concat(services.row1).map((service, index) => (
-            <div
-              key={`row1-${index}`}
-              className="bg-white rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200 flex-shrink-0 w-32"
-            >
-              <div className="text-4xl mb-2">{service.icon}</div>
-              <div className="text-gray-800 text-sm font-medium">{service.name}</div>
-            </div>
-          ))}
+          {services.row1.concat(services.row1).map((service, index) => {
+            const IconComponent = service.icon;
+            return (
+              <div
+                key={`row1-${index}`}
+                className="bg-white rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200 flex-shrink-0 w-32"
+              >
+                <div className="flex justify-center mb-2">
+                  <IconComponent className={`w-10 h-10 ${service.color}`} strokeWidth={1.5} />
+                </div>
+                <div className="text-gray-800 text-sm font-medium">{service.name}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
       {/* Row 2 - Scrolling Right */}
       <div className="relative mb-4">
         <div className="flex gap-4 animate-scroll-right">
-          {services.row2.concat(services.row2).map((service, index) => (
-            <div
-              key={`row2-${index}`}
-              className="bg-white rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200 flex-shrink-0 w-32"
-            >
-              <div className="text-4xl mb-2">{service.icon}</div>
-              <div className="text-gray-800 text-sm font-medium">{service.name}</div>
-            </div>
-          ))}
+          {services.row2.concat(services.row2).map((service, index) => {
+            const IconComponent = service.icon;
+            return (
+              <div
+                key={`row2-${index}`}
+                className="bg-white rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200 flex-shrink-0 w-32"
+              >
+                <div className="flex justify-center mb-2">
+                  <IconComponent className={`w-10 h-10 ${service.color}`} strokeWidth={1.5} />
+                </div>
+                <div className="text-gray-800 text-sm font-medium">{service.name}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
       {/* Row 3 - Scrolling Left */}
       <div className="relative">
         <div className="flex gap-4 animate-scroll-left">
-          {services.row3.concat(services.row3).map((service, index) => (
-            <div
-              key={`row3-${index}`}
-              className="bg-white rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200 flex-shrink-0 w-32"
-            >
-              <div className="text-4xl mb-2">{service.icon}</div>
-              <div className="text-gray-800 text-sm font-medium">{service.name}</div>
-            </div>
-          ))}
+          {services.row3.concat(services.row3).map((service, index) => {
+            const IconComponent = service.icon;
+            return (
+              <div
+                key={`row3-${index}`}
+                className="bg-white rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200 flex-shrink-0 w-32"
+              >
+                <div className="flex justify-center mb-2">
+                  <IconComponent className={`w-10 h-10 ${service.color}`} strokeWidth={1.5} />
+                </div>
+                <div className="text-gray-800 text-sm font-medium">{service.name}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -123,15 +177,20 @@ export default function ScrollingServices() {
             </div>
             <div className="p-6">
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {allServices.map((service, index) => (
-                  <div
-                    key={index}
-                    className="bg-gray-50 rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200"
-                  >
-                    <div className="text-4xl mb-2">{service.icon}</div>
-                    <div className="text-gray-800 text-sm font-medium">{service.name}</div>
-                  </div>
-                ))}
+                {allServices.map((service, index) => {
+                  const IconComponent = service.icon;
+                  return (
+                    <div
+                      key={index}
+                      className="bg-gray-50 rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200"
+                    >
+                      <div className="flex justify-center mb-2">
+                        <IconComponent className={`w-10 h-10 ${service.color}`} strokeWidth={1.5} />
+                      </div>
+                      <div className="text-gray-800 text-sm font-medium">{service.name}</div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
