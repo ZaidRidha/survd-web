@@ -24,7 +24,7 @@ import {
   Leaf,
   Camera
 } from 'lucide-react';
-import { GiEarrings, GiComb, GiNails } from 'react-icons/gi';
+import { GiEarrings, GiComb, GiNails, GiSoap, GiLotus, GiSpray, GiWaterDrop, GiWindow } from 'react-icons/gi';
 
 const pastelColors = [
   'text-pink-400',
@@ -46,12 +46,12 @@ const services = {
     { name: 'Barbers', icon: Scissors, color: 'text-blue-400' },
     { name: 'Hairdressers', icon: GiComb, color: 'text-pink-400' },
     { name: 'Sports Booking', icon: Trophy, color: 'text-orange-400' },
-    { name: 'Massage', icon: Heart, color: 'text-rose-400' },
+    { name: 'Massage', icon: GiLotus, color: 'text-rose-400' },
     { name: 'Nails', icon: GiNails, color: 'text-purple-400' },
     { name: 'Hairstyle', icon: Scissors, color: 'text-cyan-400' },
     { name: 'Jet Wash', icon: Droplets, color: 'text-blue-400' },
-    { name: 'Window Cleaners', icon: Home, color: 'text-teal-400' },
-    { name: 'Estheticians', icon: Sparkles, color: 'text-violet-400' },
+    { name: 'Window Cleaners', icon: GiWindow, color: 'text-blue-400' },
+    { name: 'Estheticians', icon: GiSoap, color: 'text-violet-400' },
     { name: 'Personal Shopper', icon: ShoppingBag, color: 'text-pink-400' },
     { name: 'Gardeners', icon: Flower2, color: 'text-green-400' },
     { name: 'Piercing', icon: GiEarrings, color: 'text-indigo-400' },
@@ -72,16 +72,16 @@ const services = {
   ],
   row3: [
     { name: 'Mobile Laundry', icon: Shirt, color: 'text-cyan-400' },
-    { name: 'Mobile Detail', icon: Sparkles, color: 'text-yellow-400' },
+    { name: 'Mobile Detail', icon: GiSpray, color: 'text-green-400' },
     { name: 'Health & Wellness', icon: Heart, color: 'text-rose-400' },
-    { name: 'Face Cleanse', icon: Sparkles, color: 'text-pink-400' },
+    { name: 'Face Cleanse', icon: GiWaterDrop, color: 'text-blue-400' },
     { name: 'Logistics', icon: Package, color: 'text-orange-400' },
-    { name: 'Groceries', icon: ShoppingCart, color: 'text-green-400' },
+    { name: 'Groceries', icon: ShoppingCart, color: 'text-yellow-400' },
     { name: 'Garden Services', icon: Leaf, color: 'text-teal-400' },
     { name: 'Painting', icon: Paintbrush, color: 'text-purple-400' },
     { name: 'Vehicle Services', icon: Car, color: 'text-blue-400' },
     { name: 'Photography', icon: Camera, color: 'text-indigo-400' },
-    { name: 'Car Detailing', icon: Sparkles, color: 'text-violet-400' },
+    { name: 'Car Detailing', icon: Car, color: 'text-violet-400' },
   ],
 };
 
