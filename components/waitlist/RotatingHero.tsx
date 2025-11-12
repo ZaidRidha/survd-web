@@ -43,7 +43,7 @@ const heroSlides = [
       <>
         Book Anytime,
         <br />
-        <span className="bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">Anywhere You Need</span>
+        <span className="bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">Anywhere</span>
       </>
     ),
     description: 'Professional services come to you - at home, at work, or wherever you need them.',
