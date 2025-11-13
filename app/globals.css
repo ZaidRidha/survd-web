@@ -80,6 +80,15 @@ body {
   }
 }
 
+@keyframes titleEmphasis {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
 /* Animation Classes */
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
@@ -99,6 +108,12 @@ body {
 .animate-scale-in {
   animation: scaleIn 0.5s ease-out forwards;
   opacity: 0;
+}
+
+.animate-title-emphasis {
+  display: inline-block;
+  color: #000;
+  animation: titleEmphasis 2s ease-in-out infinite;
 }
 
 /* Stagger delays for sequential animations */

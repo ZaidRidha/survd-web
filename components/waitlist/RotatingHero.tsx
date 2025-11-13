@@ -8,7 +8,7 @@ const heroSlides = [
       <>
         Introducing
         <br />
-        <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Survd</span>
+        <span className="text-black animate-title-emphasis">Survd</span>
       </>
     ),
     description: 'Connect with independent professionals for haircuts, laundry, nail techs, and more - all on your schedule, at your location.',
@@ -24,7 +24,7 @@ const heroSlides = [
       <>
         All The Services
         <br />
-        <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">You Need</span>
+        <span className="text-black animate-title-emphasis">You Need</span>
       </>
     ),
     description: 'From beauty and wellness to home maintenance and vehicle care - everything available on demand.',
@@ -43,7 +43,7 @@ const heroSlides = [
       <>
         Book Anytime,
         <br />
-        <span className="bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">Anywhere</span>
+        <span className="text-black animate-title-emphasis">Anywhere</span>
       </>
     ),
     description: 'Professional services come to you - at home, at work, or wherever you need them.',
@@ -62,7 +62,7 @@ const heroSlides = [
       <>
         Go Independent,
         <br />
-        <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Earn More</span>
+        <span className="text-black animate-title-emphasis">Earn More</span>
       </>
     ),
     description: 'Cheaper than Booksy or Fresha. No subscription fees, just small commissions when you earn.',
