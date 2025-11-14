@@ -365,6 +365,14 @@ export default function WaitlistPage() {
               © 2025 Survd. All rights reserved.
             </div>
           </div>
+          <div className="text-center mt-4">
+            <a
+              href="/home"
+              className="text-xs text-gray-500 hover:text-gray-300 transition-colors underline"
+            >
+              test web app
+            </a>
+          </div>
         </div>
       </footer>
     </main>
