@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Scissors, Car, Home, Shirt } from 'lucide-react';
+import { GiNails, GiLotus } from 'react-icons/gi';
 
 const heroSlides = [
   {
@@ -29,12 +31,12 @@ const heroSlides = [
     ),
     description: 'From beauty and wellness to home maintenance and vehicle care - everything available on demand.',
     services: [
-      { emoji: '💇', name: 'Barbers & Hairstylists' },
-      { emoji: '💅', name: 'Nail Techs' },
-      { emoji: '💆', name: 'Massage Therapy' },
-      { emoji: '🚗', name: 'Car Detailing' },
-      { emoji: '🏠', name: 'Cleaning Services' },
-      { emoji: '👕', name: 'Mobile Laundry' },
+      { icon: Scissors, name: 'Barbers & Hairstylists', color: 'text-blue-400' },
+      { icon: GiNails, name: 'Nail Techs', color: 'text-purple-400' },
+      { icon: GiLotus, name: 'Massage Therapy', color: 'text-rose-400' },
+      { icon: Car, name: 'Car Detailing', color: 'text-cyan-400' },
+      { icon: Home, name: 'Cleaning Services', color: 'text-teal-400' },
+      { icon: Shirt, name: 'Mobile Laundry', color: 'text-cyan-400' },
     ],
     showStats: false,
   },
@@ -203,17 +205,20 @@ export default function RotatingHero() {
           {/* Services Grid - Show on services slide */}
           {slide.services && (
             <div className="grid grid-cols-2 gap-3 md:gap-4 mb-8">
-              {slide.services.map((service, index) => (
-                <div
-                  key={index}
-                  className="group relative flex items-center gap-3 bg-gradient-to-br from-white to-gray-50 rounded-xl p-4 border border-gray-200 hover:border-green-400 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-2xl">{service.emoji}</span>
+              {slide.services.map((service, index) => {
+                const IconComponent = service.icon;
+                return (
+                  <div
+                    key={index}
+                    className="group relative flex items-center gap-3 bg-gradient-to-br from-white to-gray-50 rounded-xl p-4 border border-gray-200 hover:border-green-400 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  >
+                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <IconComponent className={`w-6 h-6 ${service.color}`} strokeWidth={1.5} />
+                    </div>
+                    <span className="text-gray-800 font-semibold text-sm">{service.name}</span>
                   </div>
-                  <span className="text-gray-800 font-semibold text-sm">{service.name}</span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
 
