@@ -178,12 +178,14 @@ export default function RotatingHero() {
         </h1>
 
         {/* Description */}
-        <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed text-center md:text-left">
-          {slide.description}
-        </p>
+        <div className="h-[80px] md:h-[72px] mb-8 flex items-start justify-center md:justify-start">
+          <p className="text-xl md:text-2xl text-gray-600 leading-relaxed text-center md:text-left">
+            {slide.description}
+          </p>
+        </div>
 
         {/* Content Area - Fixed height for consistency */}
-        <div className="min-h-[280px] md:min-h-[260px]">
+        <div className="h-[320px] md:h-[300px] overflow-hidden">
           {/* Key Stats - Only show on first slide */}
           {slide.showStats && (
             <div className="grid grid-cols-3 gap-4 md:gap-6 mb-8">
