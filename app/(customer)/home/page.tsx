@@ -3,19 +3,77 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-// Service categories from mobile app
+// Service categories from mobile app with SVG icons
 const serviceCategories = [
-  { id: 'barber', name: 'Barber', icon: '✂️', color: '#6B9BD1' },
-  { id: 'hairstylist', name: 'Hair Stylist', icon: '💇', color: '#FF7B7B' },
-  { id: 'makeup', name: 'Makeup', icon: '💄', color: '#D190E3' },
-  { id: 'nails', name: 'Nails', icon: '💅', color: '#FF77A1' },
-  { id: 'massage', name: 'Massage', icon: '💆', color: '#5EC4F5' },
-  { id: 'spa', name: 'Spa', icon: '🧖', color: '#81C784' },
-  { id: 'cleaning', name: 'House Cleaning', icon: '🏠', color: '#4DD0E1' },
-  { id: 'car-wash', name: 'Car Wash', icon: '🚗', color: '#29B6F6' },
-  { id: 'photography', name: 'Photography', icon: '📷', color: '#8D6E63' },
-  { id: 'personal-training', name: 'Personal Training', icon: '🏋️', color: '#FF6F00' },
+  { id: 'barber', name: 'Barber', color: '#6B9BD1' },
+  { id: 'hairstylist', name: 'Hair Stylist', color: '#FF7B7B' },
+  { id: 'makeup', name: 'Makeup', color: '#D190E3' },
+  { id: 'nails', name: 'Nails', color: '#FF77A1' },
+  { id: 'massage', name: 'Massage', color: '#5EC4F5' },
+  { id: 'spa', name: 'Spa', color: '#4CAF50' },
+  { id: 'cleaning', name: 'House Cleaning', color: '#4DD0E1' },
+  { id: 'car-wash', name: 'Car Wash', color: '#29B6F6' },
+  { id: 'photography', name: 'Photography', color: '#8D6E63' },
+  { id: 'personal-training', name: 'Personal Training', color: '#FF6F00' },
 ];
+
+// Icon component for categories
+const CategoryIcon = ({ categoryId, className = "w-5 h-5" }: { categoryId: string; className?: string }) => {
+  const icons: { [key: string]: JSX.Element } = {
+    'barber': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />
+      </svg>
+    ),
+    'hairstylist': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+      </svg>
+    ),
+    'makeup': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+      </svg>
+    ),
+    'nails': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+      </svg>
+    ),
+    'massage': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    ),
+    'spa': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    ),
+    'cleaning': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    ),
+    'car-wash': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    'photography': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+    'personal-training': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+  };
+  return icons[categoryId] || icons['cleaning'];
+};
 
 // Dummy reviews for rating calculation
 const dummyReviews = [
@@ -220,7 +278,7 @@ export default function CustomerHome() {
               <nav className="hidden sm:flex items-center gap-2">
                 <a
                   href="/home"
-                  className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-primary shadow-sm hover:bg-primary/90 transition-all"
+                  className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-gray-900 shadow-sm hover:bg-gray-800 transition-all"
                 >
                   Home
                 </a>
@@ -236,12 +294,6 @@ export default function CustomerHome() {
                 >
                   Appointments
                 </a>
-                <a
-                  href="/profile"
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all"
-                >
-                  Profile
-                </a>
               </nav>
             </div>
             <div className="flex items-center gap-2">
@@ -256,6 +308,11 @@ export default function CustomerHome() {
                 </svg>
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
               </button>
+              <a href="/profile" className="p-2.5 text-gray-600 hover:bg-gray-100 rounded-lg transition-all hover:text-gray-900">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -265,7 +322,7 @@ export default function CustomerHome() {
           <div className="flex items-center justify-around px-2 py-2">
             <a
               href="/home"
-              className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-xs font-semibold text-primary bg-primary/10"
+              className="flex flex-col items-center gap-1 px-4 py-2 rounded-lg text-xs font-semibold text-gray-900 bg-gray-100"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -274,7 +331,7 @@ export default function CustomerHome() {
             </a>
             <a
               href="/explore"
-              className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium text-gray-600"
+              className="flex flex-col items-center gap-1 px-4 py-2 rounded-lg text-xs font-medium text-gray-600"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -283,21 +340,12 @@ export default function CustomerHome() {
             </a>
             <a
               href="/appointments"
-              className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium text-gray-600"
+              className="flex flex-col items-center gap-1 px-4 py-2 rounded-lg text-xs font-medium text-gray-600"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <span>Appointments</span>
-            </a>
-            <a
-              href="/profile"
-              className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium text-gray-600"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-              <span>Profile</span>
             </a>
           </div>
         </div>
@@ -380,7 +428,7 @@ export default function CustomerHome() {
                   backgroundColor: selectedCategory === category.id ? category.color : undefined,
                 }}
               >
-                <span className="text-xl">{category.icon}</span>
+                <CategoryIcon categoryId={category.id} className="w-5 h-5" />
                 <span className="font-medium">{category.name}</span>
               </button>
             ))}
@@ -419,13 +467,22 @@ export default function CustomerHome() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
 
-                      {/* Active Badge */}
-                      {provider.isActive && (
-                        <div className="absolute top-3 right-3 flex items-center gap-1 bg-green-500/95 px-2 py-1 rounded-xl shadow-md">
-                          <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                          <span className="text-white text-xs font-semibold">Active</span>
-                        </div>
-                      )}
+                      {/* Status Badge */}
+                      <div
+                        className={`absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-xl shadow-md ${
+                          provider.isActive ? 'animate-pulse-glow' : ''
+                        }`}
+                        style={{
+                          backgroundColor: provider.isActive
+                            ? 'rgba(76, 175, 80, 0.95)'
+                            : 'rgba(251, 191, 36, 0.95)'
+                        }}
+                      >
+                        <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
+                        <span className="text-white text-xs font-semibold">
+                          {provider.isActive ? 'Active now' : 'On break'}
+                        </span>
+                      </div>
 
                       {/* Service Type Tag */}
                       {provider.services.length > 0 && (

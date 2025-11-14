@@ -89,6 +89,15 @@ body {
   }
 }
 
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3), 0 0 10px rgba(76, 175, 80, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5), 0 0 20px rgba(76, 175, 80, 0.3);
+  }
+}
+
 /* Animation Classes */
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
@@ -114,6 +123,10 @@ body {
   display: inline-block;
   color: #000;
   animation: titleEmphasis 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
 }
 
 /* Stagger delays for sequential animations */
