@@ -356,7 +356,7 @@ export default function CustomerHome() {
         {/* Search Section */}
         <div className="mb-8">
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-4">
               <div className="flex-1 relative">
                 <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -366,18 +366,18 @@ export default function CustomerHome() {
                   placeholder="Search for services..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-all"
                 />
               </div>
-              <button className="px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors font-medium">
+              <button className="px-6 py-3.5 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all font-semibold shadow-sm">
                 Search
               </button>
             </div>
 
             {/* Service Type Filters */}
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-gray-700">Service Type:</span>
-              <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <span className="text-sm font-semibold text-gray-900">Service Type:</span>
+              <div className="flex flex-wrap gap-2">
                 {[
                   { id: 'shop', label: 'In-Shop', icon: '🏪' },
                   { id: 'mobile', label: 'Mobile', icon: '🚗' },
@@ -386,13 +386,13 @@ export default function CustomerHome() {
                   <button
                     key={type.id}
                     onClick={() => toggleServiceType(type.id)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                       selectedServiceTypes.includes(type.id)
-                        ? 'bg-primary text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-gray-900 text-white shadow-sm'
+                        : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200'
                     }`}
                   >
-                    <span className="mr-1">{type.icon}</span>
+                    <span className="mr-1.5">{type.icon}</span>
                     {type.label}
                   </button>
                 ))}
