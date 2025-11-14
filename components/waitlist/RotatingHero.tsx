@@ -214,8 +214,8 @@ export default function RotatingHero() {
                     key={index}
                     className="group relative flex items-center gap-3 bg-gradient-to-br from-white to-gray-50 rounded-xl p-4 border border-gray-200 hover:border-green-400 transition-all duration-300 hover:scale-105 hover:shadow-lg"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <IconComponent className={`w-6 h-6 ${service.color}`} strokeWidth={1.5} />
+                    <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <IconComponent className={`w-8 h-8 ${service.color}`} strokeWidth={1.5} />
                     </div>
                     <span className="text-gray-800 font-semibold text-sm">{service.name}</span>
                   </div>
