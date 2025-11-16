@@ -503,7 +503,7 @@ export default function ProviderPage() {
                   </div>
                 )}
 
-                {services.grooming && services.grooming.length > 0 && (
+                {'grooming' in services && services.grooming && services.grooming.length > 0 && (
                   <div>
                     <h2 className="text-xl font-bold text-gray-900 mb-4">Grooming</h2>
                     <div className="space-y-3">
@@ -530,7 +530,7 @@ export default function ProviderPage() {
                   </div>
                 )}
 
-                {services.treatments && services.treatments.length > 0 && (
+                {'treatments' in services && services.treatments && services.treatments.length > 0 && (
                   <div>
                     <h2 className="text-xl font-bold text-gray-900 mb-4">Treatments</h2>
                     <div className="space-y-3">
