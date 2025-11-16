@@ -75,6 +75,29 @@ const CategoryIcon = ({ categoryId, className = "w-5 h-5" }: { categoryId: strin
   return icons[categoryId] || icons['cleaning'];
 };
 
+// Icon component for service types
+const ServiceTypeIcon = ({ typeId, className = "w-4 h-4" }: { typeId: string; className?: string }) => {
+  const icons: { [key: string]: ReactElement } = {
+    'shop': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+    'mobile': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+      </svg>
+    ),
+    'home': (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    ),
+  };
+  return icons[typeId] || icons['shop'];
+};
+
 // Dummy reviews for rating calculation
 const dummyReviews = [
   { businessId: 1, rating: 5 },
@@ -379,20 +402,20 @@ export default function CustomerHome() {
               <span className="text-sm font-semibold text-gray-900">Service Type:</span>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { id: 'shop', label: 'In-Shop', icon: '🏪' },
-                  { id: 'mobile', label: 'Mobile', icon: '🚗' },
-                  { id: 'home', label: 'At Home', icon: '🏠' },
+                  { id: 'shop', label: 'In-Shop' },
+                  { id: 'mobile', label: 'Mobile' },
+                  { id: 'home', label: 'At Home' },
                 ].map((type) => (
                   <button
                     key={type.id}
                     onClick={() => toggleServiceType(type.id)}
-                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                       selectedServiceTypes.includes(type.id)
-                        ? 'bg-gray-900 text-white shadow-sm'
+                        ? 'bg-gray-700 text-white shadow-md border border-gray-700'
                         : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200'
                     }`}
                   >
-                    <span className="mr-1.5">{type.icon}</span>
+                    <ServiceTypeIcon typeId={type.id} className="w-4 h-4" />
                     {type.label}
                   </button>
                 ))}

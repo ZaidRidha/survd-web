@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Scissors, Car, Home, Shirt } from 'lucide-react';
-import { GiNails, GiLotus } from 'react-icons/gi';
+import { Scissors, Home, Shirt, UtensilsCrossed, Footprints } from 'lucide-react';
+import { GiNails } from 'react-icons/gi';
 
 const heroSlides = [
   {
@@ -31,12 +31,12 @@ const heroSlides = [
     ),
     description: 'From beauty and wellness to home maintenance and vehicle care - everything available on demand.',
     services: [
-      { icon: Scissors, name: 'Barbers & Hairstylists', color: 'text-blue-400' },
+      { icon: Scissors, name: 'Barbers', color: 'text-blue-400' },
+      { icon: Home, name: 'Cleaners', color: 'text-teal-400' },
+      { icon: Shirt, name: 'Laundry', color: 'text-cyan-400' },
       { icon: GiNails, name: 'Nail Techs', color: 'text-purple-400' },
-      { icon: GiLotus, name: 'Massage Therapy', color: 'text-rose-400' },
-      { icon: Car, name: 'Car Detailing', color: 'text-cyan-400' },
-      { icon: Home, name: 'Cleaning Services', color: 'text-teal-400' },
-      { icon: Shirt, name: 'Mobile Laundry', color: 'text-cyan-400' },
+      { icon: UtensilsCrossed, name: 'Meal Prep', color: 'text-green-400' },
+      { icon: Footprints, name: 'Shoe Cleaning', color: 'text-blue-400' },
     ],
     showStats: false,
   },
