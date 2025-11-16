@@ -3,8 +3,22 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
+interface Appointment {
+  id: number;
+  providerName: string;
+  providerUsername: string;
+  providerImage: string;
+  date: string;
+  time: string;
+  service: string;
+  price: number;
+  duration: string;
+  location: string;
+  status: 'upcoming' | 'completed' | 'cancelled';
+}
+
 // Dummy appointments data
-const dummyAppointments = {
+const dummyAppointments: { upcoming: Appointment[]; history: Appointment[] } = {
   upcoming: [
     {
       id: 1,
@@ -17,7 +31,7 @@ const dummyAppointments = {
       price: 35,
       duration: '45 min',
       location: '123 High Street, London, UK',
-      status: 'upcoming' as const,
+      status: 'upcoming',
     },
     {
       id: 2,
@@ -30,7 +44,7 @@ const dummyAppointments = {
       price: 85,
       duration: '2 hrs',
       location: '456 Beauty Lane, London, UK',
-      status: 'upcoming' as const,
+      status: 'upcoming',
     },
   ],
   history: [
@@ -45,7 +59,7 @@ const dummyAppointments = {
       price: 30,
       duration: '1 hr',
       location: '789 Nail Street, London, UK',
-      status: 'completed' as const,
+      status: 'completed',
     },
     {
       id: 4,
@@ -58,24 +72,10 @@ const dummyAppointments = {
       price: 65,
       duration: '1 hr',
       location: '321 Wellness Road, London, UK',
-      status: 'completed' as const,
+      status: 'completed',
     },
   ],
 };
-
-interface Appointment {
-  id: number;
-  providerName: string;
-  providerUsername: string;
-  providerImage: string;
-  date: string;
-  time: string;
-  service: string;
-  price: number;
-  duration: string;
-  location: string;
-  status: 'upcoming' | 'completed' | 'cancelled';
-}
 
 export default function CustomerAppointments() {
   const [activeTab, setActiveTab] = useState<'upcoming' | 'history'>('upcoming');
