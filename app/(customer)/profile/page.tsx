@@ -236,7 +236,7 @@ export default function ProfilePage() {
 
         {/* Dev Skip to Vendor Button */}
         <button
-          onClick={() => router.push('/vendor')}
+          onClick={() => router.push('/vendorappointments')}
           className="w-full bg-green-50 text-green-600 py-4 rounded-2xl font-bold hover:bg-green-100 transition-colors border-2 border-green-500 flex items-center justify-center gap-2 mb-8"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
