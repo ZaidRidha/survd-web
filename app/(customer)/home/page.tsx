@@ -477,9 +477,10 @@ export default function CustomerHome() {
               const { averageRating, reviewCount } = getBusinessRating(provider.id);
 
               return (
-                <div
+                <a
                   key={provider.id}
-                  className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl transition-all cursor-pointer group"
+                  href={`/provider/${provider.id}`}
+                  className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl transition-all cursor-pointer group block"
                 >
                   {/* Image Section */}
                   <div className="relative">
@@ -608,7 +609,7 @@ export default function CustomerHome() {
                       )}
                     </div>
                   </div>
-                </div>
+                </a>
               );
             })}
           </div>
