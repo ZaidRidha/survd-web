@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { handleWaitlistSignup } from '@/lib/services/brevo';
+import { WaitlistEntry } from '@/lib/types/waitlist';
 
-// In a real app, you would save this to a database
-// For now, we'll just log it and return success
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -29,24 +29,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Save to database
-    // Example: await db.waitlist.create({ name, email, userType, createdAt: new Date() })
-
-    // For now, just log it
-    console.log('New waitlist signup:', {
+    // Create waitlist entry
+    const entry: WaitlistEntry = {
       name,
       email,
       userType,
-      timestamp: new Date().toISOString(),
-    });
+      createdAt: new Date(),
+    };
 
-    // TODO: Send confirmation email
-    // Example: await sendEmail({ to: email, template: 'waitlist-confirmation' })
+    // Add to Brevo and send confirmation email
+    const result = await handleWaitlistSignup(entry);
+
+    if (!result.success) {
+      return NextResponse.json(
+        { error: result.message },
+        { status: 500 }
+      );
+    }
+
+    console.log('✓ Waitlist signup complete:', email);
 
     return NextResponse.json(
       {
         success: true,
-        message: 'Successfully joined the waitlist',
+        message: 'Successfully joined the waitlist! Check your email for confirmation.',
       },
       { status: 201 }
     );
