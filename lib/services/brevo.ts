@@ -73,13 +73,13 @@ export async function sendWaitlistConfirmationEmail(
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Welcome to Survd!</title>
         </head>
-        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-            <h1 style="color: white; margin: 0; font-size: 28px;">Welcome to Survd!</h1>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #000; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <div style="text-align: left; margin-bottom: 30px;">
+            <img src="https://survd.co.uk/images/logos/survd-logo.png" alt="Survd Logo" style="max-width: 180px; height: auto;" />
           </div>
 
-          <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px;">
-            <p style="font-size: 18px; color: #667eea; font-weight: bold;">Hi ${entry.name}!</p>
+          <div style="background: #f9fafb; padding: 30px; border-radius: 10px;">
+            <p style="font-size: 18px; color: #000; font-weight: bold;">Hi ${entry.name}!</p>
 
             <p style="font-size: 16px;">Thank you for joining the Survd waitlist as a <strong>${entry.userType}</strong>!</p>
 
@@ -104,7 +104,7 @@ export async function sendWaitlistConfirmationEmail(
             <p style="font-size: 15px; margin-top: 25px;">We'll keep you updated on our launch and send you exclusive early access when we're ready!</p>
 
             <div style="text-align: center; margin-top: 30px;">
-              <a href="https://survd.co.uk" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold;">Visit Survd</a>
+              <a href="https://survd.co.uk" style="display: inline-block; background: linear-gradient(135deg, #111827 0%, #1f2937 100%); color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold;">Visit Survd</a>
             </div>
 
             <p style="font-size: 14px; color: #666; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
