@@ -368,9 +368,9 @@ export default function WaitlistPage() {
           <div className="text-center mt-4">
             <a
               href="/home"
-              className="text-xs text-gray-500 hover:text-gray-300 transition-colors underline"
+              className="text-xs text-transparent hover:text-gray-400 transition-colors duration-300 select-none"
             >
-              test web app
+              test web app ;)
             </a>
           </div>
         </div>
