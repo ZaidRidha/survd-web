@@ -85,6 +85,79 @@ const services = {
   ],
 };
 
+const serviceCategories = [
+  {
+    name: 'Beauty & Personal Care',
+    description: 'Hair, makeup, nails, and grooming services',
+    services: [
+      { name: 'Barbers', icon: Scissors, color: 'text-blue-400' },
+      { name: 'Hairdressers', icon: GiComb, color: 'text-pink-400' },
+      { name: 'Makeup Artist', icon: Palette, color: 'text-pink-400' },
+      { name: 'Nails', icon: GiNails, color: 'text-purple-400' },
+      { name: 'Estheticians', icon: GiSoap, color: 'text-violet-400' },
+      { name: 'Piercing', icon: GiEarrings, color: 'text-indigo-400' },
+      { name: 'Face Cleanse', icon: GiWaterDrop, color: 'text-blue-400' },
+    ],
+  },
+  {
+    name: 'Health & Wellness',
+    description: 'Massage, fitness, and relaxation services',
+    services: [
+      { name: 'Massage', icon: GiLotus, color: 'text-rose-400' },
+      { name: 'Health & Wellness', icon: Heart, color: 'text-rose-400' },
+      { name: 'Sports Booking', icon: Trophy, color: 'text-orange-400' },
+      { name: 'Padel Bookings', icon: Trophy, color: 'text-violet-400' },
+    ],
+  },
+  {
+    name: 'Home & Property',
+    description: 'Cleaning, maintenance, and home improvement',
+    services: [
+      { name: 'Domestic Services', icon: Home, color: 'text-teal-400' },
+      { name: 'Window Cleaners', icon: GiWindow, color: 'text-blue-400' },
+      { name: 'Gardeners', icon: Flower2, color: 'text-green-400' },
+      { name: 'Garden Services', icon: Leaf, color: 'text-teal-400' },
+      { name: 'Painter', icon: Paintbrush, color: 'text-purple-400' },
+      { name: 'Painting', icon: Paintbrush, color: 'text-purple-400' },
+      { name: 'Handyman', icon: Wrench, color: 'text-orange-400' },
+    ],
+  },
+  {
+    name: 'Automotive',
+    description: 'Car wash, detailing, and breakdown services',
+    services: [
+      { name: 'Car Wash', icon: Car, color: 'text-cyan-400' },
+      { name: 'Car Detailing', icon: Car, color: 'text-violet-400' },
+      { name: 'Mobile Detail', icon: GiSpray, color: 'text-green-400' },
+      { name: 'Jet Wash', icon: Droplets, color: 'text-blue-400' },
+      { name: 'Vehicle Services', icon: Car, color: 'text-blue-400' },
+      { name: 'Car Breakdown', icon: Wrench, color: 'text-orange-400' },
+    ],
+  },
+  {
+    name: 'Food & Lifestyle',
+    description: 'Personal chef, meal prep, and grocery services',
+    services: [
+      { name: 'Private Chef', icon: ChefHat, color: 'text-rose-400' },
+      { name: 'Meal Prep', icon: UtensilsCrossed, color: 'text-green-400' },
+      { name: 'Groceries', icon: ShoppingCart, color: 'text-yellow-400' },
+    ],
+  },
+  {
+    name: 'Professional Services',
+    description: 'Concierge, photography, and specialized services',
+    services: [
+      { name: 'Concierge', icon: Key, color: 'text-yellow-400' },
+      { name: 'Personal Shopper', icon: ShoppingBag, color: 'text-pink-400' },
+      { name: 'Photography', icon: Camera, color: 'text-indigo-400' },
+      { name: 'Logistics', icon: Package, color: 'text-orange-400' },
+      { name: 'Mobile Laundry', icon: Shirt, color: 'text-cyan-400' },
+      { name: 'Sneaker Cleaning', icon: Footprints, color: 'text-lime-400' },
+      { name: 'Shoe Cleaning', icon: Footprints, color: 'text-blue-400' },
+    ],
+  },
+];
+
 export default function ScrollingServices() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -165,9 +238,12 @@ export default function ScrollingServices() {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setIsModalOpen(false)}>
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-gray-900">All Services</h3>
+          <div className="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center z-10">
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900">All Services</h3>
+                <p className="text-sm text-gray-600 mt-1">Browse services by category</p>
+              </div>
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="text-gray-500 hover:text-gray-700 text-3xl leading-none"
@@ -176,21 +252,34 @@ export default function ScrollingServices() {
               </button>
             </div>
             <div className="p-6">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {allServices.map((service, index) => {
-                  const IconComponent = service.icon;
-                  return (
-                    <div
-                      key={index}
-                      className="bg-gray-50 rounded-xl p-4 text-center hover:shadow-md transition border border-gray-200"
-                    >
-                      <div className="flex justify-center mb-2">
-                        <IconComponent className={`w-10 h-10 ${service.color}`} strokeWidth={1.5} />
-                      </div>
-                      <div className="text-gray-800 text-sm font-medium">{service.name}</div>
+              <div className="space-y-8">
+                {serviceCategories.map((category, categoryIndex) => (
+                  <div key={categoryIndex}>
+                    {/* Category Header */}
+                    <div className="mb-4">
+                      <h4 className="text-lg font-bold text-gray-900">{category.name}</h4>
+                      <p className="text-sm text-gray-600">{category.description}</p>
                     </div>
-                  );
-                })}
+
+                    {/* Services Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                      {category.services.map((service, serviceIndex) => {
+                        const IconComponent = service.icon;
+                        return (
+                          <div
+                            key={serviceIndex}
+                            className="bg-gray-50 rounded-xl p-4 text-center hover:shadow-md hover:bg-white transition border border-gray-200 cursor-pointer"
+                          >
+                            <div className="flex justify-center mb-2">
+                              <IconComponent className={`w-10 h-10 ${service.color}`} strokeWidth={1.5} />
+                            </div>
+                            <div className="text-gray-800 text-sm font-medium">{service.name}</div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
