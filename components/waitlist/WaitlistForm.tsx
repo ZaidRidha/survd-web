@@ -109,7 +109,7 @@ export default function WaitlistForm() {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition text-gray-900 bg-gray-50"
-            placeholder="John Doe"
+            placeholder="Full Name / Establishment Name"
             disabled={isSubmitting}
           />
         </div>
