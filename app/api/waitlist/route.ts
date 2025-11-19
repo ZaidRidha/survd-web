@@ -1,9 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { handleWaitlistSignup } from '@/lib/services/brevo';
 import { WaitlistEntry } from '@/lib/types/waitlist';
+import { waitlistRateLimiter } from '@/lib/utils/rate-limit';
+import { getClientIp } from '@/lib/utils/get-client-ip';
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting check
+    const ip = getClientIp(request);
+    const { success, limit, remaining, reset } = await waitlistRateLimiter.limit(ip);
+
+    if (!success) {
+      const resetDate = new Date(reset);
+      const waitMinutes = Math.ceil((reset - Date.now()) / 1000 / 60);
+
+      return NextResponse.json(
+        {
+          error: `Too many signup attempts. Please try again in ${waitMinutes} minute${waitMinutes !== 1 ? 's' : ''}.`,
+          retryAfter: resetDate.toISOString(),
+        },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': limit.toString(),
+            'X-RateLimit-Remaining': remaining.toString(),
+            'X-RateLimit-Reset': reset.toString(),
+            'Retry-After': Math.ceil((reset - Date.now()) / 1000).toString(),
+          },
+        }
+      );
+    }
+
     const body = await request.json();
     const { name, email, userType } = body;
 
@@ -54,7 +81,14 @@ export async function POST(request: NextRequest) {
         success: true,
         message: 'Successfully joined the waitlist! Check your email for confirmation.',
       },
-      { status: 201 }
+      {
+        status: 201,
+        headers: {
+          'X-RateLimit-Limit': limit.toString(),
+          'X-RateLimit-Remaining': remaining.toString(),
+          'X-RateLimit-Reset': reset.toString(),
+        },
+      }
     );
   } catch (error) {
     console.error('Waitlist API error:', error);
