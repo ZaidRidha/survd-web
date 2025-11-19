@@ -91,6 +91,13 @@ export async function sendWaitlistConfirmationEmail(
                 <li style="margin-bottom: 6px;">Access verified professionals 24/7</li>
                 <li style="margin-bottom: 6px;">Track your appointments in real-time</li>
               </ul>
+
+              <div style="background: #e8f5e9; border-radius: 6px; padding: 18px; margin: 24px 0;">
+                <p style="font-size: 16px; margin: 0; color: #000000; line-height: 1.5;">
+                  <strong style="font-weight: 700; color: #2e7d32;">Early Access Benefits:</strong><br>
+                  Get exclusive discounts on first bookings, priority access to top vendors, early feature updates, and special promotions!
+                </p>
+              </div>
             ` : `
               <p style="font-size: 16px; color: #000000; margin: 0 0 12px 0;">You're one step closer to growing your business with Survd. Soon you'll be able to:</p>
               <ul style="font-size: 16px; line-height: 1.7; color: #000000; margin: 0 0 24px 0; padding-left: 20px;">
@@ -99,6 +106,13 @@ export async function sendWaitlistConfirmationEmail(
                 <li style="margin-bottom: 6px;">Build your professional brand</li>
                 <li style="margin-bottom: 6px;">Earn more with flexible hours</li>
               </ul>
+
+              <div style="background: #e8f5e9; border-radius: 6px; padding: 18px; margin: 24px 0;">
+                <p style="font-size: 16px; margin: 0; color: #000000; line-height: 1.5;">
+                  <strong style="font-weight: 700; color: #2e7d32;">Early Vendor Benefits:</strong><br>
+                  Enjoy increased discoverability by being featured, reduced commission rates for early adopters, priority promotion to customers, and premium placement!
+                </p>
+              </div>
             `}
 
             <div style="background: #f5f5f5; border-radius: 6px; padding: 18px; margin: 24px 0;">
@@ -106,10 +120,6 @@ export async function sendWaitlistConfirmationEmail(
                 <strong style="font-weight: 700;">What's next?</strong><br>
                 We'll keep you updated on our launch and send you exclusive early access when we're ready!
               </p>
-            </div>
-
-            <div style="margin-top: 28px; margin-bottom: 28px;">
-              <a href="https://survd.co.uk" style="display: inline-block; background: #000000; color: #ffffff; padding: 15px 36px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Visit Survd</a>
             </div>
 
             <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #e5e5e5;">
