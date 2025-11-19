@@ -189,15 +189,15 @@ export default function RotatingHero() {
           {/* Key Stats - Only show on first slide */}
           {slide.showStats && (
             <div className="grid grid-cols-3 gap-4 md:gap-6 mb-8">
-              <div className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-transparent rounded-2xl p-4 md:p-6 border border-green-200 hover:border-green-400 transition-all duration-300 hover:shadow-lg hover:scale-105">
+              <div className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-transparent rounded-2xl p-4 md:p-6 border border-green-200">
                 <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-1">24/7</div>
                 <div className="text-sm text-gray-600 font-medium">Available</div>
               </div>
-              <div className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-transparent rounded-2xl p-4 md:p-6 border border-green-200 hover:border-green-400 transition-all duration-300 hover:shadow-lg hover:scale-105">
+              <div className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-transparent rounded-2xl p-4 md:p-6 border border-green-200">
                 <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-1">30+</div>
                 <div className="text-sm text-gray-600 font-medium">Services</div>
               </div>
-              <div className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-transparent rounded-2xl p-4 md:p-6 border border-green-200 hover:border-green-400 transition-all duration-300 hover:shadow-lg hover:scale-105">
+              <div className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-transparent rounded-2xl p-4 md:p-6 border border-green-200">
                 <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-1">500+</div>
                 <div className="text-sm text-gray-600 font-medium">Professionals</div>
               </div>
@@ -212,9 +212,9 @@ export default function RotatingHero() {
                 return (
                   <div
                     key={index}
-                    className="group relative flex items-center gap-3 bg-gradient-to-br from-white to-gray-50 rounded-xl p-4 border border-gray-200 hover:border-green-400 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                    className="relative flex items-center gap-3 bg-gradient-to-br from-white to-gray-50 rounded-xl p-4 border border-gray-200"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
                       <IconComponent className={`w-8 h-8 ${service.color}`} strokeWidth={1.5} />
                     </div>
                     <span className="text-gray-800 font-semibold text-sm">{service.name}</span>
