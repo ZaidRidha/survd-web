@@ -81,28 +81,28 @@ export async function sendWaitlistConfirmationEmail(
           <div style="background: #ffffff; padding: 0;">
             <h2 style="font-size: 26px; color: #000000; font-weight: 700; margin: 0 0 16px 0; letter-spacing: -0.5px;">Hi ${entry.name}!</h2>
 
-            <p style="font-size: 17px; color: #000000; margin: 0 0 20px 0; line-height: 1.5; font-weight: 500;">Thank you for joining the Survd waitlist as a <strong>${entry.userType}</strong>!</p>
+            <p style="font-size: 17px; color: #000000; margin: 0 0 20px 0; line-height: 1.5;">Thank you for joining the Survd waitlist as a <strong>${entry.userType}</strong>!</p>
 
             ${entry.userType === 'customer' ? `
-              <p style="font-size: 16px; color: #000000; margin: 0 0 12px 0; font-weight: 500;">You're one step closer to accessing on-demand mobile services at your fingertips. Soon you'll be able to:</p>
+              <p style="font-size: 16px; color: #000000; margin: 0 0 12px 0;">You're one step closer to accessing on-demand mobile services at your fingertips. Soon you'll be able to:</p>
               <ul style="font-size: 16px; line-height: 1.7; color: #000000; margin: 0 0 24px 0; padding-left: 20px;">
-                <li style="margin-bottom: 6px; font-weight: 500;">Book appointments in seconds</li>
-                <li style="margin-bottom: 6px; font-weight: 500;">Get services at your location</li>
-                <li style="margin-bottom: 6px; font-weight: 500;">Access verified professionals 24/7</li>
-                <li style="margin-bottom: 6px; font-weight: 500;">Track your appointments in real-time</li>
+                <li style="margin-bottom: 6px;">Book appointments in seconds</li>
+                <li style="margin-bottom: 6px;">Get services at your location</li>
+                <li style="margin-bottom: 6px;">Access verified professionals 24/7</li>
+                <li style="margin-bottom: 6px;">Track your appointments in real-time</li>
               </ul>
             ` : `
-              <p style="font-size: 16px; color: #000000; margin: 0 0 12px 0; font-weight: 500;">You're one step closer to growing your business with Survd. Soon you'll be able to:</p>
+              <p style="font-size: 16px; color: #000000; margin: 0 0 12px 0;">You're one step closer to growing your business with Survd. Soon you'll be able to:</p>
               <ul style="font-size: 16px; line-height: 1.7; color: #000000; margin: 0 0 24px 0; padding-left: 20px;">
-                <li style="margin-bottom: 6px; font-weight: 500;">Reach more customers</li>
-                <li style="margin-bottom: 6px; font-weight: 500;">Manage your schedule efficiently</li>
-                <li style="margin-bottom: 6px; font-weight: 500;">Build your professional brand</li>
-                <li style="margin-bottom: 6px; font-weight: 500;">Earn more with flexible hours</li>
+                <li style="margin-bottom: 6px;">Reach more customers</li>
+                <li style="margin-bottom: 6px;">Manage your schedule efficiently</li>
+                <li style="margin-bottom: 6px;">Build your professional brand</li>
+                <li style="margin-bottom: 6px;">Earn more with flexible hours</li>
               </ul>
             `}
 
             <div style="background: #f5f5f5; border-radius: 6px; padding: 18px; margin: 24px 0;">
-              <p style="font-size: 16px; margin: 0; color: #000000; line-height: 1.5; font-weight: 500;">
+              <p style="font-size: 16px; margin: 0; color: #000000; line-height: 1.5;">
                 <strong style="font-weight: 700;">What's next?</strong><br>
                 We'll keep you updated on our launch and send you exclusive early access when we're ready!
               </p>
