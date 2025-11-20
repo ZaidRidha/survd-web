@@ -84,10 +84,10 @@ export default function WaitlistForm() {
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-200">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center md:text-left">
           Join the Waitlist
         </h2>
-        <p className="text-gray-600 mb-3">
+        <p className="text-gray-600 mb-3 text-center md:text-left">
           Be the first to know when we launch!
         </p>
         <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/30 rounded-lg p-3">
