@@ -169,11 +169,14 @@ export default function WaitlistPage() {
                 <div className="max-w-[320px] mx-auto">
                   <AppScreenshotCarousel
                     screenshots={[
-                      "/images/screenshots/customer/CustomerSideAppScreenshot1.jpeg",
-                      "/images/screenshots/customer/CustomerSideAppScreenshot2.jpeg",
-                      "/images/screenshots/customer/CustomerSideAppScreenshot3.jpeg",
-                      "/images/screenshots/customer/CustomerSideAppScreenshot4.jpeg",
-                      "/images/screenshots/customer/CustomerSideAppScreenshot5.jpeg",
+                      "/images/screenshots/customer/CAppSS1.png",
+                      "/images/screenshots/customer/CAppSS2.png",
+                      "/images/screenshots/customer/CAppSS3.png",
+                      "/images/screenshots/customer/CAppSS4.png",
+                      "/images/screenshots/customer/CAppSS5.png",
+                      "/images/screenshots/customer/CAppSS6.png",
+                      "/images/screenshots/customer/CAppSS7.png",
+                      "/images/screenshots/customer/CAppSS8.png",
                     ]}
                   />
                 </div>
