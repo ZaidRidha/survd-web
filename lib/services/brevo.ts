@@ -100,8 +100,8 @@ export async function sendWaitlistConfirmationEmail(
 
           <p style="font-size: 16px; color: #333333; margin: 0 0 16px 0; line-height: 1.5;">
             ${entry.userType === 'customer'
-              ? 'You'll be able to book appointments, get services at your location, and access verified professionals.'
-              : 'You'll be able to reach new customers, manage your schedule, and grow your business on our platform.'
+              ? 'You\'ll be able to book appointments, get services at your location, and access verified professionals.'
+              : 'You\'ll be able to reach new customers, manage your schedule, and grow your business on our platform.'
             }
           </p>
 
