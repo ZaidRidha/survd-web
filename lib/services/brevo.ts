@@ -57,77 +57,63 @@ export async function sendWaitlistConfirmationEmail(
   try {
     const sendSmtpEmail = new brevo.SendSmtpEmail();
 
-    sendSmtpEmail.subject = 'Welcome to Survd Waitlist!';
+    sendSmtpEmail.subject = "You're on the Survd waitlist";
     sendSmtpEmail.to = [{ email: entry.email, name: entry.name }];
     sendSmtpEmail.sender = {
       name: 'Survd',
       email: process.env.BREVO_SENDER_EMAIL || 'contact@survd.co.uk',
     };
 
-    // HTML email template
+    // Add headers to improve inbox placement
+    sendSmtpEmail.headers = {
+      'X-Priority': '1',
+      'Importance': 'high',
+      'X-MSMail-Priority': 'High',
+      'X-Entity-Ref-ID': `waitlist-${Date.now()}`,
+    };
+
+    // Tag as transactional
+    sendSmtpEmail.tags = ['transactional', 'waitlist-confirmation'];
+
+    // Simplified HTML email template - more transactional, less promotional
     sendSmtpEmail.htmlContent = `
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Welcome to Survd!</title>
         </head>
-        <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #000000; max-width: 600px; margin: 0 auto; padding: 40px 20px; background-color: #ffffff;">
-          <div style="text-align: left; margin-bottom: 32px;">
-            <img src="https://survd.co.uk/images/logos/survd-logo.png" alt="Survd Logo" style="max-width: 160px; height: auto;" />
+        <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333333; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+          <div style="margin-bottom: 32px;">
+            <img src="https://survd.co.uk/images/logos/survd-logo.png" alt="Survd" style="max-width: 140px; height: auto;" />
           </div>
 
-          <div style="background: #ffffff; padding: 0;">
-            <h2 style="font-size: 26px; color: #000000; font-weight: 700; margin: 0 0 16px 0; letter-spacing: -0.5px;">Hi ${entry.name}!</h2>
+          <h2 style="font-size: 24px; color: #000000; font-weight: 600; margin: 0 0 16px 0;">Hi ${entry.name},</h2>
 
-            <p style="font-size: 17px; color: #000000; margin: 0 0 20px 0; line-height: 1.5;">Thank you for joining the Survd waitlist as a <strong>${entry.userType}</strong>!</p>
+          <p style="font-size: 16px; color: #333333; margin: 0 0 16px 0; line-height: 1.5;">
+            You've successfully joined the Survd waitlist as a <strong>${entry.userType}</strong>.
+          </p>
 
-            ${entry.userType === 'customer' ? `
-              <p style="font-size: 16px; color: #000000; margin: 0 0 12px 0;">You're one step closer to accessing on-demand mobile services at your fingertips. Soon you'll be able to:</p>
-              <ul style="font-size: 16px; line-height: 1.7; color: #000000; margin: 0 0 24px 0; padding-left: 20px;">
-                <li style="margin-bottom: 6px;">Book appointments in seconds</li>
-                <li style="margin-bottom: 6px;">Get services at your location</li>
-                <li style="margin-bottom: 6px;">Access verified professionals 24/7</li>
-                <li style="margin-bottom: 6px;">Track your appointments in real-time</li>
-              </ul>
+          <p style="font-size: 16px; color: #333333; margin: 0 0 16px 0; line-height: 1.5;">
+            We'll notify you by email when we launch. As an early member, you'll get access to the platform before our public release.
+          </p>
 
-              <div style="background: #e8f5e9; border-radius: 6px; padding: 18px; margin: 24px 0;">
-                <p style="font-size: 16px; margin: 0; color: #000000; line-height: 1.5;">
-                  <strong style="font-weight: 700; color: #2e7d32;">Early Access Benefits:</strong><br>
-                  Get exclusive discounts on first bookings, priority access to top vendors, early feature updates, and special promotions!
-                </p>
-              </div>
-            ` : `
-              <p style="font-size: 16px; color: #000000; margin: 0 0 12px 0;">You're one step closer to growing your business with Survd. Soon you'll be able to:</p>
-              <ul style="font-size: 16px; line-height: 1.7; color: #000000; margin: 0 0 24px 0; padding-left: 20px;">
-                <li style="margin-bottom: 6px;">Reach more customers</li>
-                <li style="margin-bottom: 6px;">Manage your schedule efficiently</li>
-                <li style="margin-bottom: 6px;">Build your professional brand</li>
-                <li style="margin-bottom: 6px;">Earn more with flexible hours</li>
-              </ul>
+          <p style="font-size: 16px; color: #333333; margin: 0 0 16px 0; line-height: 1.5;">
+            ${entry.userType === 'customer'
+              ? 'You'll be able to book appointments, get services at your location, and access verified professionals.'
+              : 'You'll be able to reach new customers, manage your schedule, and grow your business on our platform.'
+            }
+          </p>
 
-              <div style="background: #e8f5e9; border-radius: 6px; padding: 18px; margin: 24px 0;">
-                <p style="font-size: 16px; margin: 0; color: #000000; line-height: 1.5;">
-                  <strong style="font-weight: 700; color: #2e7d32;">Early Vendor Benefits:</strong><br>
-                  Enjoy increased discoverability by being featured, reduced commission rates for early adopters, priority promotion to customers, and premium placement!
-                </p>
-              </div>
-            `}
+          <p style="font-size: 16px; color: #333333; margin: 0 0 24px 0; line-height: 1.5;">
+            Thank you for your interest in Survd.
+          </p>
 
-            <div style="background: #f5f5f5; border-radius: 6px; padding: 18px; margin: 24px 0;">
-              <p style="font-size: 16px; margin: 0; color: #000000; line-height: 1.5;">
-                <strong style="font-weight: 700;">What's next?</strong><br>
-                We'll keep you updated on our launch and send you exclusive early access when we're ready!
-              </p>
-            </div>
-
-            <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #e5e5e5;">
-              <p style="font-size: 14px; color: #666666; margin: 0; line-height: 1.5;">
-                Questions? Reply to this email or visit our website.<br>
-                <span style="color: #999999; font-size: 13px;">Survd - Mobile Services On Demand</span>
-              </p>
-            </div>
+          <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+            <p style="font-size: 14px; color: #666666; margin: 0; line-height: 1.5;">
+              Questions? Reply to this email.<br>
+              Visit <a href="https://survd.co.uk" style="color: #666666; text-decoration: none;">survd.co.uk</a>
+            </p>
           </div>
         </body>
       </html>
@@ -135,17 +121,21 @@ export async function sendWaitlistConfirmationEmail(
 
     // Plain text fallback
     sendSmtpEmail.textContent = `
-Hi ${entry.name}!
+Hi ${entry.name},
 
-Thank you for joining the Survd waitlist as a ${entry.userType}!
+You've successfully joined the Survd waitlist as a ${entry.userType.toUpperCase()}.
 
-We'll keep you updated on our launch and send you exclusive early access when we're ready!
+We'll notify you by email when we launch. As an early member, you'll get access to the platform before our public release.
 
-Visit us at: https://survd.co.uk
+${entry.userType === 'customer'
+  ? "You'll be able to book appointments, get services at your location, and access verified professionals."
+  : "You'll be able to reach new customers, manage your schedule, and grow your business on our platform."
+}
 
-Questions? Reply to this email or visit our website.
+Thank you for your interest in Survd.
 
-Survd - Mobile Services On Demand
+Questions? Reply to this email.
+Visit survd.co.uk
     `.trim();
 
     await emailApiInstance.sendTransacEmail(sendSmtpEmail);
