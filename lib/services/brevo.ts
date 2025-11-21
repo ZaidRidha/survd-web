@@ -64,16 +64,6 @@ export async function sendWaitlistConfirmationEmail(
       email: process.env.BREVO_SENDER_EMAIL || 'contact@survd.co.uk',
     };
 
-    // Add headers to improve inbox placement
-    sendSmtpEmail.headers = {
-      'X-Priority': '1',
-      'Importance': 'high',
-      'X-MSMail-Priority': 'High',
-      'X-Entity-Ref-ID': `waitlist-${Date.now()}`,
-    };
-
-    // Tag as transactional
-    sendSmtpEmail.tags = ['transactional', 'waitlist-confirmation'];
 
     // Simplified HTML email template - more transactional, less promotional
     sendSmtpEmail.htmlContent = `
