@@ -13,9 +13,13 @@ interface ServiceAvailability {
 interface ServiceForm {
   name: string;
   duration: number;
-  price: number;
+  price: number | string;
   description: string;
   availability: ServiceAvailability[];
+  locationType?: 'shop' | 'mobile' | 'studio';
+  outOfHours?: boolean;
+  serviceRadius?: number | string;
+  transportFeePerMile?: number | string;
 }
 
 interface ServiceAvailabilityStepProps {
