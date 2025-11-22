@@ -102,6 +102,7 @@ export default function VendorAppointmentsPage() {
   const [isNewClient, setIsNewClient] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
+  const [showMonthPicker, setShowMonthPicker] = useState(false);
   const [clientSearchQuery, setClientSearchQuery] = useState('');
   const [showClientDropdown, setShowClientDropdown] = useState(false);
   const [selectedService, setSelectedService] = useState<VendorService | null>(null);
@@ -321,51 +322,90 @@ export default function VendorAppointmentsPage() {
               </div>
             </div>
           ) : (
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <button onClick={() => changeMonth('prev')} className="p-2 hover:bg-gray-100 rounded-lg">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="max-w-md mx-auto">
+              <div className="flex items-center justify-between mb-3">
+                <button onClick={() => changeMonth('prev')} className="p-1 hover:bg-gray-100 rounded-lg">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
-                <button onClick={() => changeMonth('next')} className="p-2 hover:bg-gray-100 rounded-lg">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="relative">
+                  <button
+                    onClick={() => setShowMonthPicker(!showMonthPicker)}
+                    className="text-sm font-semibold text-gray-900 hover:bg-gray-100 px-3 py-1 rounded-lg transition-colors flex items-center gap-1"
+                  >
+                    {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {showMonthPicker && (
+                    <div className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 w-64">
+                      <div className="p-3 max-h-64 overflow-y-auto">
+                        {Array.from({ length: 24 }, (_, i) => {
+                          const date = new Date();
+                          date.setMonth(date.getMonth() - 12 + i);
+                          return date;
+                        }).map((date, index) => (
+                          <button
+                            key={index}
+                            onClick={() => {
+                              setCurrentDate(date);
+                              setShowMonthPicker(false);
+                            }}
+                            className={`w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors ${
+                              date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear()
+                                ? 'bg-gray-900 text-white hover:bg-gray-800'
+                                : 'text-gray-900'
+                            }`}
+                          >
+                            {date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <button onClick={() => changeMonth('next')} className="p-1 hover:bg-gray-100 rounded-lg">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
               </div>
-              <div className="grid grid-cols-7 gap-1 mb-2">
+              <div className="grid grid-cols-7 gap-1 mb-1">
                 {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
-                  <div key={index} className="text-center text-sm font-semibold text-gray-500 py-2">{day}</div>
+                  <div key={index} className="text-center">
+                    <span className="text-[10px] font-medium text-gray-500">{day}</span>
+                  </div>
                 ))}
               </div>
               <div className="grid grid-cols-7 gap-1">
-                {generateCalendarDays(currentDate).map((day, index) => {
-                  const isSelected = day && selectedDate && isSameDay(day, selectedDate);
-                  const isToday = day && isSameDay(day, new Date());
-                  const hasAppointment = day && hasAppointmentOnDate(day);
-                  return (
-                    <div key={index} className="aspect-square flex items-center justify-center">
-                      {day && (
-                        <button
-                          onClick={() => setSelectedDate(day)}
-                          className={`w-10 h-10 rounded-full font-medium transition-all relative ${
-                            isSelected
-                              ? 'bg-gray-900 text-white'
-                              : isToday
-                              ? 'bg-gray-100 text-gray-900 font-bold'
-                              : 'hover:bg-gray-50 text-gray-700'
-                          }`}
-                        >
-                          {day.getDate()}
-                          {hasAppointment && (
-                            <div className={`absolute bottom-1 w-1 h-1 rounded-full ${isSelected ? 'bg-white' : 'bg-blue-500'}`} />
-                          )}
-                        </button>
+                {generateCalendarDays(currentDate).map((day, index) => (
+                  day ? (
+                    <div key={index} className="aspect-square p-0.5 flex items-center justify-center">
+                      <button
+                        onClick={() => setSelectedDate(day)}
+                        className={`w-full h-full flex items-center justify-center rounded-full relative transition-all ${
+                          day && isSameDay(day, new Date()) ? 'bg-gray-100' : ''
+                        } ${day && selectedDate && isSameDay(day, selectedDate) ? 'bg-gray-900 text-white' : 'hover:bg-gray-50'}`}
+                      >
+                      <span className={`text-[11px] ${
+                        day && selectedDate && isSameDay(day, selectedDate) ? 'text-white font-bold' :
+                        day && isSameDay(day, new Date()) ? 'text-gray-900 font-bold' : 'text-gray-700'
+                      }`}>
+                        {day.getDate()}
+                      </span>
+                      {hasAppointmentOnDate(day) && (
+                        <div className={`absolute bottom-0 w-1 h-1 rounded-full ${
+                          day && selectedDate && isSameDay(day, selectedDate) ? 'bg-white' : 'bg-blue-500'
+                        }`} />
                       )}
+                      </button>
                     </div>
-                  );
-                })}
+                  ) : (
+                    <div key={index} className="aspect-square" />
+                  )
+                ))}
               </div>
             </div>
           )}
