@@ -81,23 +81,29 @@ export async function sendWaitlistConfirmationEmail(
           <div style="background: #ffffff; padding: 0;">
             <h2 style="font-size: 24px; color: #000000; font-weight: 600; margin: 0 0 16px 0;">Hello ${entry.name},</h2>
 
-            <p style="font-size: 16px; color: #000000; margin: 0 0 16px 0; line-height: 1.5;">Your request to join the Survd waitlist has been confirmed.</p>
+            <p style="font-size: 16px; color: #000000; margin: 0 0 20px 0; line-height: 1.5;">Thank you for signing up as a <strong>${entry.userType}</strong>.</p>
 
-            <div style="background: #f9f9f9; border-left: 3px solid #000000; padding: 16px; margin: 20px 0;">
-              <p style="font-size: 15px; margin: 0; color: #000000; line-height: 1.5;">
-                <strong>Registration Details:</strong><br>
-                Name: ${entry.name}<br>
-                Email: ${entry.email}<br>
-                Account Type: ${entry.userType.charAt(0).toUpperCase() + entry.userType.slice(1)}
-              </p>
-            </div>
+            ${entry.userType === 'customer' ? `
+              <p style="font-size: 16px; color: #000000; margin: 20px 0 12px 0; line-height: 1.5;"><strong>Your waitlist registration includes:</strong></p>
+              <ul style="font-size: 15px; line-height: 1.6; color: #000000; margin: 0 0 20px 0; padding-left: 20px;">
+                <li style="margin-bottom: 4px;">Earlier access to vendors</li>
+                <li style="margin-bottom: 4px;">Discounts on initial bookings</li>
+              </ul>
+            ` : `
+              <p style="font-size: 16px; color: #000000; margin: 20px 0 12px 0; line-height: 1.5;"><strong>Your waitlist registration includes:</strong></p>
+              <ul style="font-size: 15px; line-height: 1.6; color: #000000; margin: 0 0 20px 0; padding-left: 20px;">
+                <li style="margin-bottom: 4px;">Lower commission rates</li>
+                <li style="margin-bottom: 4px;">Increased discoverability on the platform</li>
+                <li style="margin-bottom: 4px;">Featured vendor placement</li>
+              </ul>
+            `}
 
             <p style="font-size: 16px; color: #000000; margin: 20px 0 16px 0; line-height: 1.5;">You will receive an email notification when the platform becomes available.</p>
 
             <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #e5e5e5;">
               <p style="font-size: 14px; color: #666666; margin: 0; line-height: 1.5;">
                 If you have any questions, please reply to this email.<br>
-                <span style="color: #999999; font-size: 13px;">Survd</span>
+                <span style="color: #999999; font-size: 13px;">Visit us at <a href="https://survd.co.uk" style="color: #999999; text-decoration: underline;">www.survd.co.uk</a></span>
               </p>
             </div>
           </div>
@@ -109,18 +115,19 @@ export async function sendWaitlistConfirmationEmail(
     sendSmtpEmail.textContent = `
 Hello ${entry.name},
 
-Your request to join the Survd waitlist has been confirmed.
+Thank you for signing up as a ${entry.userType}.
 
-Registration Details:
-Name: ${entry.name}
-Email: ${entry.email}
-Account Type: ${entry.userType.charAt(0).toUpperCase() + entry.userType.slice(1)}
+Your waitlist registration includes:
+${entry.userType === 'customer'
+  ? '- Earlier access to vendors\n- Discounts on initial bookings'
+  : '- Lower commission rates\n- Increased discoverability on the platform\n- Featured vendor placement'
+}
 
 You will receive an email notification when the platform becomes available.
 
 If you have any questions, please reply to this email.
 
-Survd
+Visit us at www.survd.co.uk
     `.trim();
 
     await emailApiInstance.sendTransacEmail(sendSmtpEmail);
