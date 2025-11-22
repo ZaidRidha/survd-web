@@ -169,45 +169,45 @@ export default function VendorProfilePage() {
     setVendor({ ...vendor, location: { ...vendor.location, address: editedLocation.address, postcode: editedLocation.postcode } });
   };
 
+  const renderStatusOptions = () => {
+    return (
+      <div className="space-y-3">
+        {(['active', 'onBreak', 'walkInsOnly', 'notActive'] as StatusType[]).map((statusOption) => {
+          const config = getStatusConfig(statusOption);
+          return (
+            <button
+              key={statusOption}
+              onClick={() => {
+                setStatus(statusOption);
+                setActiveModal(null);
+              }}
+              className={`w-full flex items-center justify-between p-4 rounded-xl transition-colors ${
+                status === statusOption ? 'bg-gray-100 border-2 border-gray-900' : 'bg-gray-50 border-2 border-gray-100 hover:bg-gray-100'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-3 h-3 rounded-full ${config.color}`} />
+                <span className="font-semibold text-gray-900">{config.text}</span>
+              </div>
+              {status === statusOption && (
+                <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+    );
+  };
+
   const renderPolicyModal = () => {
     let title = '';
     let content = null;
 
     switch (activeModal) {
-      case 'status':
-        title = 'Change Status';
-        content = (
-          <div className="space-y-3">
-            {(['active', 'onBreak', 'walkInsOnly', 'notActive'] as StatusType[]).map((statusOption) => {
-              const config = getStatusConfig(statusOption);
-              return (
-                <button
-                  key={statusOption}
-                  onClick={() => {
-                    setStatus(statusOption);
-                    setActiveModal(null);
-                  }}
-                  className={`w-full flex items-center justify-between p-4 rounded-xl transition-colors ${
-                    status === statusOption ? 'bg-gray-100 border-2 border-gray-900' : 'bg-gray-50 border-2 border-gray-100 hover:bg-gray-100'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-3 h-3 rounded-full ${config.color}`} />
-                    <span className="font-semibold text-gray-900">{config.text}</span>
-                  </div>
-                  {status === statusOption && (
-                    <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        );
-        break;
       case 'noShow':
         title = 'No-Show Policy';
         content = (
@@ -352,9 +352,11 @@ export default function VendorProfilePage() {
         break;
     }
 
+    if (!activeModal || activeModal === 'status') return null;
+
     return (
       <EditModal
-        isOpen={activeModal !== null && activeModal !== 'status'}
+        isOpen={true}
         onClose={() => setActiveModal(null)}
         title={title}
         onSave={() => setActiveModal(null)}
@@ -889,13 +891,13 @@ export default function VendorProfilePage() {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            {renderPolicyModal()}
+            {renderStatusOptions()}
           </div>
         </div>
       )}
 
       {/* Policy Modals */}
-      {activeModal !== 'status' && renderPolicyModal()}
+      {renderPolicyModal()}
     </div>
   );
 }
