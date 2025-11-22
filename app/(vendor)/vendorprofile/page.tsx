@@ -69,7 +69,7 @@ const dummyVendor = {
   specialties: ['Afro', 'Fades', 'Caucasian'],
 };
 
-type StatusType = 'active' | 'onBreak' | 'walkInsOnly' | 'notActive';
+type StatusType = 'active' | 'onBreak' | 'walkInsOnly' | 'notActive' | 'none';
 type ModalType = 'noShow' | 'late' | 'cancellation' | 'payment' | 'status' | null;
 
 interface EditModalProps {
@@ -147,6 +147,8 @@ export default function VendorProfilePage() {
         return { text: 'Walk-ins Only', color: 'bg-blue-500', dotColor: 'bg-white' };
       case 'notActive':
         return { text: 'Not Active', color: 'bg-gray-500', dotColor: 'bg-white' };
+      case 'none':
+        return { text: 'No Status', color: 'bg-gray-400', dotColor: 'bg-white' };
     }
   };
 
@@ -172,7 +174,7 @@ export default function VendorProfilePage() {
   const renderStatusOptions = () => {
     return (
       <div className="space-y-3">
-        {(['active', 'onBreak', 'walkInsOnly', 'notActive'] as StatusType[]).map((statusOption) => {
+        {(['active', 'onBreak', 'walkInsOnly', 'notActive', 'none'] as StatusType[]).map((statusOption) => {
           const config = getStatusConfig(statusOption);
           return (
             <button

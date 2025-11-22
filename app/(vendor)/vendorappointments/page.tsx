@@ -100,6 +100,7 @@ export default function VendorAppointmentsPage() {
   const [isCalendarExpanded, setIsCalendarExpanded] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [isNewClient, setIsNewClient] = useState(false);
+  const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
   const [clientSearchQuery, setClientSearchQuery] = useState('');
   const [showClientDropdown, setShowClientDropdown] = useState(false);
@@ -143,6 +144,13 @@ export default function VendorAppointmentsPage() {
   const isSameDay = (date1: Date | null, date2: Date | null): boolean => {
     if (!date1 || !date2) return false;
     return date1.toDateString() === date2.toDateString();
+  };
+
+  const hasAppointmentOnDate = (date: Date): boolean => {
+    return mockAppointments.some(apt => {
+      const aptDate = parseAppointmentDate(apt.date);
+      return aptDate && isSameDay(aptDate, date);
+    });
   };
 
   const generateHorizontalDates = () => {
@@ -285,11 +293,12 @@ export default function VendorAppointmentsPage() {
                 {generateHorizontalDates().map((date, index) => {
                   const isSelected = selectedDate && isSameDay(date, selectedDate);
                   const isToday = isSameDay(date, new Date());
+                  const hasAppointment = hasAppointmentOnDate(date);
                   return (
                     <button
                       key={index}
                       onClick={() => setSelectedDate(date)}
-                      className="flex flex-col items-center gap-2 min-w-[56px]"
+                      className="flex flex-col items-center gap-2 min-w-[56px] relative"
                     >
                       <span className={`text-xs font-bold uppercase tracking-wide ${isSelected ? 'text-gray-900' : 'text-gray-400'}`}>
                         {date.toLocaleDateString('en-US', { weekday: 'short' })}
@@ -303,6 +312,9 @@ export default function VendorAppointmentsPage() {
                       }`}>
                         {date.getDate()}
                       </div>
+                      {hasAppointment && (
+                        <div className={`absolute bottom-0 w-1 h-1 rounded-full ${isSelected ? 'bg-white' : 'bg-blue-500'}`} />
+                      )}
                     </button>
                   );
                 })}
@@ -331,12 +343,13 @@ export default function VendorAppointmentsPage() {
                 {generateCalendarDays(currentDate).map((day, index) => {
                   const isSelected = day && selectedDate && isSameDay(day, selectedDate);
                   const isToday = day && isSameDay(day, new Date());
+                  const hasAppointment = day && hasAppointmentOnDate(day);
                   return (
                     <div key={index} className="aspect-square flex items-center justify-center">
                       {day && (
                         <button
                           onClick={() => setSelectedDate(day)}
-                          className={`w-10 h-10 rounded-full font-medium transition-all ${
+                          className={`w-10 h-10 rounded-full font-medium transition-all relative ${
                             isSelected
                               ? 'bg-gray-900 text-white'
                               : isToday
@@ -345,6 +358,9 @@ export default function VendorAppointmentsPage() {
                           }`}
                         >
                           {day.getDate()}
+                          {hasAppointment && (
+                            <div className={`absolute bottom-1 w-1 h-1 rounded-full ${isSelected ? 'bg-white' : 'bg-blue-500'}`} />
+                          )}
                         </button>
                       )}
                     </div>
@@ -442,7 +458,8 @@ export default function VendorAppointmentsPage() {
                           {appointmentsAtTime.map((appointment) => (
                             <div
                               key={appointment.id}
-                              className="bg-white rounded-xl p-4 border-l-4 shadow-sm hover:shadow-md transition-shadow"
+                              onClick={() => setSelectedAppointment(appointment)}
+                              className="w-full bg-white rounded-xl p-4 border-l-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
                               style={{ borderLeftColor: getStatusColor(appointment.status) }}
                             >
                               <div className="flex justify-between items-start mb-2">
@@ -474,13 +491,19 @@ export default function VendorAppointmentsPage() {
                               </div>
                               {appointment.status === 'pending' && (
                                 <div className="flex gap-2 mt-4 pt-4 border-t border-gray-100">
-                                  <button className="flex-1 flex items-center justify-center gap-2 bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors font-bold text-sm">
+                                  <button
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="flex-1 flex items-center justify-center gap-2 bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors font-bold text-sm"
+                                  >
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                     <span>Reject</span>
                                   </button>
-                                  <button className="flex-1 flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition-colors font-bold text-sm">
+                                  <button
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="flex-1 flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition-colors font-bold text-sm"
+                                  >
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                     </svg>
@@ -698,6 +721,150 @@ export default function VendorAppointmentsPage() {
                 </svg>
                 <span>Save Appointment</span>
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Appointment Details Modal */}
+      {selectedAppointment && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold text-gray-900">Appointment Details</h2>
+                <button
+                  onClick={() => setSelectedAppointment(null)}
+                  className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Client Info */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-16 h-16 rounded-xl bg-blue-100 flex items-center justify-center">
+                  <span className="text-2xl font-bold text-blue-600">
+                    {selectedAppointment.clientName.split(' ').map(n => n[0]).join('').toUpperCase()}
+                  </span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-lg text-gray-900">{selectedAppointment.clientName}</h3>
+                  <p className="text-sm text-gray-600">Client</p>
+                </div>
+              </div>
+
+              {/* Date and Time */}
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="bg-white border border-gray-200 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span className="text-xs text-gray-600 font-medium">Date</span>
+                  </div>
+                  <p className="text-lg font-semibold text-gray-900">{selectedAppointment.date}</p>
+                </div>
+                <div className="bg-white border border-gray-200 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="text-xs text-gray-600 font-medium">Time</span>
+                  </div>
+                  <p className="text-lg font-semibold text-gray-900">{selectedAppointment.time}</p>
+                  <p className="text-xs text-gray-500">{selectedAppointment.duration}</p>
+                </div>
+              </div>
+
+              {/* Service Details */}
+              <div className="bg-white border border-gray-200 rounded-xl p-4 mb-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <svg className="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />
+                  </svg>
+                  <span className="font-semibold text-gray-900">{selectedAppointment.service}</span>
+                  <span className="text-sm text-gray-600">• {selectedAppointment.duration}</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                  </svg>
+                  <span className="font-semibold text-lg text-gray-900">{selectedAppointment.price}</span>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6">
+                <div className="flex items-start gap-2">
+                  <svg className="w-5 h-5 text-gray-900 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <p className="text-sm text-gray-700 flex-1">{selectedAppointment.location}</p>
+                </div>
+              </div>
+
+              {/* Status Badge */}
+              <div className="mb-6">
+                <span
+                  className="inline-block px-4 py-2 rounded-lg text-sm font-bold"
+                  style={{
+                    backgroundColor: getStatusColor(selectedAppointment.status) + '20',
+                    color: getStatusColor(selectedAppointment.status),
+                  }}
+                >
+                  {selectedAppointment.status.toUpperCase()}
+                </span>
+              </div>
+
+              {/* Action Buttons */}
+              {selectedAppointment.status === 'pending' && (
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => {
+                      // Handle reject
+                      setSelectedAppointment(null);
+                    }}
+                    className="flex-1 flex items-center justify-center gap-2 bg-red-500 text-white px-4 py-3 rounded-xl hover:bg-red-600 transition-colors font-semibold"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    Reject
+                  </button>
+                  <button
+                    onClick={() => {
+                      // Handle accept
+                      setSelectedAppointment(null);
+                    }}
+                    className="flex-1 flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-3 rounded-xl hover:bg-green-600 transition-colors font-semibold"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Accept
+                  </button>
+                </div>
+              )}
+
+              {selectedAppointment.status === 'confirmed' && (
+                <button
+                  onClick={() => {
+                    // Handle mark as complete
+                    setSelectedAppointment(null);
+                  }}
+                  className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white px-4 py-3 rounded-xl hover:bg-gray-800 transition-colors font-semibold"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Mark as Complete
+                </button>
+              )}
             </div>
           </div>
         </div>
