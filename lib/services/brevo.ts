@@ -81,24 +81,29 @@ export async function sendWaitlistConfirmationEmail(
           <div style="background: #ffffff; padding: 0;">
             <h2 style="font-size: 24px; color: #000000; font-weight: 600; margin: 0 0 16px 0;">Hello ${entry.name},</h2>
 
-            <p style="font-size: 16px; color: #000000; margin: 0 0 20px 0; line-height: 1.5;">Thank you for signing up as a <strong>${entry.userType}</strong>.</p>
+            <p style="font-size: 16px; color: #000000; margin: 0 0 16px 0; line-height: 1.5;">Thank you for signing up as a <strong>${entry.userType}</strong>.</p>
+
+            <p style="font-size: 16px; color: #000000; margin: 0 0 20px 0; line-height: 1.5;">We're building Survd to connect people with trusted service providers, making it easier than ever to book appointments that come to you. Your early registration helps us understand the demand and ensures you'll be among the first to experience the platform when we launch!</p>
 
             ${entry.userType === 'customer' ? `
-              <p style="font-size: 16px; color: #000000; margin: 20px 0 12px 0; line-height: 1.5;"><strong>Your waitlist registration includes:</strong></p>
-              <ul style="font-size: 15px; line-height: 1.6; color: #000000; margin: 0 0 20px 0; padding-left: 20px;">
-                <li style="margin-bottom: 4px;">Earlier access to vendors</li>
-                <li style="margin-bottom: 4px;">Discounts on initial bookings</li>
+              <p style="font-size: 16px; color: #000000; margin: 20px 0 12px 0; line-height: 1.5;"><strong>What you can look forward to:</strong></p>
+              <ul style="font-size: 15px; line-height: 1.7; color: #000000; margin: 0 0 20px 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;"><strong>Earlier access to vendors:</strong> Get started before the general public and have first pick of available service providers in your area</li>
+                <li style="margin-bottom: 8px;"><strong>Welcome discounts:</strong> Enjoy special pricing on your initial bookings as a thank you for being an early supporter</li>
+                <li style="margin-bottom: 8px;"><strong>Direct updates:</strong> Receive personal notifications about our progress and launch timeline</li>
               </ul>
             ` : `
-              <p style="font-size: 16px; color: #000000; margin: 20px 0 12px 0; line-height: 1.5;"><strong>Your waitlist registration includes:</strong></p>
-              <ul style="font-size: 15px; line-height: 1.6; color: #000000; margin: 0 0 20px 0; padding-left: 20px;">
-                <li style="margin-bottom: 4px;">Lower commission rates</li>
-                <li style="margin-bottom: 4px;">Increased discoverability on the platform</li>
-                <li style="margin-bottom: 4px;">Featured vendor placement</li>
+              <p style="font-size: 16px; color: #000000; margin: 20px 0 12px 0; line-height: 1.5;"><strong>What you can look forward to:</strong></p>
+              <ul style="font-size: 15px; line-height: 1.7; color: #000000; margin: 0 0 20px 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;"><strong>Lower commission rates:</strong> Early vendors benefit from reduced fees, helping you keep more of what you earn</li>
+                <li style="margin-bottom: 8px;"><strong>Increased discoverability:</strong> Your profile will be prioritized in search results, connecting you with more potential customers</li>
+                <li style="margin-bottom: 8px;"><strong>Featured placement:</strong> Stand out with highlighted positioning on the platform during our launch period</li>
+                <li style="margin-bottom: 8px;"><strong>Direct updates:</strong> Stay informed about platform development and receive early access to vendor tools</li>
               </ul>
             `}
 
-            <p style="font-size: 16px; color: #000000; margin: 20px 0 16px 0; line-height: 1.5;">You will receive an email notification when the platform becomes available.</p>
+            <p style="font-size: 16px; color: #000000; margin: 20px 0 12px 0; line-height: 1.5;"><strong>What happens next?</strong></p>
+            <p style="font-size: 15px; color: #000000; margin: 0 0 20px 0; line-height: 1.6;">We'll keep you informed as we approach our launch date. You'll receive an email with instructions on how to set up your account and start ${entry.userType === 'customer' ? 'booking services' : 'connecting with customers'}. In the meantime, feel free to reply to this email if you have any questions or feedback.</p>
 
             <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #e5e5e5;">
               <p style="font-size: 14px; color: #666666; margin: 0; line-height: 1.5;">
@@ -117,13 +122,23 @@ Hello ${entry.name},
 
 Thank you for signing up as a ${entry.userType}.
 
-Your waitlist registration includes:
+We're building Survd to connect people with trusted service providers, making it easier than ever to book appointments that come to you. Your early registration helps us understand the demand and ensures you'll be among the first to experience the platform when we launch!
+
+What you can look forward to:
+
 ${entry.userType === 'customer'
-  ? '- Earlier access to vendors\n- Discounts on initial bookings'
-  : '- Lower commission rates\n- Increased discoverability on the platform\n- Featured vendor placement'
+  ? `- Earlier access to vendors: Get started before the general public and have first pick of available service providers in your area
+- Welcome discounts: Enjoy special pricing on your initial bookings as a thank you for being an early supporter
+- Direct updates: Receive personal notifications about our progress and launch timeline`
+  : `- Lower commission rates: Early vendors benefit from reduced fees, helping you keep more of what you earn
+- Increased discoverability: Your profile will be prioritized in search results, connecting you with more potential customers
+- Featured placement: Stand out with highlighted positioning on the platform during our launch period
+- Direct updates: Stay informed about platform development and receive early access to vendor tools`
 }
 
-You will receive an email notification when the platform becomes available.
+What happens next?
+
+We'll keep you informed as we approach our launch date. You'll receive an email with instructions on how to set up your account and start ${entry.userType === 'customer' ? 'booking services' : 'connecting with customers'}. In the meantime, feel free to reply to this email if you have any questions or feedback.
 
 If you have any questions, please reply to this email.
 
