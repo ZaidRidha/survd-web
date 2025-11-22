@@ -373,38 +373,39 @@ export default function VendorProfilePage() {
         {/* Edit Cover Photo Button */}
         <button
           onClick={() => handleImageUpload('cover')}
-          className="absolute top-6 right-6 bg-black bg-opacity-60 text-white px-4 py-2 rounded-xl font-medium hover:bg-opacity-75 transition-colors shadow-lg flex items-center gap-2"
+          className="absolute top-6 left-6 bg-white text-gray-900 px-4 py-2 rounded-xl font-medium hover:bg-gray-100 transition-colors shadow-lg flex items-center gap-2"
         >
           <Camera className="w-4 h-4" />
+          Edit Cover
         </button>
 
-        {/* Status Badge - Bottom Right on Cover */}
+        {/* Status Badge - Top Right on Cover */}
         <button
           onClick={() => setActiveModal('status')}
-          className={`absolute bottom-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full shadow-lg transition-colors ${statusConfig.color}`}
+          className={`absolute top-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full shadow-lg transition-colors ${statusConfig.color}`}
         >
           <div className={`w-2 h-2 rounded-full ${statusConfig.dotColor} ${status === 'active' ? 'animate-pulse' : ''}`} />
           <span className="text-xs text-white font-semibold">{statusConfig.text}</span>
           <ChevronDown className="w-3 h-3 text-white" />
         </button>
 
-        {/* Profile Image - Bottom Left */}
-        <div className="absolute -bottom-12 left-8">
-          <div className="relative w-32 h-32 rounded-full border-4 border-white shadow-xl overflow-hidden bg-white group">
+        {/* Profile Image - Centered Bottom */}
+        <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2">
+          <div className="relative w-40 h-40 rounded-3xl border-4 border-white shadow-xl overflow-hidden bg-white group">
             <Image src={vendor.image} alt={vendor.name} fill className="object-cover" />
             <button
               onClick={() => handleImageUpload('profile')}
               className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center"
             >
-              <Camera className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Camera className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Vendor Info */}
-      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-16 pb-8">
-        <div className="mb-8">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-24 pb-8">
+        <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-1">{vendor.name}</h1>
           <p className="text-lg text-gray-500 mb-3">{vendor.username}</p>
           <div className="inline-flex items-center gap-2 bg-gray-50 px-4 py-2.5 rounded-full border border-gray-100">
