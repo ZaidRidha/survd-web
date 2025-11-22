@@ -42,7 +42,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!email.includes('@')) {
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: 'Invalid email address' },
         { status: 400 }

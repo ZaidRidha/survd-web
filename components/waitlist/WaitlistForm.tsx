@@ -25,8 +25,10 @@ export default function WaitlistForm() {
       return;
     }
 
-    if (!formData.email.includes('@')) {
-      setError('Please enter a valid email');
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address');
       return;
     }
 
