@@ -314,7 +314,7 @@ export default function VendorAppointmentsPage() {
                         {date.getDate()}
                       </div>
                       {hasAppointment && (
-                        <div className={`absolute bottom-0 w-1 h-1 rounded-full ${isSelected ? 'bg-white' : 'bg-blue-500'}`} />
+                        <div className={`absolute bottom-1 w-1 h-1 rounded-full ${isSelected ? 'bg-white' : 'bg-blue-500'}`} />
                       )}
                     </button>
                   );
@@ -382,7 +382,7 @@ export default function VendorAppointmentsPage() {
               <div className="grid grid-cols-7 gap-1">
                 {generateCalendarDays(currentDate).map((day, index) => (
                   day ? (
-                    <div key={index} className="aspect-square p-0.5 flex items-center justify-center">
+                    <div key={index} className="aspect-square p-1 flex items-center justify-center">
                       <button
                         onClick={() => setSelectedDate(day)}
                         className={`w-full h-full flex items-center justify-center rounded-full relative transition-all ${
@@ -396,7 +396,7 @@ export default function VendorAppointmentsPage() {
                         {day.getDate()}
                       </span>
                       {hasAppointmentOnDate(day) && (
-                        <div className={`absolute bottom-0 w-1 h-1 rounded-full ${
+                        <div className={`absolute bottom-1 w-1 h-1 rounded-full ${
                           day && selectedDate && isSameDay(day, selectedDate) ? 'bg-white' : 'bg-blue-500'
                         }`} />
                       )}
