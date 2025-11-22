@@ -1,34 +1,48 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { handleWaitlistSignup } from '@/lib/services/brevo';
+import { validateEmail, isDisposableEmail } from '@/lib/services/zerobounce';
 import { WaitlistEntry } from '@/lib/types/waitlist';
 import { waitlistRateLimiter } from '@/lib/utils/rate-limit';
 import { getClientIp } from '@/lib/utils/get-client-ip';
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting check
+    // Rate limiting check (fail-open: allows signup if Upstash is unavailable)
     const ip = getClientIp(request);
-    const { success, limit, remaining, reset } = await waitlistRateLimiter.limit(ip);
+    let rateLimitHeaders = {};
 
-    if (!success) {
-      const resetDate = new Date(reset);
-      const waitMinutes = Math.ceil((reset - Date.now()) / 1000 / 60);
+    try {
+      const { success, limit, remaining, reset } = await waitlistRateLimiter.limit(ip);
 
-      return NextResponse.json(
-        {
-          error: `Too many signup attempts. Please try again in ${waitMinutes} minute${waitMinutes !== 1 ? 's' : ''}.`,
-          retryAfter: resetDate.toISOString(),
-        },
-        {
-          status: 429,
-          headers: {
-            'X-RateLimit-Limit': limit.toString(),
-            'X-RateLimit-Remaining': remaining.toString(),
-            'X-RateLimit-Reset': reset.toString(),
-            'Retry-After': Math.ceil((reset - Date.now()) / 1000).toString(),
+      // Set rate limit headers for successful check
+      rateLimitHeaders = {
+        'X-RateLimit-Limit': limit.toString(),
+        'X-RateLimit-Remaining': remaining.toString(),
+        'X-RateLimit-Reset': reset.toString(),
+      };
+
+      if (!success) {
+        const resetDate = new Date(reset);
+        const waitMinutes = Math.ceil((reset - Date.now()) / 1000 / 60);
+
+        return NextResponse.json(
+          {
+            error: `Too many signup attempts. Please try again in ${waitMinutes} minute${waitMinutes !== 1 ? 's' : ''}.`,
+            retryAfter: resetDate.toISOString(),
           },
-        }
-      );
+          {
+            status: 429,
+            headers: {
+              ...rateLimitHeaders,
+              'Retry-After': Math.ceil((reset - Date.now()) / 1000).toString(),
+            },
+          }
+        );
+      }
+    } catch (rateLimitError) {
+      // Fail-open: If rate limiting fails (Upstash down/out of quota), allow signup
+      console.error('Rate limiting error (allowing signup to continue):', rateLimitError);
+      // Continue with signup - rate limiting will resume when Upstash is available
     }
 
     const body = await request.json();
@@ -47,6 +61,24 @@ export async function POST(request: NextRequest) {
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: 'Invalid email address' },
+        { status: 400 }
+      );
+    }
+
+    // Check for disposable emails (quick check before API call)
+    if (isDisposableEmail(email)) {
+      return NextResponse.json(
+        { error: 'Temporary or disposable email addresses are not allowed' },
+        { status: 400 }
+      );
+    }
+
+    // Validate email with ZeroBounce
+    const validationResult = await validateEmail(email);
+    if (!validationResult.valid) {
+      console.log(`Email validation failed for ${email}:`, validationResult.status);
+      return NextResponse.json(
+        { error: validationResult.message },
         { status: 400 }
       );
     }
@@ -85,11 +117,7 @@ export async function POST(request: NextRequest) {
       },
       {
         status: 201,
-        headers: {
-          'X-RateLimit-Limit': limit.toString(),
-          'X-RateLimit-Remaining': remaining.toString(),
-          'X-RateLimit-Reset': reset.toString(),
-        },
+        headers: rateLimitHeaders,
       }
     );
   } catch (error) {

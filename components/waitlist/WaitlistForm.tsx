@@ -43,15 +43,19 @@ export default function WaitlistForm() {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to join waitlist');
+        // Show specific error message from API
+        setError(data.error || 'Failed to join waitlist. Please try again.');
+        return;
       }
 
       setIsSuccess(true);
       setFormData({ name: '', email: '', userType: '' });
     } catch (err) {
-      setError('Something went wrong. Please try again.');
-      console.error(err);
+      console.error('Waitlist submission error:', err);
+      setError('Unable to connect to the server. Please check your internet connection and try again.');
     } finally {
       setIsSubmitting(false);
     }

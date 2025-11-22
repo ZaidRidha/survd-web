@@ -8,7 +8,10 @@
       "Bash(npm install:*)",
       "Bash(npm run dev:*)",
       "Bash(start email-preview-new.html)",
-      "Bash(start email-preview.html)"
+      "Bash(start email-preview.html)",
+      "WebSearch",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []
