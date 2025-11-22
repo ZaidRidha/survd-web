@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Survd - Join the Waitlist",
-  description: "Join the waitlist for Survd - the future of local service booking. Connect with barbers, hairstylists, nail technicians, and more.",
+  title: "Survd - The App for All Services",
+  description: "Survd - The app for all services. Book barbers, hairstylists, nail technicians, massage therapists, house cleaning, car wash, laundry, and more. All services available on demand, right at your location.",
   icons: {
     icon: "/images/logos/SurvdFavIcon.png",
   },
