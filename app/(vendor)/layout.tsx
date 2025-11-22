@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Briefcase, Calendar, User } from 'lucide-react';
+import { Briefcase, Calendar, DollarSign, User } from 'lucide-react';
 
 export default function VendorLayout({
   children,
@@ -12,9 +12,9 @@ export default function VendorLayout({
   const pathname = usePathname();
 
   const navItems = [
-    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-    { name: 'Services', href: '/vendorservices', icon: Briefcase },
     { name: 'Appointments', href: '/vendorappointments', icon: Calendar },
+    { name: 'Services', href: '/vendorservices', icon: Briefcase },
+    { name: 'Earnings', href: '/vendorearnings', icon: DollarSign },
     { name: 'Profile', href: '/vendorprofile', icon: User },
   ];
 
@@ -28,7 +28,7 @@ export default function VendorLayout({
           <div className="flex items-center justify-between h-16">
             {/* Logo and Navigation Links */}
             <div className="flex items-center gap-4 sm:gap-8">
-              <Link href="/dashboard" className="flex items-center flex-shrink-0">
+              <Link href="/vendorappointments" className="flex items-center flex-shrink-0">
                 <span className="text-xl sm:text-2xl font-bold text-gray-900">Survd</span>
                 <span className="ml-2 px-2 py-0.5 bg-blue-100 text-blue-800 text-xs font-semibold rounded">
                   Vendor
