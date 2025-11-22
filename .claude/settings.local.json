@@ -11,7 +11,8 @@
       "Bash(start email-preview.html)",
       "WebSearch",
       "WebFetch(domain:www.npmjs.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
