@@ -24,10 +24,22 @@ interface ServiceForm {
   transportFeePerMile?: number | string;
 }
 
+interface SavedService {
+  name: string;
+  duration: number;
+  price: number;
+  description: string;
+  availability: ServiceAvailability[];
+  locationType?: 'shop' | 'mobile' | 'studio';
+  outOfHours?: boolean;
+  serviceRadius?: number;
+  transportFeePerMile?: number;
+}
+
 interface AddServiceModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (service: ServiceForm) => void;
+  onSave: (service: SavedService) => void;
   editingService?: ServiceForm | null;
   defaultAvailability: ServiceAvailability[];
 }
@@ -90,14 +102,19 @@ export default function AddServiceModal({
     }
 
     // Convert string values to numbers before saving
-    const serviceToSave = {
-      ...serviceForm,
+    const serviceToSave: SavedService = {
+      name: serviceForm.name,
+      duration: serviceForm.duration,
       price: priceValue,
+      description: serviceForm.description,
+      availability: serviceForm.availability,
+      locationType: serviceForm.locationType,
+      outOfHours: serviceForm.outOfHours,
       serviceRadius: serviceForm.serviceRadius ? (typeof serviceForm.serviceRadius === 'string' ? parseFloat(serviceForm.serviceRadius) : serviceForm.serviceRadius) : undefined,
       transportFeePerMile: serviceForm.transportFeePerMile ? (typeof serviceForm.transportFeePerMile === 'string' ? parseFloat(serviceForm.transportFeePerMile) : serviceForm.transportFeePerMile) : undefined,
     };
 
-    onSave(serviceToSave as ServiceForm);
+    onSave(serviceToSave);
     handleClose();
   };
 
