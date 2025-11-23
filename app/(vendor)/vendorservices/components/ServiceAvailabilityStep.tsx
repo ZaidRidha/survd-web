@@ -157,6 +157,10 @@ export default function ServiceAvailabilityStep({
 
   // Calendar state
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragMode, setDragMode] = useState<'select' | 'deselect'>('select');
+  const [dragStartDate, setDragStartDate] = useState<Date | null>(null);
+  const [dragEndDate, setDragEndDate] = useState<Date | null>(null);
 
   const customDates = serviceForm.customDates || [];
 
@@ -172,6 +176,18 @@ export default function ServiceAvailabilityStep({
   const isDateSelected = (date: Date) => {
     const dateStr = formatDate(date);
     return customDates.some(d => d.date === dateStr);
+  };
+
+  // Check if date is in current drag range
+  const isInDragRange = (date: Date): boolean => {
+    if (!isDragging || !dragStartDate || !dragEndDate) return false;
+
+    const dateTime = date.getTime();
+    const startTime = dragStartDate.getTime();
+    const endTime = dragEndDate.getTime();
+    const [minTime, maxTime] = startTime < endTime ? [startTime, endTime] : [endTime, startTime];
+
+    return dateTime >= minTime && dateTime <= maxTime;
   };
 
   // Toggle date selection
@@ -191,6 +207,70 @@ export default function ServiceAvailabilityStep({
     }
 
     setServiceForm({ ...serviceForm, customDates: newCustomDates });
+  };
+
+  // Get all dates between two dates (inclusive)
+  const getDateRange = (start: Date, end: Date): Date[] => {
+    const dates: Date[] = [];
+    const startTime = start.getTime();
+    const endTime = end.getTime();
+    const [minTime, maxTime] = startTime < endTime ? [startTime, endTime] : [endTime, startTime];
+
+    const current = new Date(minTime);
+    while (current.getTime() <= maxTime) {
+      dates.push(new Date(current));
+      current.setDate(current.getDate() + 1);
+    }
+
+    return dates;
+  };
+
+  // Apply range selection
+  const applyRangeSelection = (start: Date, end: Date, mode: 'select' | 'deselect') => {
+    const rangeDates = getDateRange(start, end);
+    const newCustomDates = [...customDates];
+
+    rangeDates.forEach(date => {
+      const dateStr = formatDate(date);
+      const existingIndex = newCustomDates.findIndex(d => d.date === dateStr);
+
+      if (mode === 'select' && existingIndex === -1) {
+        newCustomDates.push({
+          date: dateStr,
+          startTime: '09:00',
+          endTime: '17:00',
+        });
+      } else if (mode === 'deselect' && existingIndex >= 0) {
+        newCustomDates.splice(existingIndex, 1);
+      }
+    });
+
+    setServiceForm({ ...serviceForm, customDates: newCustomDates });
+  };
+
+  // Handle drag start
+  const handleMouseDown = (date: Date) => {
+    setIsDragging(true);
+    setDragStartDate(date);
+    setDragEndDate(date);
+    const isCurrentlySelected = isDateSelected(date);
+    setDragMode(isCurrentlySelected ? 'deselect' : 'select');
+  };
+
+  // Handle drag over dates
+  const handleMouseEnter = (date: Date) => {
+    if (!isDragging || !dragStartDate) return;
+    setDragEndDate(date);
+  };
+
+  // Handle drag end
+  const handleMouseUp = () => {
+    if (isDragging && dragStartDate && dragEndDate) {
+      applyRangeSelection(dragStartDate, dragEndDate, dragMode);
+    }
+    setIsDragging(false);
+    setDragStartDate(null);
+    setDragEndDate(null);
   };
 
   // Update time for a specific date
@@ -348,8 +428,20 @@ export default function ServiceAvailabilityStep({
     return date1.toDateString() === date2.toDateString();
   };
 
+  // Add global mouse up listener
+  React.useEffect(() => {
+    const handleGlobalMouseUp = () => {
+      if (isDragging) {
+        setIsDragging(false);
+      }
+    };
+
+    window.addEventListener('mouseup', handleGlobalMouseUp);
+    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
+  }, [isDragging]);
+
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6" style={{ userSelect: isDragging ? 'none' : 'auto' }}>
       {/* Header */}
       <div className="text-center">
         <div className="inline-flex items-center justify-center w-18 h-18 rounded-full bg-blue-50 mb-4">
@@ -577,32 +669,47 @@ export default function ServiceAvailabilityStep({
 
               {/* Calendar Grid */}
               <div className="grid grid-cols-7 gap-1">
-                {generateCalendarDays(currentDate).map((day, index) => (
-                  day ? (
+                {generateCalendarDays(currentDate).map((day, index) => {
+                  if (!day) return <div key={index} className="aspect-square" />;
+
+                  const selected = isDateSelected(day);
+                  const inDragRange = isInDragRange(day);
+                  const isToday = isSameDay(day, new Date());
+
+                  // Determine background color based on state
+                  let bgClass = 'hover:bg-gray-50';
+                  if (selected) {
+                    bgClass = 'bg-green-600 text-white';
+                  } else if (inDragRange) {
+                    bgClass = dragMode === 'select' ? 'bg-green-200' : 'bg-red-200';
+                  } else if (isToday) {
+                    bgClass = 'bg-gray-100';
+                  }
+
+                  return (
                     <div key={index} className="aspect-square p-2 flex items-center justify-center">
                       <button
-                        onClick={() => toggleDate(day)}
-                        className={`w-full h-full flex items-center justify-center rounded-full relative transition-all ${
-                          day && isSameDay(day, new Date()) ? 'bg-gray-100' : ''
-                        } ${day && isDateSelected(day) ? 'bg-green-600 text-white' : 'hover:bg-gray-50'}`}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          handleMouseDown(day);
+                        }}
+                        onMouseEnter={() => handleMouseEnter(day)}
+                        onMouseUp={handleMouseUp}
+                        className={`w-full h-full flex items-center justify-center rounded-full relative transition-all cursor-pointer ${bgClass}`}
                       >
                         <span className={`text-[11px] ${
-                          day && isDateSelected(day) ? 'text-white font-bold' :
-                          day && isSameDay(day, new Date()) ? 'text-gray-900 font-bold' : 'text-gray-700'
+                          selected ? 'text-white font-bold' :
+                          isToday ? 'text-gray-900 font-bold' : 'text-gray-700'
                         }`}>
                           {day.getDate()}
                         </span>
-                        {isDateSelected(day) && (
-                          <div className={`absolute bottom-1.5 w-1 h-1 rounded-full ${
-                            day && isDateSelected(day) ? 'bg-white' : 'bg-blue-500'
-                          }`} />
+                        {selected && (
+                          <div className="absolute bottom-1.5 w-1 h-1 rounded-full bg-white" />
                         )}
                       </button>
                     </div>
-                  ) : (
-                    <div key={index} className="aspect-square" />
-                  )
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
