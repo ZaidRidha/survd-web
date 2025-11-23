@@ -1,13 +1,25 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ArrowLeft, Check, Calendar, Repeat, ChevronDown, ChevronUp, Info } from 'lucide-react';
+import { ArrowLeft, Check, Calendar, Repeat, ChevronDown, ChevronUp, Info, ChevronLeft, ChevronRight, Sparkles, CheckCheck, XCircle } from 'lucide-react';
 
 interface ServiceAvailability {
   day: string;
   enabled: boolean;
   startTime: string;
   endTime: string;
+  advancedMode?: boolean;
+  selectedSlots?: string[];
+  slotInterval?: number; // in minutes (15, 30, 60)
+}
+
+interface CustomDateAvailability {
+  date: string; // YYYY-MM-DD format
+  startTime: string;
+  endTime: string;
+  advancedMode?: boolean;
+  selectedSlots?: string[];
+  slotInterval?: number; // in minutes (15, 30, 60)
 }
 
 interface ServiceForm {
@@ -16,6 +28,7 @@ interface ServiceForm {
   price: number | string;
   description: string;
   availability: ServiceAvailability[];
+  customDates?: CustomDateAvailability[];
   locationType?: 'shop' | 'mobile' | 'studio';
   outOfHours?: boolean;
   serviceRadius?: number | string;
@@ -56,6 +69,283 @@ export default function ServiceAvailabilityStep({
       Sun: 'Sunday',
     };
     return dayMap[day] || day;
+  };
+
+  // Generate timeslots based on start time, end time, and interval
+  const generateTimeSlots = (startTime: string, endTime: string, interval: number): string[] => {
+    const slots: string[] = [];
+    const parseTime = (time: string): number => {
+      const [hours, minutes] = time.split(':').map(Number);
+      return hours * 60 + minutes;
+    };
+
+    const formatTime = (minutes: number): string => {
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      return `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}`;
+    };
+
+    const startMinutes = parseTime(startTime);
+    const endMinutes = parseTime(endTime);
+
+    for (let time = startMinutes; time < endMinutes; time += interval) {
+      slots.push(formatTime(time));
+    }
+
+    return slots;
+  };
+
+  const toggleAdvancedMode = (index: number) => {
+    const newAvailability = [...serviceForm.availability];
+    const day = newAvailability[index];
+    const isEnabling = !day.advancedMode;
+
+    if (isEnabling) {
+      // Initialize with all slots selected
+      const interval = day.slotInterval || 60;
+      const slots = generateTimeSlots(day.startTime, day.endTime, interval);
+      newAvailability[index] = {
+        ...day,
+        advancedMode: true,
+        slotInterval: interval,
+        selectedSlots: slots,
+      };
+    } else {
+      newAvailability[index] = {
+        ...day,
+        advancedMode: false,
+        selectedSlots: [],
+      };
+    }
+
+    setServiceForm({ ...serviceForm, availability: newAvailability });
+  };
+
+  const toggleTimeSlot = (dayIndex: number, slot: string) => {
+    const newAvailability = [...serviceForm.availability];
+    const day = newAvailability[dayIndex];
+    const selectedSlots = day.selectedSlots || [];
+
+    if (selectedSlots.includes(slot)) {
+      newAvailability[dayIndex] = {
+        ...day,
+        selectedSlots: selectedSlots.filter(s => s !== slot),
+      };
+    } else {
+      newAvailability[dayIndex] = {
+        ...day,
+        selectedSlots: [...selectedSlots, slot],
+      };
+    }
+
+    setServiceForm({ ...serviceForm, availability: newAvailability });
+  };
+
+  const updateSlotInterval = (dayIndex: number, interval: number) => {
+    const newAvailability = [...serviceForm.availability];
+    const day = newAvailability[dayIndex];
+    const slots = generateTimeSlots(day.startTime, day.endTime, interval);
+
+    newAvailability[dayIndex] = {
+      ...day,
+      slotInterval: interval,
+      selectedSlots: slots, // Reset to all slots selected
+    };
+
+    setServiceForm({ ...serviceForm, availability: newAvailability });
+  };
+
+  // Calendar state
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const customDates = serviceForm.customDates || [];
+
+  // Format date as YYYY-MM-DD
+  const formatDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  // Check if date is selected
+  const isDateSelected = (date: Date) => {
+    const dateStr = formatDate(date);
+    return customDates.some(d => d.date === dateStr);
+  };
+
+  // Toggle date selection
+  const toggleDate = (date: Date | string) => {
+    const dateStr = typeof date === 'string' ? date : formatDate(date);
+    const newCustomDates = [...customDates];
+    const existingIndex = newCustomDates.findIndex(d => d.date === dateStr);
+
+    if (existingIndex >= 0) {
+      newCustomDates.splice(existingIndex, 1);
+    } else {
+      newCustomDates.push({
+        date: dateStr,
+        startTime: '09:00',
+        endTime: '17:00',
+      });
+    }
+
+    setServiceForm({ ...serviceForm, customDates: newCustomDates });
+  };
+
+  // Update time for a specific date
+  const updateCustomDateTime = (dateStr: string, field: 'startTime' | 'endTime', value: string) => {
+    const newCustomDates = customDates.map(d =>
+      d.date === dateStr ? { ...d, [field]: value } : d
+    );
+    setServiceForm({ ...serviceForm, customDates: newCustomDates });
+  };
+
+  // Toggle advanced mode for custom date
+  const toggleAdvancedModeForDate = (dateStr: string) => {
+    const newCustomDates = customDates.map(d => {
+      if (d.date === dateStr) {
+        const isEnabling = !d.advancedMode;
+
+        if (isEnabling) {
+          // Initialize with all slots selected
+          const interval = d.slotInterval || 60;
+          const slots = generateTimeSlots(d.startTime, d.endTime, interval);
+          return {
+            ...d,
+            advancedMode: true,
+            slotInterval: interval,
+            selectedSlots: slots,
+          };
+        } else {
+          return {
+            ...d,
+            advancedMode: false,
+            selectedSlots: [],
+          };
+        }
+      }
+      return d;
+    });
+
+    setServiceForm({ ...serviceForm, customDates: newCustomDates });
+  };
+
+  // Toggle time slot for custom date
+  const toggleTimeSlotForDate = (dateStr: string, slot: string) => {
+    const newCustomDates = customDates.map(d => {
+      if (d.date === dateStr) {
+        const selectedSlots = d.selectedSlots || [];
+
+        if (selectedSlots.includes(slot)) {
+          return {
+            ...d,
+            selectedSlots: selectedSlots.filter(s => s !== slot),
+          };
+        } else {
+          return {
+            ...d,
+            selectedSlots: [...selectedSlots, slot],
+          };
+        }
+      }
+      return d;
+    });
+
+    setServiceForm({ ...serviceForm, customDates: newCustomDates });
+  };
+
+  // Update slot interval for custom date
+  const updateSlotIntervalForDate = (dateStr: string, interval: number) => {
+    const newCustomDates = customDates.map(d => {
+      if (d.date === dateStr) {
+        const slots = generateTimeSlots(d.startTime, d.endTime, interval);
+        return {
+          ...d,
+          slotInterval: interval,
+          selectedSlots: slots, // Reset to all slots selected
+        };
+      }
+      return d;
+    });
+
+    setServiceForm({ ...serviceForm, customDates: newCustomDates });
+  };
+
+  // Select all dates in current month
+  const selectAllDatesInMonth = () => {
+    const days = generateCalendarDays(currentDate);
+    const newCustomDates = [...customDates];
+
+    days.forEach(day => {
+      if (day) {
+        const dateStr = formatDate(day);
+        if (!isDateSelected(day)) {
+          newCustomDates.push({
+            date: dateStr,
+            startTime: '09:00',
+            endTime: '17:00',
+          });
+        }
+      }
+    });
+
+    setServiceForm({ ...serviceForm, customDates: newCustomDates });
+  };
+
+  // Clear all dates in current month
+  const clearAllDatesInMonth = () => {
+    const days = generateCalendarDays(currentDate);
+    const datesToRemove = new Set<string>();
+
+    days.forEach(day => {
+      if (day) {
+        datesToRemove.add(formatDate(day));
+      }
+    });
+
+    const newCustomDates = customDates.filter(d => !datesToRemove.has(d.date));
+    setServiceForm({ ...serviceForm, customDates: newCustomDates });
+  };
+
+  // Calendar helper functions
+  const generateCalendarDays = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const startingDayOfWeek = firstDay.getDay();
+    const daysInMonth = lastDay.getDate();
+
+    const days: (Date | null)[] = [];
+
+    // Add empty cells for days before the month starts
+    for (let i = 0; i < startingDayOfWeek; i++) {
+      days.push(null);
+    }
+
+    // Add all days in the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      days.push(new Date(year, month, day));
+    }
+
+    return days;
+  };
+
+  const changeMonth = (direction: 'prev' | 'next') => {
+    const newDate = new Date(currentDate);
+    if (direction === 'prev') {
+      newDate.setMonth(currentDate.getMonth() - 1);
+    } else {
+      newDate.setMonth(currentDate.getMonth() + 1);
+    }
+    setCurrentDate(newDate);
+  };
+
+  const isSameDay = (date1: Date | null, date2: Date | null): boolean => {
+    if (!date1 || !date2) return false;
+    return date1.toDateString() === date2.toDateString();
   };
 
   return (
@@ -128,21 +418,88 @@ export default function ServiceAvailabilityStep({
               </button>
 
               {dayAvailability.enabled && (
-                <div className="flex items-center gap-2.5 pl-8">
-                  <input
-                    type="time"
-                    value={dayAvailability.startTime}
-                    onChange={(e) => updateAvailability(index, 'startTime', e.target.value)}
-                    className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-900 text-center focus:outline-none focus:ring-2 focus:ring-green-500"
-                  />
-                  <span className="text-sm font-bold text-gray-600">-</span>
-                  <input
-                    type="time"
-                    value={dayAvailability.endTime}
-                    onChange={(e) => updateAvailability(index, 'endTime', e.target.value)}
-                    className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-900 text-center focus:outline-none focus:ring-2 focus:ring-green-500"
-                  />
-                </div>
+                <>
+                  <div className="flex items-center gap-2.5 pl-8">
+                    <input
+                      type="time"
+                      value={dayAvailability.startTime}
+                      onChange={(e) => updateAvailability(index, 'startTime', e.target.value)}
+                      className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-900 text-center focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                    <span className="text-sm font-bold text-gray-600">-</span>
+                    <input
+                      type="time"
+                      value={dayAvailability.endTime}
+                      onChange={(e) => updateAvailability(index, 'endTime', e.target.value)}
+                      className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-900 text-center focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+
+                  {/* Advanced Timeslot Selection */}
+                  <button
+                    onClick={() => toggleAdvancedMode(index)}
+                    className="flex items-center gap-1.5 pl-8 mt-2 text-xs font-semibold text-green-600 hover:text-green-700"
+                  >
+                    {dayAvailability.advancedMode ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )}
+                    {dayAvailability.advancedMode ? 'Hide Advanced' : 'Advanced Scheduling'}
+                  </button>
+
+                  {dayAvailability.advancedMode && (
+                    <div className="mt-3 pl-8 pr-3 pt-3 pb-2 bg-green-50 rounded-lg border border-green-200">
+                      {/* Interval Selection */}
+                      <div className="mb-3">
+                        <p className="text-xs font-semibold text-gray-900 mb-2">Slot Interval:</p>
+                        <div className="flex gap-2">
+                          {[15, 30, 60].map((interval) => (
+                            <button
+                              key={interval}
+                              onClick={() => updateSlotInterval(index, interval)}
+                              className={`px-3.5 py-2 rounded-lg text-xs font-semibold border-2 transition-all ${
+                                (dayAvailability.slotInterval || 60) === interval
+                                  ? 'bg-green-600 border-green-600 text-white'
+                                  : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
+                              }`}
+                            >
+                              {interval} min
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Timeslot Chips */}
+                      <div className="flex gap-2 overflow-x-auto pb-1 mb-2">
+                        {generateTimeSlots(
+                          dayAvailability.startTime,
+                          dayAvailability.endTime,
+                          dayAvailability.slotInterval || 60
+                        ).map((slot) => {
+                          const isSelected = (dayAvailability.selectedSlots || []).includes(slot);
+                          return (
+                            <button
+                              key={slot}
+                              onClick={() => toggleTimeSlot(index, slot)}
+                              className={`px-3.5 py-2.5 rounded-lg text-xs font-semibold border-2 whitespace-nowrap transition-all ${
+                                isSelected
+                                  ? 'bg-green-600 border-green-600 text-white'
+                                  : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
+                              }`}
+                            >
+                              {slot}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      <p className="text-xs text-gray-600 italic">
+                        Tap timeslots to enable/disable specific hours
+                      </p>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           ))}
@@ -153,21 +510,223 @@ export default function ServiceAvailabilityStep({
       {availabilityMode === 'custom' && (
         <div className="space-y-4">
           <div className="bg-green-50 border border-green-600 rounded-xl p-4 flex gap-3">
-            <Info className="w-6 h-6 text-green-600 flex-shrink-0" />
+            <Sparkles className="w-6 h-6 text-green-600 flex-shrink-0" />
             <div>
               <h4 className="text-sm font-bold text-gray-900 mb-1">Advanced Scheduling</h4>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Select specific dates when this service is available. Tap dates to select or
+                Select specific dates when this service is available. Click dates to select or
                 deselect them.
               </p>
             </div>
           </div>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
-            <p className="text-sm text-gray-600 text-center">
-              Custom date selection feature coming soon. For now, use weekly schedule mode.
-            </p>
+          {/* Calendar */}
+          <div className="bg-white border border-gray-200 rounded-xl p-4">
+            {/* Calendar Header with Month/Year */}
+            <div className="text-center mb-3">
+              <h3 className="text-lg font-bold text-gray-900">
+                {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+              </h3>
+            </div>
+
+            {/* Calendar Navigation */}
+            <div className="flex justify-between items-center mb-4 px-2">
+              <button
+                onClick={() => changeMonth('prev')}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <ChevronLeft className="w-6 h-6 text-gray-900" />
+              </button>
+
+              <button
+                onClick={() => changeMonth('next')}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-900" />
+              </button>
+            </div>
+
+            {/* Bulk Actions */}
+            <div className="flex gap-3 mb-4">
+              <button
+                onClick={selectAllDatesInMonth}
+                className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
+              >
+                <CheckCheck className="w-4 h-4 text-green-600" />
+                Select All
+              </button>
+
+              <button
+                onClick={clearAllDatesInMonth}
+                className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
+              >
+                <XCircle className="w-4 h-4 text-red-500" />
+                Clear All
+              </button>
+            </div>
+
+            {/* Calendar Day Labels */}
+            <div className="grid grid-cols-7 mb-1">
+              {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+                <div key={index} className="text-center py-2">
+                  <span className="text-xs font-semibold text-gray-500">{day}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Calendar Grid */}
+            <div className="grid grid-cols-7 gap-1">
+              {generateCalendarDays(currentDate).map((day, index) => {
+                const isSelected = day ? isDateSelected(day) : false;
+                const isToday = day && isSameDay(day, new Date());
+
+                return (
+                  <div key={index} className="aspect-square flex items-center justify-center">
+                    {day && (
+                      <button
+                        onClick={() => toggleDate(day)}
+                        className={`w-full h-full flex flex-col items-center justify-center rounded-lg text-sm font-medium transition-all ${
+                          isSelected
+                            ? 'bg-green-600 text-white hover:bg-green-700'
+                            : isToday
+                            ? 'bg-gray-200 text-gray-900 hover:bg-gray-300'
+                            : 'text-gray-900 hover:bg-gray-100'
+                        }`}
+                      >
+                        <span className={isSelected ? 'font-bold' : ''}>{day.getDate()}</span>
+                        {isSelected && (
+                          <div className={`w-1 h-1 rounded-full mt-0.5 ${isSelected ? 'bg-white' : 'bg-blue-500'}`} />
+                        )}
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
+
+          {/* Selected Dates List */}
+          {customDates.length > 0 && (
+            <div className="space-y-3">
+              <h4 className="text-base font-bold text-gray-900">
+                Selected Dates ({customDates.length})
+              </h4>
+              <div className="space-y-3">
+                {customDates.sort((a, b) => a.date.localeCompare(b.date)).map((customDate) => {
+                  const date = new Date(customDate.date + 'T00:00:00');
+                  const formattedDate = date.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  });
+
+                  return (
+                    <div key={customDate.date} className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-sm font-semibold text-gray-900">{formattedDate}</span>
+                        <button
+                          onClick={() => toggleDate(customDate.date)}
+                          className="text-red-500 hover:text-red-600"
+                        >
+                          <XCircle className="w-5 h-5" />
+                        </button>
+                      </div>
+
+                      <div className="flex items-center gap-2.5 mb-2">
+                        <input
+                          type="time"
+                          value={customDate.startTime}
+                          onChange={(e) => updateCustomDateTime(customDate.date, 'startTime', e.target.value)}
+                          className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-900 text-center focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                        <span className="text-sm font-bold text-gray-600">-</span>
+                        <input
+                          type="time"
+                          value={customDate.endTime}
+                          onChange={(e) => updateCustomDateTime(customDate.date, 'endTime', e.target.value)}
+                          className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-900 text-center focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                      </div>
+
+                      {/* Advanced Timeslot Selection */}
+                      <button
+                        onClick={() => toggleAdvancedModeForDate(customDate.date)}
+                        className="flex items-center gap-1.5 mt-2 text-xs font-semibold text-green-600 hover:text-green-700"
+                      >
+                        {customDate.advancedMode ? (
+                          <ChevronUp className="w-4 h-4" />
+                        ) : (
+                          <ChevronDown className="w-4 h-4" />
+                        )}
+                        {customDate.advancedMode ? 'Hide Advanced' : 'Advanced Scheduling'}
+                      </button>
+
+                      {customDate.advancedMode && (
+                        <div className="mt-3 pt-3 pb-2 bg-green-50 rounded-lg border border-green-200 px-3">
+                          {/* Interval Selection */}
+                          <div className="mb-3">
+                            <p className="text-xs font-semibold text-gray-900 mb-2">Slot Interval:</p>
+                            <div className="flex gap-2">
+                              {[15, 30, 60].map((interval) => (
+                                <button
+                                  key={interval}
+                                  onClick={() => updateSlotIntervalForDate(customDate.date, interval)}
+                                  className={`px-3.5 py-2 rounded-lg text-xs font-semibold border-2 transition-all ${
+                                    (customDate.slotInterval || 60) === interval
+                                      ? 'bg-green-600 border-green-600 text-white'
+                                      : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
+                                  }`}
+                                >
+                                  {interval} min
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Timeslot Chips */}
+                          <div className="flex gap-2 overflow-x-auto pb-1 mb-2">
+                            {generateTimeSlots(
+                              customDate.startTime,
+                              customDate.endTime,
+                              customDate.slotInterval || 60
+                            ).map((slot) => {
+                              const isSelected = (customDate.selectedSlots || []).includes(slot);
+                              return (
+                                <button
+                                  key={slot}
+                                  onClick={() => toggleTimeSlotForDate(customDate.date, slot)}
+                                  className={`px-3.5 py-2.5 rounded-lg text-xs font-semibold border-2 whitespace-nowrap transition-all ${
+                                    isSelected
+                                      ? 'bg-green-600 border-green-600 text-white'
+                                      : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
+                                  }`}
+                                >
+                                  {slot}
+                                </button>
+                              );
+                            })}
+                          </div>
+
+                          <p className="text-xs text-gray-600 italic">
+                            Click timeslots to enable/disable specific hours
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {customDates.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-10 px-5 bg-gray-50 rounded-xl border border-gray-200">
+              <Calendar className="w-12 h-12 text-gray-300 mb-3" />
+              <p className="text-sm text-gray-600 text-center">
+                No dates selected. Click on dates in the calendar above to get started.
+              </p>
+            </div>
+          )}
         </div>
       )}
 
