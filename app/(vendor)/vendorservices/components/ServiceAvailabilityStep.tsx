@@ -581,11 +581,11 @@ export default function ServiceAvailabilityStep({
                 const isToday = day && isSameDay(day, new Date());
 
                 return (
-                  <div key={index} className="aspect-square flex items-center justify-center">
+                  <div key={index} className="flex items-center justify-center">
                     {day && (
                       <button
                         onClick={() => toggleDate(day)}
-                        className={`w-full h-full flex flex-col items-center justify-center rounded-lg text-sm font-medium transition-all ${
+                        className={`w-9 h-9 flex flex-col items-center justify-center rounded-full text-xs font-medium transition-all ${
                           isSelected
                             ? 'bg-green-600 text-white hover:bg-green-700'
                             : isToday
@@ -595,7 +595,7 @@ export default function ServiceAvailabilityStep({
                       >
                         <span className={isSelected ? 'font-bold' : ''}>{day.getDate()}</span>
                         {isSelected && (
-                          <div className={`w-1 h-1 rounded-full mt-0.5 ${isSelected ? 'bg-white' : 'bg-blue-500'}`} />
+                          <div className="w-1 h-1 rounded-full bg-white" />
                         )}
                       </button>
                     )}
