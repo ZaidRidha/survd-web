@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Briefcase, Calendar, DollarSign, User, MessageSquare, Bell } from 'lucide-react';
@@ -28,9 +29,15 @@ export default function VendorLayout({
           <div className="flex items-center justify-between h-16">
             {/* Logo and Navigation Links */}
             <div className="flex items-center gap-4 sm:gap-8">
-              <Link href="/vendorappointments" className="flex items-center flex-shrink-0">
-                <span className="text-xl sm:text-2xl font-bold text-gray-900">Survd</span>
-                <span className="ml-2 px-2 py-0.5 bg-blue-100 text-blue-800 text-xs font-semibold rounded">
+              <Link href="/vendorappointments" className="flex items-center flex-shrink-0 gap-2">
+                <Image
+                  src="/images/logos/survd-logo.png"
+                  alt="Survd"
+                  width={100}
+                  height={33}
+                  className="h-7 sm:h-8 w-auto"
+                />
+                <span className="px-1.5 py-0.5 bg-blue-100 text-blue-800 text-[10px] font-semibold rounded">
                   Vendor
                 </span>
               </Link>
