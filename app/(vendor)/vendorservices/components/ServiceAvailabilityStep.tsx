@@ -678,12 +678,17 @@ export default function ServiceAvailabilityStep({
 
                   // Determine background color based on state
                   let bgClass = 'hover:bg-gray-50';
-                  if (selected) {
+                  let textClass = 'text-gray-700';
+
+                  if (selected || (inDragRange && dragMode === 'select')) {
                     bgClass = 'bg-green-600 text-white';
-                  } else if (inDragRange) {
-                    bgClass = dragMode === 'select' ? 'bg-green-200' : 'bg-red-200';
+                    textClass = 'text-white font-bold';
+                  } else if (inDragRange && dragMode === 'deselect') {
+                    bgClass = 'bg-red-500 text-white';
+                    textClass = 'text-white font-bold';
                   } else if (isToday) {
                     bgClass = 'bg-gray-100';
+                    textClass = 'text-gray-900 font-bold';
                   }
 
                   return (
@@ -695,15 +700,12 @@ export default function ServiceAvailabilityStep({
                         }}
                         onMouseEnter={() => handleMouseEnter(day)}
                         onMouseUp={handleMouseUp}
-                        className={`w-full h-full flex items-center justify-center rounded-full relative transition-all cursor-pointer ${bgClass}`}
+                        className={`w-full h-full flex items-center justify-center rounded-full relative transition-all duration-150 ease-in-out cursor-pointer ${bgClass}`}
                       >
-                        <span className={`text-[11px] ${
-                          selected ? 'text-white font-bold' :
-                          isToday ? 'text-gray-900 font-bold' : 'text-gray-700'
-                        }`}>
+                        <span className={`text-[11px] transition-all duration-150 ${textClass}`}>
                           {day.getDate()}
                         </span>
-                        {selected && (
+                        {(selected || (inDragRange && dragMode === 'select')) && (
                           <div className="absolute bottom-1.5 w-1 h-1 rounded-full bg-white" />
                         )}
                       </button>
