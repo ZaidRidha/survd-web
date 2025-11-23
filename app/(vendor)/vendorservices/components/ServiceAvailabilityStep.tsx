@@ -522,86 +522,88 @@ export default function ServiceAvailabilityStep({
 
           {/* Calendar */}
           <div className="bg-white border border-gray-200 rounded-xl p-4">
-            {/* Calendar Header with Month/Year */}
-            <div className="text-center mb-3">
-              <h3 className="text-lg font-bold text-gray-900">
-                {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-              </h3>
-            </div>
+            <div className="max-w-md mx-auto">
+              {/* Calendar Header with Month/Year */}
+              <div className="text-center mb-3">
+                <h3 className="text-lg font-bold text-gray-900">
+                  {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                </h3>
+              </div>
 
-            {/* Calendar Navigation */}
-            <div className="flex justify-between items-center mb-4 px-2">
-              <button
-                onClick={() => changeMonth('prev')}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <ChevronLeft className="w-6 h-6 text-gray-900" />
-              </button>
+              {/* Calendar Navigation */}
+              <div className="flex justify-between items-center mb-4 px-2">
+                <button
+                  onClick={() => changeMonth('prev')}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <ChevronLeft className="w-6 h-6 text-gray-900" />
+                </button>
 
-              <button
-                onClick={() => changeMonth('next')}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <ChevronRight className="w-6 h-6 text-gray-900" />
-              </button>
-            </div>
+                <button
+                  onClick={() => changeMonth('next')}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <ChevronRight className="w-6 h-6 text-gray-900" />
+                </button>
+              </div>
 
-            {/* Bulk Actions */}
-            <div className="flex gap-3 mb-4">
-              <button
-                onClick={selectAllDatesInMonth}
-                className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
-              >
-                <CheckCheck className="w-4 h-4 text-green-600" />
-                Select All
-              </button>
+              {/* Bulk Actions */}
+              <div className="flex gap-3 mb-4">
+                <button
+                  onClick={selectAllDatesInMonth}
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
+                >
+                  <CheckCheck className="w-4 h-4 text-green-600" />
+                  Select All
+                </button>
 
-              <button
-                onClick={clearAllDatesInMonth}
-                className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
-              >
-                <XCircle className="w-4 h-4 text-red-500" />
-                Clear All
-              </button>
-            </div>
+                <button
+                  onClick={clearAllDatesInMonth}
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
+                >
+                  <XCircle className="w-4 h-4 text-red-500" />
+                  Clear All
+                </button>
+              </div>
 
-            {/* Calendar Day Labels */}
-            <div className="grid grid-cols-7 mb-1">
-              {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
-                <div key={index} className="text-center py-2">
-                  <span className="text-xs font-semibold text-gray-500">{day}</span>
-                </div>
-              ))}
-            </div>
+              {/* Calendar Day Labels */}
+              <div className="grid grid-cols-7 gap-1 mb-1">
+                {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+                  <div key={index} className="text-center">
+                    <span className="text-[10px] font-medium text-gray-500">{day}</span>
+                  </div>
+                ))}
+              </div>
 
-            {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-1">
-              {generateCalendarDays(currentDate).map((day, index) => {
-                const isSelected = day ? isDateSelected(day) : false;
-                const isToday = day && isSameDay(day, new Date());
-
-                return (
-                  <div key={index} className="flex items-center justify-center">
-                    {day && (
+              {/* Calendar Grid */}
+              <div className="grid grid-cols-7 gap-1">
+                {generateCalendarDays(currentDate).map((day, index) => (
+                  day ? (
+                    <div key={index} className="aspect-square p-2 flex items-center justify-center">
                       <button
                         onClick={() => toggleDate(day)}
-                        className={`w-9 h-9 flex flex-col items-center justify-center rounded-full text-xs font-medium transition-all ${
-                          isSelected
-                            ? 'bg-green-600 text-white hover:bg-green-700'
-                            : isToday
-                            ? 'bg-gray-200 text-gray-900 hover:bg-gray-300'
-                            : 'text-gray-900 hover:bg-gray-100'
-                        }`}
+                        className={`w-full h-full flex items-center justify-center rounded-full relative transition-all ${
+                          day && isSameDay(day, new Date()) ? 'bg-gray-100' : ''
+                        } ${day && isDateSelected(day) ? 'bg-green-600 text-white' : 'hover:bg-gray-50'}`}
                       >
-                        <span className={isSelected ? 'font-bold' : ''}>{day.getDate()}</span>
-                        {isSelected && (
-                          <div className="w-1 h-1 rounded-full bg-white" />
+                        <span className={`text-[11px] ${
+                          day && isDateSelected(day) ? 'text-white font-bold' :
+                          day && isSameDay(day, new Date()) ? 'text-gray-900 font-bold' : 'text-gray-700'
+                        }`}>
+                          {day.getDate()}
+                        </span>
+                        {isDateSelected(day) && (
+                          <div className={`absolute bottom-1.5 w-1 h-1 rounded-full ${
+                            day && isDateSelected(day) ? 'bg-white' : 'bg-blue-500'
+                          }`} />
                         )}
                       </button>
-                    )}
-                  </div>
-                );
-              })}
+                    </div>
+                  ) : (
+                    <div key={index} className="aspect-square" />
+                  )
+                ))}
+              </div>
             </div>
           </div>
 
