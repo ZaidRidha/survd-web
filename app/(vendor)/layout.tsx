@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Briefcase, Calendar, DollarSign, User } from 'lucide-react';
+import { Briefcase, Calendar, DollarSign, User, MessageSquare, Bell } from 'lucide-react';
 
 export default function VendorLayout({
   children,
@@ -58,8 +58,17 @@ export default function VendorLayout({
 
             {/* Right side actions */}
             <div className="flex items-center gap-2">
-              <button className="p-2.5 text-gray-600 hover:bg-gray-100 rounded-lg transition-all hover:text-gray-900">
-                <User className="w-5 h-5" />
+              <button className="p-2 relative hover:bg-gray-100 rounded-lg transition-all">
+                <MessageSquare className="w-5 h-5 text-gray-600" />
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center border-2 border-white">
+                  3
+                </span>
+              </button>
+              <button className="p-2 relative hover:bg-gray-100 rounded-lg transition-all">
+                <Bell className="w-5 h-5 text-gray-600" />
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center border-2 border-white">
+                  5
+                </span>
               </button>
             </div>
           </div>
