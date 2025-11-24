@@ -169,14 +169,13 @@ export default function WaitlistPage() {
                 <div className="max-w-[320px] mx-auto">
                   <AppScreenshotCarousel
                     screenshots={[
-                      "/images/screenshots/customer/CAppSS1.png",
-                      "/images/screenshots/customer/CAppSS2.png",
-                      "/images/screenshots/customer/CAppSS3.png",
-                      "/images/screenshots/customer/CAppSS4.png",
-                      "/images/screenshots/customer/CAppSS5.png",
-                      "/images/screenshots/customer/CAppSS6.png",
-                      "/images/screenshots/customer/CAppSS7.png",
-                      "/images/screenshots/customer/CAppSS8.png",
+                      "/images/screenshots/customer/CustomerScreenShot1.jpeg",
+                      "/images/screenshots/customer/CustomerScreenShot2.jpeg",
+                      "/images/screenshots/customer/CustomerScreenShot3.jpeg",
+                      "/images/screenshots/customer/CustomerScreenShot4.jpeg",
+                      "/images/screenshots/customer/CustomerScreenShot6.jpeg",
+                      "/images/screenshots/customer/CustomerScreenShot7.jpeg",
+                      "/images/screenshots/customer/CustomerScreenShot8.jpeg",
                     ]}
                   />
                 </div>
@@ -196,12 +195,15 @@ export default function WaitlistPage() {
                   <div className="max-w-[320px] mx-auto">
                     <AppScreenshotCarousel
                       screenshots={[
-                        "/images/screenshots/vendor/VendorSideAppScreenshot1.jpeg",
-                        "/images/screenshots/vendor/VendorSideAppScreenshot2.jpeg",
-                        "/images/screenshots/vendor/VendorSideAppScreenshot3.jpeg",
-                        "/images/screenshots/vendor/VendorSideAppScreenshot4.jpeg",
-                        "/images/screenshots/vendor/VendorSideAppScreenshot5.jpeg",
-                        "/images/screenshots/vendor/VendorSideAppScreenshot6.jpeg",
+                        "/images/screenshots/vendor/VendorScreenShot1.jpeg",
+                        "/images/screenshots/vendor/VendorScreenShot2.jpeg",
+                        "/images/screenshots/vendor/VendorScreenShot3.jpeg",
+                        "/images/screenshots/vendor/VendorScreenShot4.jpeg",
+                        "/images/screenshots/vendor/VendorScreenShot5.jpeg",
+                        "/images/screenshots/vendor/VendorScreenShot6.jpeg",
+                        "/images/screenshots/vendor/VendorScreenShot7.jpeg",
+                        "/images/screenshots/vendor/VendorScreenShot8.jpeg",
+                        "/images/screenshots/vendor/VendorScreenShot9.jpeg",
                       ]}
                     />
                   </div>

@@ -71,12 +71,12 @@ export default function VendorLayout({
                   3
                 </span>
               </button>
-              <button className="p-2 relative hover:bg-gray-100 rounded-lg transition-all">
+              <Link href="/vendornotifications" className="p-2 relative hover:bg-gray-100 rounded-lg transition-all">
                 <Bell className="w-5 h-5 text-gray-600" />
                 <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center border-2 border-white">
                   5
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
