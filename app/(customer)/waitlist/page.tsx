@@ -2,7 +2,7 @@ import WaitlistForm from "@/components/waitlist/WaitlistForm";
 import RotatingHero from "@/components/waitlist/RotatingHero";
 import ScrollingServices from "@/components/waitlist/ScrollingServices";
 import AppScreenshotCarousel from "@/components/waitlist/AppScreenshotCarousel";
-import HowItWorks from "@/components/waitlist/HowItWorks";
+import LaunchAnnouncement from "@/components/waitlist/LaunchAnnouncement";
 import Image from "next/image";
 
 export default function WaitlistPage() {
@@ -334,8 +334,8 @@ export default function WaitlistPage() {
         </div>
       </section>
 
-      {/* How It Works */}
-      <HowItWorks />
+      {/* Launch Announcement */}
+      <LaunchAnnouncement />
 
       {/* Services Preview */}
       <section className="bg-gray-50 py-16 border-t border-gray-300 overflow-hidden">
