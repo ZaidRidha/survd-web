@@ -411,10 +411,11 @@ export default function ExplorePage() {
                     key={service.id}
                     className="relative flex-shrink-0 w-32 h-36 rounded-xl overflow-hidden cursor-pointer group"
                   >
-                    <img
+                    <Image
                       src={service.image}
                       alt={service.name}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                     <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
                     <div className="absolute bottom-0 left-0 right-0 p-3">
@@ -444,10 +445,11 @@ export default function ExplorePage() {
                     key={service.id}
                     className="relative flex-shrink-0 w-32 h-36 rounded-xl overflow-hidden cursor-pointer group"
                   >
-                    <img
+                    <Image
                       src={service.image}
                       alt={service.name}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                     <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
                     <div className="absolute bottom-0 left-0 right-0 p-3">
@@ -506,10 +508,11 @@ export default function ExplorePage() {
                       <div className="flex items-center gap-3">
                         {/* Image */}
                         <div className="relative flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
-                          <img
+                          <Image
                             src={vendor.image}
                             alt={vendor.name}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
                           />
                           {vendor.isActive && (
                             <div className="absolute top-1.5 right-1.5 w-2 h-2 bg-green-500 rounded-full border border-white" />
@@ -666,10 +669,11 @@ export default function ExplorePage() {
                         key={service.id}
                         className="relative flex-shrink-0 w-32 h-36 rounded-xl overflow-hidden cursor-pointer group"
                       >
-                        <img
+                        <Image
                           src={service.image}
                           alt={service.name}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
                         />
                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
                         <div className="absolute bottom-0 left-0 right-0 p-3">
@@ -699,10 +703,11 @@ export default function ExplorePage() {
                         key={service.id}
                         className="relative flex-shrink-0 w-32 h-36 rounded-xl overflow-hidden cursor-pointer group"
                       >
-                        <img
+                        <Image
                           src={service.image}
                           alt={service.name}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
                         />
                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
                         <div className="absolute bottom-0 left-0 right-0 p-3">

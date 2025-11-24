@@ -20,13 +20,14 @@ export default function LaunchAnnouncement() {
       }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -54,7 +55,7 @@ export default function LaunchAnnouncement() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            We're putting the final touches on something special. Join the waitlist to be among the first to experience the future of on-demand services.
+            We&apos;re putting the final touches on something special. Join the waitlist to be among the first to experience the future of on-demand services.
           </p>
 
           {/* Partnership CTA Box */}
@@ -68,7 +69,7 @@ export default function LaunchAnnouncement() {
                 Want to Be Part of Our Launch?
               </h3>
               <p className="text-lg text-gray-600">
-                We're looking for vendors to feature and partners to collaborate with
+                We&apos;re looking for vendors to feature and partners to collaborate with
               </p>
             </div>
 
