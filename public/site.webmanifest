@@ -1,0 +1,22 @@
+{
+  "name": "Survd - The App for All Services",
+  "short_name": "Survd",
+  "description": "Book barbers, hairstylists, nail technicians, massage therapists, house cleaning, car wash, laundry, and more.",
+  "icons": [
+    {
+      "src": "/images/logos/SurvdFavIcon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logos/survd-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}
