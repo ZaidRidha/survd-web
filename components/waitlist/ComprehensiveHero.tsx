@@ -53,10 +53,12 @@ export default function ComprehensiveHero() {
       </h1>
 
       {/* Rotating Service Text - Fixed height */}
-      <div className="h-[80px] md:h-[90px] mb-0 flex items-start justify-center md:justify-start overflow-visible">
-        <p className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight text-center md:text-left">
-          Book{' '}
-          <span className="inline-block min-w-[200px] md:min-w-[280px] text-left">
+      <div className="h-[80px] md:h-[90px] mb-4 md:mb-0 flex items-start justify-center md:justify-start overflow-visible">
+        <p className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight text-center md:text-left w-full md:w-auto">
+          Book
+          <br className="md:hidden" />
+          <span className="hidden md:inline"> </span>
+          <span className="inline-block min-w-[200px] md:min-w-[280px] text-center md:text-left">
             <span
               className={`text-black transition-all duration-300 ${
                 isAnimating ? 'opacity-0 -translate-y-2' : 'opacity-100 translate-y-0'
