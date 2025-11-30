@@ -1,5 +1,5 @@
 import WaitlistForm from "@/components/waitlist/WaitlistForm";
-import RotatingHero from "@/components/waitlist/RotatingHero";
+import ComprehensiveHero from "@/components/waitlist/ComprehensiveHero";
 import ScrollingServices from "@/components/waitlist/ScrollingServices";
 import AppScreenshotCarousel from "@/components/waitlist/AppScreenshotCarousel";
 import LaunchAnnouncement from "@/components/waitlist/LaunchAnnouncement";
@@ -59,9 +59,9 @@ export default function WaitlistPage() {
       <section className="min-h-screen flex items-center justify-center px-6 md:px-8 lg:px-4 pt-32 pb-20 md:py-20 lg:pt-20 bg-gradient-to-br from-primary/5 via-white to-gray-50 waitlist-hero-section">
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Rotating Content */}
+            {/* Left Side - Comprehensive Hero */}
             <div className="animate-fade-in-up animation-delay-200">
-              <RotatingHero />
+              <ComprehensiveHero />
             </div>
 
             {/* Right Side - Waitlist Form */}
